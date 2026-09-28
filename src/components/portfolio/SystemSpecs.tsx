@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { Terminal, Shield, Cpu, Activity, Zap, CheckCircle2 } from "lucide-react";
+import { Terminal, Shield, Cpu, Activity, Zap, GraduationCap, CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { PROFILE_DATA } from "@/lib/projects-data";
 
 export function SystemSpecs() {
   const [clientSpecs, setClientSpecs] = React.useState({
@@ -25,37 +26,37 @@ export function SystemSpecs() {
 
   const coreTenets = [
     {
-      title: "Deterministic State Over Stochastic Guesswork",
+      title: "Deterministic Multi-Agent Graphs Over Stochastic Loops",
       description:
-        "Replacing open-ended LLM loops with typed, topologically sorted DAGs and bounded execution checkpoints. Reduces token burn by 68% and prevents runaway hallucination loops.",
+        "Replacing unbounded LLM loops with typed, topologically sorted DAGs and bounded execution checkpoints. Reduces token burn by 68% and prevents runaway hallucination loops.",
       metric: "99.4% Task Completion",
     },
     {
-      title: "Zero-Copy Memory & Thread Concurrency",
+      title: "Algorithmic Rigor & Data Structure Efficiency",
       description:
-        "Utilizing Rust compiled to WebAssembly with SharedArrayBuffer ring buffers and atomic pointers. Bypasses JavaScript garbage collection to deliver sub-millisecond dispatching.",
+        "Deep application of optimal time/space complexity, cache-conscious memory layouts, and lock-free ring buffers to achieve sub-millisecond dispatching.",
       metric: "1.2M events/sec",
     },
     {
-      title: "Analytical Mathematical Models vs Iterative Loops",
+      title: "Scalable AI Serving & Vector Proximity Routing",
       description:
-        "Evaluating closed-form second-order harmonic differential equations in constant O(1) time. Guarantees locked 120 FPS spring micro-interactions without layout thrashing.",
-      metric: "120 FPS Locked",
+        "Evaluating cosine similarity across high-dimensional vector embeddings in under 140ms, routing incoming user intent to specialized micro-agents.",
+      metric: "135ms Routing",
     },
     {
-      title: "Single-Flight Coalescing & Probabilistic Edge Verification",
+      title: "Single-Flight Coalescing & Origin Shielding",
       description:
-        "Protecting origin databases by locking concurrent in-flight requests into atomic broadcast barriers and filtering missing keys with Counting Bloom filters in 0.001ms.",
+        "Protecting database clusters during burst traffic by locking concurrent requests into broadcast channels and filtering missing keys with Counting Bloom filters.",
       metric: "99.98% Cache Hit",
     },
   ];
 
   const competencies = [
-    { name: "Distributed Systems & Streaming (Rust / WASM / Tokio)", level: 98 },
-    { name: "High-Fidelity Interaction Design & WebGL/GLSL", level: 95 },
-    { name: "Vector Search & Grounded RAG Orchestration (PGVector / HNSW)", level: 94 },
-    { name: "Modern Web Architecture (Next.js App Router / TypeScript)", level: 99 },
-    { name: "Edge Proxies & Low-Latency Caching (eBPF / Redis)", level: 92 },
+    { name: "Scalable AI Systems & Vector Retrieval (PGVector / Python)", level: 96 },
+    { name: "Multi-Agent Workflows & Deterministic DAGs", level: 95 },
+    { name: "Full-Stack Architecture (Next.js App Router / TypeScript / React)", level: 98 },
+    { name: "Data Structures, Algorithms & Concurrency (C++ / Rust / TS)", level: 97 },
+    { name: "Smart Manufacturing & Distributed Automation (IIITDM Jabalpur)", level: 94 },
   ];
 
   return (
@@ -70,10 +71,10 @@ export function SystemSpecs() {
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-mono font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-            Engineering Principles & System Capabilities
+            Engineering Principles & Core Capabilities
           </h2>
           <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-            Core technical philosophies, architectural tenets, and hardware execution capabilities.
+            Academic foundations at IIITDM Jabalpur, core algorithmic tenets, and production competencies.
           </p>
         </div>
       </div>
@@ -105,13 +106,13 @@ export function SystemSpecs() {
         ))}
       </div>
 
-      {/* Engineering Depth Matrix & Client Telemetry */}
+      {/* Academic & Engineering Depth Matrix */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Depth Matrix */}
         <div className="lg:col-span-2 p-5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-900/30 flex flex-col gap-4 font-mono text-xs">
           <div className="flex items-center justify-between">
             <span className="font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider">
-              Engineering Competency Spectrum
+              Core Technical Competencies
             </span>
             <span className="text-[11px] text-zinc-500">PRODUCTION VERIFIED</span>
           </div>
@@ -138,48 +139,40 @@ export function SystemSpecs() {
           </div>
         </div>
 
-        {/* Live Client Machine Telemetry */}
+        {/* Academic Profile & Active Runtime */}
         <div className="p-5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-950 text-zinc-100 flex flex-col justify-between font-mono text-xs">
           <div>
             <div className="flex items-center gap-2 mb-3 pb-2 border-b border-zinc-800">
-              <Activity className="w-4 h-4 text-emerald-400" />
+              <GraduationCap className="w-4 h-4 text-emerald-400" />
               <span className="font-bold uppercase tracking-wider text-zinc-300">
-                ACTIVE HARDWARE RUNTIME
+                ACADEMIC PROFILE
               </span>
             </div>
 
             <div className="space-y-2.5 text-[11px]">
-              <div className="flex justify-between">
-                <span className="text-zinc-400">WebAssembly Core:</span>
-                <span className="text-emerald-400 font-bold">
-                  {clientSpecs.wasmSupported ? "NATIVE ENABLED" : "DISABLED"}
-                </span>
+              <div>
+                <div className="text-zinc-400 text-[10px]">INSTITUTION:</div>
+                <div className="text-zinc-100 font-bold">IIITDM Jabalpur</div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-zinc-400">WebGL 2.0 Pipeline:</span>
-                <span className="text-emerald-400 font-bold">
-                  {clientSpecs.webgl2Supported ? "ACCELERATED" : "SOFTWARE"}
-                </span>
+              <div>
+                <div className="text-zinc-400 text-[10px]">DEGREE & PROGRAM:</div>
+                <div className="text-emerald-400 font-bold">B.Tech in Smart Manufacturing</div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-zinc-400">Hardware CPU Threads:</span>
-                <span className="text-zinc-200 font-bold">
-                  {clientSpecs.hardwareConcurrency} Cores
-                </span>
+              <div>
+                <div className="text-zinc-400 text-[10px]">TENURE:</div>
+                <div className="text-zinc-300">2023 - Present</div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-zinc-400">Next.js Rendering:</span>
-                <span className="text-emerald-400 font-bold">APP ROUTER (RSC)</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-zinc-400">Theme Engine:</span>
-                <span className="text-zinc-200 font-bold">CLASS-BASED DARK/LIGHT</span>
+              <div>
+                <div className="text-zinc-400 text-[10px]">SPECIALIZATION:</div>
+                <div className="text-zinc-300 text-[10px]">
+                  AI Automation, Systems Design, Graph Algorithms
+                </div>
               </div>
             </div>
           </div>
 
           <div className="pt-3 border-t border-zinc-800/80 text-[10px] text-zinc-500 mt-4">
-            Zero third-party trackers • Zero client advertising bloat
+            Next.js App Router • Grounded RAG Copilot Runtime
           </div>
         </div>
       </div>

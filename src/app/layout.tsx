@@ -3,18 +3,19 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: "Alex Vance — Systems & Design Technologist",
+  title: "Arush Jain — AI Systems & Full-Stack Engineer",
   description:
-    "High-impact systems engineering and tactile interaction portfolio inspired by Will Dzierson. Featuring sub-millisecond distributed runtimes, 120 FPS physics, and an embedded RAG Copilot.",
+    "Portfolio of Arush Jain (IIITDM Jabalpur). Engineering scalable AI systems, multi-agent workflows, full-stack applications, and foundational data structures. Features an embedded RAG Copilot and high-impact case studies.",
   keywords: [
-    "Design Technologist",
-    "Systems Architect",
-    "Rust",
-    "WebAssembly",
+    "Arush Jain",
+    "IIITDM Jabalpur",
+    "Scalable AI Systems",
+    "Multi-Agent Workflows",
+    "Full-Stack Applications",
+    "Data Structures",
     "Next.js",
     "RAG Copilot",
-    "WebGL",
-    "Distributed Systems",
+    "TypeScript",
   ],
 };
 

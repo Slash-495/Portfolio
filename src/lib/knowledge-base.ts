@@ -93,17 +93,25 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     id: "kb-philosophy-1",
     category: "Philosophy",
     title: "Engineering Philosophy & Focus on High-Impact Deliverables",
-    keywords: ["philosophy", "past clients", "years of experience", "approach", "craft", "systems", "design technologist"],
+    keywords: ["philosophy", "past clients", "years of experience", "approach", "craft", "systems", "arush"],
     content:
-      "Alex Vance's portfolio intentionally omits generic 'past clients' logo walls and 'years of experience' counters. True senior engineering mastery is demonstrated through tangible deliverables, architectural rigor, verified performance benchmarks, and production-grade code. The focus is strictly on high-impact systems engineering and tactile interaction craft.",
+      "Arush Jain's portfolio intentionally omits generic 'past clients' logo walls and 'years of experience' counters. True engineering mastery is demonstrated through tangible deliverables, architectural rigor, verified performance benchmarks, and production-grade code. The focus is strictly on scalable AI systems, multi-agent architectures, and algorithmic excellence.",
   },
   {
-    id: "kb-philosophy-2",
-    category: "Philosophy",
-    title: "What is a Design Technologist?",
-    keywords: ["design technologist", "systems architect", "intersection", "webgl", "systems", "ui", "front-end"],
+    id: "kb-education-1",
+    category: "Education",
+    title: "Academic Background at IIITDM Jabalpur",
+    keywords: ["education", "college", "iiitdm", "jabalpur", "btech", "smart manufacturing", "university", "arush", "degree"],
     content:
-      "A Design Technologist operates at the rare intersection of low-level systems engineering (Rust, WebAssembly, distributed concurrency, memory management) and high-fidelity human-computer interaction (fluid micro-interactions, WebGL shaders, typographic rhythm, and intuitive user experiences).",
+      "Arush Jain is pursuing his B.Tech in Smart Manufacturing at IIITDM Jabalpur (2023 - Present). His studies combine intelligent computational systems, automation technologies, advanced mathematical modeling, and distributed software engineering.",
+  },
+  {
+    id: "kb-focus-1",
+    category: "Technical Specs",
+    title: "Core Engineering Focus Areas",
+    keywords: ["focus", "core", "ai", "multi-agent", "workflows", "full-stack", "data structures", "dsa", "algorithms"],
+    content:
+      "Arush Jain's primary engineering pillars are: 1) Scalable AI Systems (fine-tuning, vector embeddings, high-throughput model serving), 2) Multi-Agent Workflows (deterministic DAG orchestration, autonomous agent communication, fallback recovery), 3) Modern Full-Stack Applications (Next.js App Router, TypeScript, Tailwind CSS, reactive state), and 4) Data Structures & Algorithms (optimal time/space complexity, graph traversal, memory-efficient data buffers).",
   },
   {
     id: "kb-specs-1",
@@ -111,23 +119,24 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "Core Technology Stack & System Capabilities",
     keywords: ["stack", "tech", "nextjs", "react", "typescript", "rust", "tailwind", "redis", "pgvector", "python"],
     content:
-      "Primary production stack includes Next.js 14 (App Router), React 18/19, TypeScript, Rust, WebAssembly, WebGL/GLSL, Python, PGVector, Redis, Docker, and Tailwind CSS. Architecture focuses on event-driven streams, deterministic DAG orchestration, and sub-millisecond edge services.",
+      "Arush's primary engineering stack includes Next.js 14 (App Router), React 18/19, TypeScript, Python, Rust, WebAssembly, PGVector, Redis, Docker, and Tailwind CSS. System design emphasizes deterministic multi-agent graphs, sub-millisecond edge pipelines, and data-structure efficiency.",
   },
   {
     id: "kb-contact-1",
     category: "Contact",
-    title: "Availability & Collaboration Roles",
-    keywords: ["hire", "availability", "contact", "email", "contract", "staff", "principal", "roles"],
+    title: "Contact Information & Developer Profiles",
+    keywords: ["hire", "availability", "contact", "email", "phone", "github", "linkedin", "leetcode", "arush jain"],
     content:
-      "Alex Vance is currently available for high-impact Staff / Principal Engineering and Design Technologist roles, technical advisory, and architecture consulting for distributed systems and AI-powered interfaces. Contact directly via email at alex@vance.engineering or connect on GitHub and LinkedIn.",
+      "Arush Jain is open to high-impact software engineering, AI systems, and full-stack development roles. Reach him via email at jainarush423@gmail.com or phone at +91 91713 56822. Explore his GitHub repositories at https://github.com/Slash-495, along with his LinkedIn and LeetCode profiles.",
   },
 ];
 
 export const SUGGESTED_PROMPTS = [
-  "How did you optimize Chronos Engine to handle 1.2M events/sec?",
-  "Explain the deterministic DAG architecture in Nexus Graph.",
-  "What is your philosophy on omitting client logos and years of experience?",
-  "How does HyperFluid achieve 120 FPS without layout thrashing?",
-  "How does Sentient Core prevent cache stampedes during flash traffic spikes?",
-  "What technologies are in your primary engineering stack?",
+  "Tell me about Arush Jain's education and background at IIITDM Jabalpur.",
+  "What is Arush's core focus across AI systems and data structures?",
+  "How did Arush optimize Chronos Engine to handle 1.2M events/sec?",
+  "Explain the deterministic multi-agent DAG architecture in Nexus Graph.",
+  "How can I get in touch with Arush Jain?",
+  "What technologies are in Arush's primary engineering stack?",
 ];
+

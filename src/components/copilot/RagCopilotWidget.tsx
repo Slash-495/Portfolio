@@ -44,7 +44,7 @@ export function RagCopilotWidget({
     {
       id: "initial-1",
       sender: "copilot",
-      text: "Greetings. I am Alex's portfolio RAG Copilot, grounded in technical specs, system architecture decisions, and benchmark metrics for projects like Chronos Engine, Nexus Graph, HyperFluid, and Sentient Core. Ask me anything about performance optimizations, engineering trade-offs, or system designs.",
+      text: "Greetings! I am Arush Jain's portfolio RAG Copilot. I am grounded in his background at IIITDM Jabalpur (B.Tech in Smart Manufacturing), his core focus across scalable AI systems, multi-agent workflows, full-stack applications, and data structures, as well as his engineering projects. Ask me anything about Arush's experience, architecture designs, or code decisions.",
       timestamp: "Just now",
     },
   ]);

@@ -32,10 +32,10 @@ export function Header({ onOpenCopilot }: HeaderProps) {
             className="font-bold text-zinc-900 dark:text-zinc-100 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors uppercase tracking-wider flex items-center gap-2"
           >
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>ALEX VANCE</span>
+            <span>ARUSH JAIN</span>
             <span className="text-zinc-400 hidden sm:inline">//</span>
             <span className="text-zinc-500 hidden sm:inline font-normal text-[11px]">
-              SYSTEMS & DESIGN TECHNOLOGIST
+              AI SYSTEMS & FULL-STACK
             </span>
           </a>
         </div>

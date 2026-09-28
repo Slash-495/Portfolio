@@ -681,12 +681,23 @@ impl<T: Clone + Send + 'static> SingleFlight<T> {
 ];
 
 export const PROFILE_DATA = {
-  name: "Alex Vance",
-  title: "Principal Design Technologist & Systems Architect",
+  name: "Arush Jain",
+  title: "AI Systems & Full-Stack Engineer",
   status: "AVAILABLE FOR HIGH-IMPACT ROLES",
-  location: "San Francisco / Remote",
-  bio: "Engineering high-throughput distributed systems, tactile micro-interaction engines, and deterministic RAG architectures at the intersection of systems engineering and human-computer interaction.",
-  heroPunchline: "Architecting resilient distributed systems and tactile digital interfaces.",
+  location: "IIITDM Jabalpur / Remote",
+  education: "B.Tech in Smart Manufacturing, IIITDM Jabalpur (2023 - Present)",
+  contact: {
+    email: "jainarush423@gmail.com",
+    phone: "+91 91713 56822",
+  },
+  coreFocus: [
+    "Scalable AI Systems",
+    "Multi-Agent Workflows",
+    "Full-Stack Applications",
+    "Data Structures & Algorithms",
+  ],
+  bio: "Engineering scalable AI systems, deterministic multi-agent workflows, and robust full-stack applications with deep algorithmic foundations in data structures and systems design.",
+  heroPunchline: "Architecting scalable AI systems, multi-agent workflows, and high-performance full-stack applications.",
   stats: [
     { label: "Systems Throughput", value: "1.2M+ req/s" },
     { label: "Sub-ms p99 Latency", value: "<0.8ms" },
@@ -694,16 +705,20 @@ export const PROFILE_DATA = {
     { label: "AI Token Savings", value: "68%" },
   ],
   systemSpecs: {
+    education: "IIITDM Jabalpur (2023 - Present)",
+    degree: "B.Tech in Smart Manufacturing",
     runtime: "Next.js 14 App Router + Rust/WASM Core",
-    architecture: "Event-Driven & Deterministic DAGs",
+    architecture: "Multi-Agent DAGs & Scalable AI",
     styling: "Tailwind CSS + Class-Based Dark Mode",
     motion: "Analytical Harmonic Springs (Framer Motion)",
     copilot: "In-Memory Semantic Vector Retrieval & Grounded RAG",
   },
   socialLinks: [
-    { label: "GitHub", url: "https://github.com", icon: "Github" },
-    { label: "LinkedIn", url: "https://linkedin.com", icon: "Linkedin" },
-    { label: "Twitter / X", url: "https://x.com", icon: "Twitter" },
-    { label: "Email", url: "mailto:alex@vance.engineering", icon: "Mail" },
+    { label: "GitHub", url: "https://github.com/Slash-495", icon: "Github" },
+    { label: "LinkedIn", url: "https://linkedin.com/in/#", icon: "Linkedin", isPlaceholder: true },
+    { label: "LeetCode", url: "https://leetcode.com/#", icon: "Code2", isPlaceholder: true },
+    { label: "Email", url: "mailto:jainarush423@gmail.com", icon: "Mail" },
+    { label: "Phone", url: "tel:+919171356822", icon: "Phone" },
   ],
 };
+
