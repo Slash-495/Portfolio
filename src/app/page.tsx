@@ -55,7 +55,7 @@ export default function Home() {
         <SystemSpecs />
 
         {/* Embedded Interactive RAG Copilot Section */}
-        <section id="copilot" className="scroll-mt-24 flex flex-col gap-6">
+        <section id="ai-chat" className="scroll-mt-24 flex flex-col gap-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-4">
             <div>
               <div className="flex items-center gap-2 mb-1.5">

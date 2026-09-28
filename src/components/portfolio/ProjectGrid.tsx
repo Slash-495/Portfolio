@@ -36,7 +36,7 @@ export function ProjectGrid({ onOpenCopilotWithProject }: ProjectGridProps) {
   };
 
   return (
-    <section id="work" className="scroll-mt-24 flex flex-col gap-6">
+    <section id="projects" className="scroll-mt-24 flex flex-col gap-6">
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-4">
         <div>

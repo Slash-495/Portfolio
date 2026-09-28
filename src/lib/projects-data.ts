@@ -683,7 +683,7 @@ impl<T: Clone + Send + 'static> SingleFlight<T> {
 export const PROFILE_DATA = {
   name: "Arush Jain",
   title: "AI Systems & Full-Stack Engineer",
-  status: "AVAILABLE FOR HIGH-IMPACT ROLES",
+  status: "Final Year @ IIITDM Jabalpur • Amazon ML Summer School 2026",
   location: "IIITDM Jabalpur / Remote",
   education: "B.Tech in Smart Manufacturing, IIITDM Jabalpur (2023 - Present)",
   contact: {
@@ -697,7 +697,8 @@ export const PROFILE_DATA = {
     "Data Structures & Algorithms",
   ],
   bio: "Engineering scalable AI systems, deterministic multi-agent workflows, and robust full-stack applications with deep algorithmic foundations in data structures and systems design.",
-  heroPunchline: "Architecting scalable AI systems, multi-agent workflows, and high-performance full-stack applications.",
+  heroHeadline: "Building scalable AI systems, multi-agent workflows, and robust full-stack applications.",
+  heroPunchline: "Building scalable AI systems, multi-agent workflows, and robust full-stack applications.",
   stats: [
     { label: "Systems Throughput", value: "1.2M+ req/s" },
     { label: "Sub-ms p99 Latency", value: "<0.8ms" },
