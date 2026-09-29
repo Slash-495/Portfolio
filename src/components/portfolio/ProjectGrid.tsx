@@ -18,10 +18,11 @@ export function ProjectGrid({ onOpenCopilotWithProject }: ProjectGridProps) {
 
   const categories = [
     "ALL",
-    "Distributed Systems",
-    "AI & RAG",
-    "Design Systems",
-    "Edge Infrastructure",
+    "Full Stack Project",
+    "AI & Multi-Agent",
+    "RAG & Search",
+    "Machine Learning",
+    "Systems & Hardware",
   ];
 
   const filteredProjects = React.useMemo(() => {

@@ -18,10 +18,14 @@ import {
   CheckCircle2,
   GitCommit,
 } from "lucide-react";
-import { EventStreamerDemo } from "./demos/EventStreamerDemo";
-import { VectorGraphDemo } from "./demos/VectorGraphDemo";
-import { SpringPhysicsDemo } from "./demos/SpringPhysicsDemo";
-import { CacheSimulatorDemo } from "./demos/CacheSimulatorDemo";
+import { RailRouteDemo } from "./demos/RailRouteDemo";
+import { HybridLegalRagDemo } from "./demos/HybridLegalRagDemo";
+import { ConformalDemandDemo } from "./demos/ConformalDemandDemo";
+import { TwoTowerRecDemo } from "./demos/TwoTowerRecDemo";
+import { LeetLensDemo } from "./demos/LeetLensDemo";
+import { DuffyDemo } from "./demos/DuffyDemo";
+import { VeloraDemo } from "./demos/VeloraDemo";
+import { PatentFootrestDemo } from "./demos/PatentFootrestDemo";
 
 interface CaseStudyModalProps {
   project: ProjectCaseStudy | null;
@@ -72,14 +76,22 @@ export function CaseStudyModal({
 
   const renderInteractiveDemo = () => {
     switch (project.interactiveDemoType) {
-      case "event-streamer":
-        return <EventStreamerDemo />;
-      case "vector-graph":
-        return <VectorGraphDemo />;
-      case "spring-physics":
-        return <SpringPhysicsDemo />;
-      case "cache-simulator":
-        return <CacheSimulatorDemo />;
+      case "leetlens":
+        return <LeetLensDemo />;
+      case "duffy":
+        return <DuffyDemo />;
+      case "velora":
+        return <VeloraDemo />;
+      case "railroute":
+        return <RailRouteDemo />;
+      case "legal-rag":
+        return <HybridLegalRagDemo />;
+      case "conformal":
+        return <ConformalDemandDemo />;
+      case "two-tower":
+        return <TwoTowerRecDemo />;
+      case "patent-footrest":
+        return <PatentFootrestDemo />;
       default:
         return null;
     }

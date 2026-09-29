@@ -2,7 +2,7 @@ export interface KnowledgeChunk {
   id: string;
   projectId?: string;
   projectTitle?: string;
-  category: "Architecture" | "Case Study" | "Philosophy" | "Technical Specs" | "Contact";
+  category: "Architecture" | "Case Study" | "Philosophy" | "Technical Specs" | "Contact" | "Education" | "Patent";
   title: string;
   keywords: string[];
   content: string;
@@ -10,100 +10,122 @@ export interface KnowledgeChunk {
 
 export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
   {
-    id: "kb-chronos-1",
-    projectId: "chronos-engine",
-    projectTitle: "Chronos Engine",
+    id: "kb-railroute-1",
+    projectId: "railroute-agent",
+    projectTitle: "RailRoute Agent",
     category: "Case Study",
-    title: "Chronos Engine Architecture & Throughput Optimization",
-    keywords: ["chronos", "rust", "wasm", "webgl", "throughput", "latency", "ring buffer", "sharedarraybuffer", "1.2m"],
+    title: "RailRoute Agent: 3-Agent Split-Journey Train Routing",
+    keywords: ["railroute", "train", "agent", "multi-agent", "planner", "verifier", "ranker", "gemini", "streamlit", "python", "latency", "pass rate"],
     content:
-      "Chronos Engine is a sub-millisecond distributed state machine visualizer and event streaming runtime. It achieves 1.2M events/sec in browser tabs by combining Rust compiled to WebAssembly with SharedArrayBuffer ring buffers and an offscreen WebGL canvas. It eliminates main-thread UI stutter by bypassing JavaScript garbage collection entirely, maintaining rock-solid 60 FPS and sub-0.8ms p99 dispatch latency.",
+      "RailRoute Agent is a specialized 3-agent autonomous routing system built by Arush Jain using Python, Gemini, and Streamlit. It discovers operationally safe split-journey train routes when direct tickets are waitlisted or unavailable. By executing a triad DAG (Route Planner -> Schedule Verifier -> Journey Ranker) with parallel verification, it cut latency from 3.2s to 1.45s and raised the operational pass rate to 100%.",
   },
   {
-    id: "kb-chronos-2",
-    projectId: "chronos-engine",
-    projectTitle: "Chronos Engine",
+    id: "kb-railroute-2",
+    projectId: "railroute-agent",
+    projectTitle: "RailRoute Agent",
     category: "Architecture",
-    title: "Lock-Free Ring Buffer Ingestion in Rust/WASM",
-    keywords: ["chronos", "lock-free", "ring buffer", "atomics", "memory", "zero-copy", "garbage collection"],
+    title: "RailRoute 3-Agent Triad & Safety Buffer Interlocks",
+    keywords: ["railroute", "safety", "buffer", "layover", "planner", "verifier", "ranker", "handoff"],
     content:
-      "To eliminate garbage collection pauses, Chronos pre-allocates a circular ring buffer inside a SharedArrayBuffer. Incoming binary Protobuf WebSocket packets are unpacked into fixed memory slices in 0.04ms using atomic pointer operations (acquire/release memory ordering). WebGL shaders sample the memory offsets directly with zero CPU copy overhead.",
+      "Unlike monolithic LLMs that hallucinate impossible layovers or negative durations, RailRoute splits responsibilities: 1) Route Planner traverses station graphs for candidate junction transfers, 2) Schedule Verifier deterministically enforces a strict 45-minute to 180-minute platform transfer buffer, and 3) Journey Ranker evaluates comfort, cost, and transfer stress, guaranteeing zero missed connection risks.",
   },
   {
-    id: "kb-nexus-1",
-    projectId: "nexus-graph",
-    projectTitle: "Nexus Graph",
+    id: "kb-chambers-1",
+    projectId: "chambers-legal-rag",
+    projectTitle: "Chambers & Infrastructure",
     category: "Case Study",
-    title: "Nexus Graph Multi-Agent Cognitive Orchestrator",
-    keywords: ["nexus", "rag", "agents", "dag", "tokens", "hnsw", "pgvector", "orchestrator", "ai"],
+    title: "Chambers & Infrastructure: Hybrid Legal RAG for Indian GST Act",
+    keywords: ["chambers", "legal", "rag", "gst", "faiss", "bm25", "cohere", "rerank", "fastapi", "aws", "precision", "hallucination"],
     content:
-      "Nexus Graph is an enterprise cognitive graph orchestrator executing multi-agent LLM workflows as deterministic directed acyclic graphs (DAGs). It solves the common problems of stochastic loops and runaway token costs by introducing local HNSW vector cosine similarity routing (135ms lookup) and context window compression, slashing overall token consumption by 68% while achieving a 99.4% task completion rate.",
+      "Chambers & Infrastructure is an enterprise legal RAG pipeline developed by Arush Jain over the Indian Goods & Services Tax (GST) Act. It uses a dual-stream hybrid retrieval pipeline combining dense semantic search (FAISS) with sparse statutory keyword search (BM25) fused via Reciprocal Rank Fusion (RRF) and scored with Cohere Cross-Encoder Rerank. It reduced legal hallucinations from 36.8% to 2.1% and achieved 94.2% Precision@4.",
   },
   {
-    id: "kb-nexus-2",
-    projectId: "nexus-graph",
-    projectTitle: "Nexus Graph",
+    id: "kb-chambers-2",
+    projectId: "chambers-legal-rag",
+    projectTitle: "Chambers & Infrastructure",
     category: "Architecture",
-    title: "Deterministic DAG Execution vs Autonomous Loops",
-    keywords: ["nexus", "dag", "react loop", "deterministic", "topological sort", "checkpoint", "rollback"],
+    title: "Dual-Stream RRF & Cohere Cross-Encoder Reranking",
+    keywords: ["chambers", "rrf", "cohere", "dense", "sparse", "dual-stream", "clause", "gst act"],
     content:
-      "Rather than letting LLMs decide unconstrained execution loops (which cause infinite loops and hallucination cascades), Nexus Graph compiles workflows into topologically sorted DAGs with isolated memory namespaces. If an agent validation fails, automated fallback branches self-heal the workflow with full transactional state checkpoints and replayability.",
+      "Naive semantic vectors often blur numerical statutory citations (like Section 16(2)(aa) vs Section 16(4)). Chambers & Infrastructure solves this with a dual-stream approach: BM25 guarantees exact legal clause and section number matches, FAISS captures conceptual context, RRF fuses the candidate lists, and Cohere Cross-Encoder reranks the top-50 down to the top-4 most authoritative statutory clauses.",
   },
   {
-    id: "kb-hyperfluid-1",
-    projectId: "hyperfluid",
-    projectTitle: "HyperFluid",
+    id: "kb-conformal-1",
+    projectId: "conformal-demand-forecasting",
+    projectTitle: "Conformal Demand Forecasting",
     category: "Case Study",
-    title: "HyperFluid GPU-Accelerated Micro-Interaction Runtime",
-    keywords: ["hyperfluid", "webgl", "spring", "physics", "120 fps", "css", "layout thrashing", "shaders"],
+    title: "Conformal Demand Forecasting: Probabilistic Supply Chain Engine",
+    keywords: ["conformal", "demand", "forecasting", "lightgbm", "newsvendor", "fastapi", "docker", "stockout", "inventory", "inventory cost"],
     content:
-      "HyperFluid is a zero-runtime CSS and physics micro-interaction engine combining custom WebGL fragment shaders and analytical spring math. It locks animations to 120 FPS on high-refresh ProMotion screens with a tiny 1.4kB gzip bundle footprint, eliminating 100% of DOM layout thrashing by calculating second-order spring dynamics analytically in O(1) time.",
+      "Conformal Demand Forecasting is a probabilistic inventory forecasting engine engineered by Arush Jain using LightGBM, FastAPI, and Docker. By combining non-parametric Split Conformal Prediction intervals (90% coverage guarantee) with Newsvendor profit-maximization optimization, it cut retail stockout rates from 48% to 11% and reduced total inventory holding costs by 31%.",
   },
   {
-    id: "kb-hyperfluid-2",
-    projectId: "hyperfluid",
-    projectTitle: "HyperFluid",
+    id: "kb-conformal-2",
+    projectId: "conformal-demand-forecasting",
+    projectTitle: "Conformal Demand Forecasting",
     category: "Architecture",
-    title: "Analytical Closed-Form Spring Math",
-    keywords: ["hyperfluid", "analytical", "spring", "differential equation", "frame-rate independent", "euler"],
+    title: "Newsvendor Critical Fractile & Asymmetric Risk Mapping",
+    keywords: ["conformal", "newsvendor", "critical ratio", "underage", "overage", "stockout", "safety stock"],
     content:
-      "Unlike conventional physics libraries that rely on iterative Euler integration (which drifts across varied frame rates), HyperFluid solves the damped harmonic oscillator analytically in closed form. This allows instantaneous evaluation at any arbitrary timestamp t, ensuring identical spring tactile responsiveness whether the user display runs at 60Hz, 90Hz, or 120Hz.",
+      "Standard MSE regressions predict expected average demand, which fails when underage costs (lost customer margin) and overage costs (spoilage/holding expense) are asymmetric. Arush's system calculates the Newsvendor critical ratio Cu / (Cu + Co) and maps it across the conformalized prediction interval to determine the exact profit-maximizing order quantity in real-time.",
   },
   {
-    id: "kb-sentient-1",
-    projectId: "sentient-core",
-    projectTitle: "Sentient Core",
+    id: "kb-two-tower-1",
+    projectId: "two-tower-recommender",
+    projectTitle: "Multimodal Two-Tower Recommender",
     category: "Case Study",
-    title: "Sentient Core Edge Caching Proxy & Origin Shield",
-    keywords: ["sentient", "edge", "caching", "rust", "ebpf", "single-flight", "stampede", "p99", "redis"],
+    title: "Multimodal Two-Tower Recommender: Dual-Encoder InfoNCE Retrieval",
+    keywords: ["recommender", "two-tower", "infonce", "pytorch", "faiss", "contrastive", "recall", "dual-encoder"],
     content:
-      "Sentient Core is a distributed Rust edge proxy serving 250k req/sec with <3.2ms p99 latency. It protects origin databases during extreme traffic surges and flash sales by implementing single-flight request coalescing, counting Bloom filters for zero-IO key verification, and adaptive rate limiting governed by kernel-level eBPF packet inspection.",
+      "Multimodal Two-Tower Recommender is a deep learning dual-encoder candidate generation model trained by Arush Jain in PyTorch with FAISS vector retrieval. Using InfoNCE contrastive loss and in-batch negative sampling, it aligns 128-dimensional user context and item embeddings, driving a +4.2% lift in Recall@10 and a +3.6% lift in Recall@50 over matrix factorization with sub-2.4ms retrieval latency across 1M+ catalog items.",
   },
   {
-    id: "kb-sentient-2",
-    projectId: "sentient-core",
-    projectTitle: "Sentient Core",
-    category: "Architecture",
-    title: "Single-Flight Request Coalescing Mechanism",
-    keywords: ["sentient", "single-flight", "stampede", "dog-piling", "mutex", "tokio", "async", "channels"],
+    id: "kb-leetlens-1",
+    projectId: "leetlens",
+    projectTitle: "LeetLens",
+    category: "Case Study",
+    title: "LeetLens: AI LeetCode Coding Assistant & Execution Trace Visualizer",
+    keywords: ["leetlens", "leetcode", "chrome extension", "byok", "solution review", "trace visualizer", "socratic", "complexity"],
     content:
-      "When 5,000 concurrent requests arrive for an expired cache key, Sentient Core collapses them into a single flight. The first request locks an async NotifyBarrier and performs the origin fetch, while the other 4,999 requests subscribe to the broadcast result in memory. This eliminates 99.4% of backend origin spikes without dropping connections.",
+      "LeetLens is a high-utility Chrome Extension engineered by Arush Jain that integrates directly into LeetCode. Features include an automated Solution Review Engine for senior-level time/space complexity analysis, an interactive Execution Trace Visualizer for step-by-step recursion trees, intelligent brute-force vs. optimal code comparison (e.g. O(N²) vs O(N)), and 100% local Bring-Your-Own-Key (BYOK) encrypted storage.",
   },
   {
-    id: "kb-philosophy-1",
-    category: "Philosophy",
-    title: "Engineering Philosophy & Focus on High-Impact Deliverables",
-    keywords: ["philosophy", "past clients", "years of experience", "approach", "craft", "systems", "arush"],
+    id: "kb-duffy-1",
+    projectId: "duffy",
+    projectTitle: "Duffy",
+    category: "Case Study",
+    title: "Duffy: AI Language Learning Ecosystem with In-Browser Voice AI",
+    keywords: ["duffy", "language", "spaced repetition", "srs", "web speech", "voice", "gemini", "render", "duffy.onrender.com"],
     content:
-      "Arush Jain's portfolio intentionally omits generic 'past clients' logo walls and 'years of experience' counters. True engineering mastery is demonstrated through tangible deliverables, architectural rigor, verified performance benchmarks, and production-grade code. The focus is strictly on scalable AI systems, multi-agent architectures, and algorithmic excellence.",
+      "Duffy is an AI-powered full-stack language immersion platform built by Arush Jain, live at duffy.onrender.com. It combines an intelligent Spaced Repetition System (SRS) for custom flashcard decks, free in-browser neural voice recognition via the Web Speech API (<150ms latency) with dynamic pronunciation grading, Gemini-powered adaptive scenario roleplay (cafes, immigration), and B2B classroom roster tools for teachers.",
+  },
+  {
+    id: "kb-velora-1",
+    projectId: "velora",
+    projectTitle: "Velora",
+    category: "Case Study",
+    title: "Velora: Modern Full-Stack Cloud Application & Low-Latency APIs",
+    keywords: ["velora", "full-stack", "nextjs", "typescript", "postgres", "prisma", "zod", "server actions", "reactive", "latency"],
+    content:
+      "Velora is a high-concurrency full-stack cloud web application engineered by Arush Jain using Next.js App Router, TypeScript, and PostgreSQL with Prisma. It delivers sub-45ms API response latencies, 100% end-to-end type safety via shared Zod schemas and Server Actions, and instant 0ms optimistic UI rendering with zero layout shift.",
+  },
+  {
+    id: "kb-patent-1",
+    projectId: "embedded-footrest-patent",
+    projectTitle: "Patent & Notable Achievements",
+    category: "Patent",
+    title: "Patented Automatic Footrest Assembly & Amazon ML Summer School 2026",
+    keywords: ["patent", "footrest", "two-wheeler", "embedded", "interlock", "amazon ml", "amazon", "achievement", "honors"],
+    content:
+      "Arush Jain holds a patent for an automatic footrest assembly for two-wheelers using embedded microcontroller feedback, seat pressure sensors, and vehicle velocity safety interlocks (locking actuation above 5 km/h to prevent roadside hazards). Furthermore, Arush was selected for the prestigious Amazon ML Summer School 2026, receiving specialized mentorship from Amazon scientists in deep learning and LLM architectures.",
   },
   {
     id: "kb-education-1",
     category: "Education",
-    title: "Academic Background at IIITDM Jabalpur",
-    keywords: ["education", "college", "iiitdm", "jabalpur", "btech", "smart manufacturing", "university", "arush", "degree"],
+    title: "Education & Academic Standing at IIITDM Jabalpur",
+    keywords: ["education", "college", "iiitdm", "jabalpur", "btech", "smart manufacturing", "university", "arush jain", "final year", "2023"],
     content:
-      "Arush Jain is pursuing his B.Tech in Smart Manufacturing at IIITDM Jabalpur (2023 - Present). His studies combine intelligent computational systems, automation technologies, advanced mathematical modeling, and distributed software engineering.",
+      "Arush Jain is a Final Year B.Tech student in Smart Manufacturing at IIITDM Jabalpur (2023 - Present). His academic specialization spans AI automation, multi-agent workflows, scalable distributed computing, and advanced algorithmic data structures.",
   },
   {
     id: "kb-focus-1",
@@ -111,32 +133,23 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "Core Engineering Focus Areas",
     keywords: ["focus", "core", "ai", "multi-agent", "workflows", "full-stack", "data structures", "dsa", "algorithms"],
     content:
-      "Arush Jain's primary engineering pillars are: 1) Scalable AI Systems (fine-tuning, vector embeddings, high-throughput model serving), 2) Multi-Agent Workflows (deterministic DAG orchestration, autonomous agent communication, fallback recovery), 3) Modern Full-Stack Applications (Next.js App Router, TypeScript, Tailwind CSS, reactive state), and 4) Data Structures & Algorithms (optimal time/space complexity, graph traversal, memory-efficient data buffers).",
-  },
-  {
-    id: "kb-specs-1",
-    category: "Technical Specs",
-    title: "Core Technology Stack & System Capabilities",
-    keywords: ["stack", "tech", "nextjs", "react", "typescript", "rust", "tailwind", "redis", "pgvector", "python"],
-    content:
-      "Arush's primary engineering stack includes Next.js 14 (App Router), React 18/19, TypeScript, Python, Rust, WebAssembly, PGVector, Redis, Docker, and Tailwind CSS. System design emphasizes deterministic multi-agent graphs, sub-millisecond edge pipelines, and data-structure efficiency.",
+      "Arush Jain's primary engineering focus is: 1) Scalable AI Systems (fine-tuning, hybrid retrieval, dual-stream architectures), 2) Multi-Agent Workflows (triad DAGs, deterministic verification, Pareto ranking), 3) Full-Stack Applications (Next.js App Router, FastAPI, WebRTC, Docker), and 4) Algorithmic Data Structures (FAISS vector indices, lock-free buffers, complexity optimization).",
   },
   {
     id: "kb-contact-1",
     category: "Contact",
     title: "Contact Information & Developer Profiles",
-    keywords: ["hire", "availability", "contact", "email", "phone", "github", "linkedin", "leetcode", "arush jain"],
+    keywords: ["contact", "email", "phone", "github", "linkedin", "leetcode", "hire", "arush"],
     content:
-      "Arush Jain is open to high-impact software engineering, AI systems, and full-stack development roles. Reach him via email at jainarush423@gmail.com or phone at +91 91713 56822. Explore his GitHub repositories at https://github.com/Slash-495, along with his LinkedIn and LeetCode profiles.",
+      "Arush Jain can be reached via email at jainarush423@gmail.com or phone at +91 91713 56822. Check out his code repositories on GitHub at https://github.com/Slash-495, along with his LinkedIn and LeetCode profiles.",
   },
 ];
 
 export const SUGGESTED_PROMPTS = [
-  "Tell me about Arush Jain's education and background at IIITDM Jabalpur.",
-  "What is Arush's core focus across AI systems and data structures?",
-  "How did Arush optimize Chronos Engine to handle 1.2M events/sec?",
-  "Explain the deterministic multi-agent DAG architecture in Nexus Graph.",
-  "How can I get in touch with Arush Jain?",
-  "What technologies are in Arush's primary engineering stack?",
+  "How does LeetLens provide code reviews without leaking API keys?",
+  "Tell me about Duffy's in-browser voice recognition and SRS ecosystem.",
+  "What is Velora's full-stack architecture and sub-45ms latency?",
+  "How does RailRoute Agent achieve a 100% operational pass rate?",
+  "Explain the dual-stream retrieval in Chambers & Infrastructure (Legal RAG).",
+  "Tell me about Arush's patent in embedded footrests and Amazon ML Summer School 2026.",
 ];
-

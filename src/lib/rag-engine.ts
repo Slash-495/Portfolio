@@ -85,14 +85,14 @@ export function queryRagCopilot(query: string): RagResponse {
   if (topMatches.length === 0) {
     return {
       answer:
-        "I don't have direct benchmark or architectural documentation specifically for that query. You can ask me about **Chronos Engine** (distributed streaming & WASM), **Nexus Graph** (multi-agent deterministic DAGs), **HyperFluid** (120 FPS GPU physics), **Sentient Core** (single-flight edge caching), or my engineering philosophy on skipping past clients in favor of high-impact technical proof.",
+        "I don't have direct benchmark or architectural documentation specifically for that query. You can ask me about **RailRoute Agent** (3-agent train routing), **Chambers & Infrastructure** (dual-stream legal RAG), **Conformal Demand Forecasting** (LightGBM Newsvendor optimization), **Multimodal Two-Tower Recommender** (PyTorch InfoNCE), **Duffy & LeetLens** (WebRTC Whisper & BYOK extension), or Arush's **two-wheeler footrest patent** and selection for **Amazon ML Summer School 2026**.",
       citations: [],
       confidence: 0.1,
       matchedChunks: 0,
       suggestedFollowUps: [
-        "How did you optimize Chronos Engine latency?",
-        "What is your philosophy on high-impact project engineering?",
-        "How does Sentient Core prevent cache stampedes?",
+        "How did RailRoute Agent achieve a 100% pass rate?",
+        "Explain the dual-stream retrieval in Chambers Legal RAG.",
+        "Tell me about Arush's patent and Amazon ML selection.",
       ],
     };
   }
@@ -124,30 +124,50 @@ export function queryRagCopilot(query: string): RagResponse {
 
   // Determine relevant follow-ups
   const suggestedFollowUps: string[] = [];
-  if (primaryMatch.projectId === "chronos-engine") {
+  if (primaryMatch.projectId === "railroute-agent") {
     suggestedFollowUps.push(
-      "How does the SharedArrayBuffer eliminate garbage collection?",
-      "What are the trade-offs between Rust/WASM vs Web Workers?"
+      "How did the 3-agent triad cut latency from 3.2s to 1.45s?",
+      "How does the Verifier enforce 45m-180m layover safety?"
     );
-  } else if (primaryMatch.projectId === "nexus-graph") {
+  } else if (primaryMatch.projectId === "chambers-legal-rag") {
     suggestedFollowUps.push(
-      "How did you achieve a 68% token reduction?",
-      "Why use deterministic DAGs instead of autonomous ReAct loops?"
+      "How does BM25 and FAISS fusion lower hallucinations to 2.1%?",
+      "Why is Cohere Cross-Encoder reranking critical for GST sections?"
     );
-  } else if (primaryMatch.projectId === "hyperfluid") {
+  } else if (primaryMatch.projectId === "conformal-demand-forecasting") {
     suggestedFollowUps.push(
-      "How does analytical spring math prevent frame-rate drift?",
-      "Why use a single shared WebGL canvas overlay?"
+      "How does Newsvendor critical ratio map asymmetric stockout risk?",
+      "What guarantees does Split Conformal prediction provide?"
     );
-  } else if (primaryMatch.projectId === "sentient-core") {
+  } else if (primaryMatch.projectId === "two-tower-recommender") {
     suggestedFollowUps.push(
-      "How does the single-flight collapser broadcast responses?",
-      "What is the role of counting Bloom filters at the edge?"
+      "How does InfoNCE contrastive loss leverage in-batch negatives?",
+      "What gives the +4.2% lift in Recall@10 over matrix factorization?"
+    );
+  } else if (primaryMatch.projectId === "leetlens") {
+    suggestedFollowUps.push(
+      "How does LeetLens evaluate time/space complexity without spoiling code?",
+      "How does the Execution Trace Visualizer render recursion trees?"
+    );
+  } else if (primaryMatch.projectId === "duffy") {
+    suggestedFollowUps.push(
+      "How does Duffy's Web Speech API deliver in-browser pronunciation scoring?",
+      "How does the SuperMemo-2 Spaced Repetition algorithm schedule cards?"
+    );
+  } else if (primaryMatch.projectId === "velora") {
+    suggestedFollowUps.push(
+      "How does Velora achieve sub-45ms API response latency?",
+      "How do Next.js Server Actions and Zod ensure end-to-end type safety?"
+    );
+  } else if (primaryMatch.projectId === "embedded-footrest-patent") {
+    suggestedFollowUps.push(
+      "How does the speed interlock gate prevent highway deployment?",
+      "Tell me about Arush's experience at Amazon ML Summer School 2026."
     );
   } else {
     suggestedFollowUps.push(
-      "How did you optimize Chronos Engine for 1.2M events/sec?",
-      "Explain the deterministic multi-agent routing in Nexus Graph."
+      "How does RailRoute Agent achieve a 100% operational pass rate?",
+      "Explain the dual-stream retrieval in Chambers & Infrastructure."
     );
   }
 
