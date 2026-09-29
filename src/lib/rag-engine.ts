@@ -184,13 +184,13 @@ export function queryRagCopilot(query: string): RagResponse {
     );
   } else if (primaryMatch.projectId === "duffy") {
     suggestedFollowUps.push(
-      "How does Duffy's Web Speech API deliver in-browser pronunciation scoring?",
-      "How does the SuperMemo-2 Spaced Repetition algorithm schedule cards?"
+      "How does Duffy integrate Whisper API for live audio transcription?",
+      "How does the WebRTC architecture enable real-time communication?"
     );
   } else if (primaryMatch.category === "Patent") {
     suggestedFollowUps.push(
-      "What is the status of Arush's two-wheeler footrest patent application?",
-      "How does the centrifugal flyweight interlock operate without battery power?"
+      "What is the publication status of the two-wheeler footrest patent (2025)?",
+      "How do the pressure sensors and embedded controller prevent actuation at speed?"
     );
   } else {
     suggestedFollowUps.push(

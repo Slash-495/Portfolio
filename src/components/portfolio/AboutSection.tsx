@@ -47,7 +47,7 @@ export function AboutSection() {
           </p>
 
           <p>
-            My journey here has been anything but a straight line—I’ve gone from filing a published patent application for a novel centrifugal safety footrest for two-wheelers to engineering multi-agent LLM pipelines, data warehouse architectures, and probabilistic demand forecasting models. I love the chaos of bridging hardware intuition with deep software engineering, whether that means optimizing a vector retrieval system for a legal RAG copilot or getting selected for the Amazon ML Summer School.
+            My journey here has been anything but a straight line—I’ve gone from designing a published patent application for an automatic sensor-based footrest assembly for two-wheelers (using embedded controllers and pressure sensors) to engineering multi-agent LLM systems, relational data warehouses, and probabilistic demand forecasting models. I love the chaos of bridging hardware intuition with deep software engineering, whether that means optimizing a dual-stream retrieval pipeline for a legal RAG copilot or getting selected for the Amazon ML Summer School 2026.
           </p>
 
           <p>

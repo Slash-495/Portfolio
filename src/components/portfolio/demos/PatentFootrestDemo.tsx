@@ -7,25 +7,25 @@ import { Button } from "@/components/ui/Button";
 
 export function PatentFootrestDemo() {
   const [vehicleSpeed, setVehicleSpeed] = React.useState(0);
-  const [pillionMounted, setPillionMounted] = React.useState(false);
+  const [pressureDetected, setPressureDetected] = React.useState(false);
 
-  // Safety interlock rule: speed must be <= 5 km/h to actuate
+  // Safety interlock rule: speed must be <= 5 km/h and passenger pressure sensor active to actuate
   const isInterlockTriggered = vehicleSpeed > 5;
-  const isFootrestExtended = !isInterlockTriggered && pillionMounted;
+  const isFootrestExtended = !isInterlockTriggered && pressureDetected;
 
   return (
     <div className="flex flex-col gap-4 p-4 rounded-xl bg-slate-950 text-slate-100 border border-slate-800 font-mono text-xs">
       {/* Header Telemetry */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
         <div className="flex items-center gap-2">
-          <Award className="w-4 h-4 text-emerald-400" />
+          <Cpu className="w-4 h-4 text-emerald-400" />
           <span className="font-semibold uppercase tracking-wider text-slate-300">
-            EMBEDDED CONTROLLER: PATENTED TWO-WHEELER FOOTREST & AMAZON ML 2026
+            EMBEDDED CONTROLLER: AUTOMATIC TWO-WHEELER FOOTREST ASSEMBLY
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <Badge variant="active">PATENT GRANTED</Badge>
-          <Badge variant="metric">AMAZON ML SUMMER SCHOOL 2026</Badge>
+          <Badge variant="active">APPLICATION PUBLISHED 2025</Badge>
+          <Badge variant="metric">APP. NO. 202421034177</Badge>
         </div>
       </div>
 
@@ -37,7 +37,7 @@ export function PatentFootrestDemo() {
             {vehicleSpeed} km/h
           </div>
           <div className="text-[10px] text-slate-400 mt-0.5">
-            Speedometer Interrupt
+            Embedded Speedometer Input
           </div>
         </div>
 
@@ -48,17 +48,17 @@ export function PatentFootrestDemo() {
               : "bg-emerald-950/30 border-emerald-500/50 text-emerald-200"
           }`}
         >
-          <div className="text-[10px] text-slate-400 uppercase">Speed Interlock Gate</div>
+          <div className="text-[10px] text-slate-400 uppercase">Velocity Interlock Gate</div>
           <div className="text-xl font-bold mt-1">
-            {isInterlockTriggered ? "LOCKED (>5 km/h)" : "ARMED (&le;5 km/h)"}
+            {isInterlockTriggered ? "LOCKED (>5 km/h)" : "ARMED (≤5 km/h)"}
           </div>
           <div className="text-[10px] mt-0.5">
-            {isInterlockTriggered ? "Accidental deployment blocked" : "Safe to actuate"}
+            {isInterlockTriggered ? "Deployment prevented at speed" : "Safe for actuation"}
           </div>
         </div>
 
         <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800">
-          <div className="text-[10px] text-slate-500 uppercase">Footrest Mechanical State</div>
+          <div className="text-[10px] text-slate-500 uppercase">Mechanical Actuation State</div>
           <div
             className={`text-xl font-bold mt-1 ${
               isFootrestExtended ? "text-emerald-400" : "text-slate-300"
@@ -67,7 +67,7 @@ export function PatentFootrestDemo() {
             {isFootrestExtended ? "EXTENDED (ACTIVE)" : "RETRACTED FLUSH"}
           </div>
           <div className="text-[10px] text-slate-400 mt-0.5">
-            Actuation Time: 120ms
+            Pressure Sensor Controlled
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@ export function PatentFootrestDemo() {
         <div className="flex flex-col gap-1.5">
           <div className="flex justify-between text-[11px]">
             <span className="text-slate-400 flex items-center gap-1.5">
-              <Sliders className="w-3 h-3 text-emerald-400" /> Vehicle Speed Slider:
+              <Sliders className="w-3 h-3 text-emerald-400" /> Velocity Throttle Input:
             </span>
             <span className="text-emerald-400 font-bold">{vehicleSpeed} km/h</span>
           </div>
@@ -91,40 +91,40 @@ export function PatentFootrestDemo() {
             className="w-full accent-emerald-500 cursor-pointer h-1.5 bg-slate-800 rounded-lg"
           />
           <span className="text-[10px] text-slate-500">
-            Slide above 5 km/h to see the safety interlock lock actuation!
+            Slide above 5 km/h to test fail-safe operational logic locking actuation.
           </span>
         </div>
 
         <div className="flex flex-col justify-between">
-          <span className="text-slate-400 text-[11px] mb-1.5">Pillion Passenger Sensor:</span>
+          <span className="text-slate-400 text-[11px] mb-1.5">Pillion Pressure Sensor:</span>
           <button
-            onClick={() => setPillionMounted(!pillionMounted)}
+            onClick={() => setPressureDetected(!pressureDetected)}
             className={`w-full py-2 px-3 rounded-lg border text-xs font-mono font-semibold transition-all ${
-              pillionMounted
+              pressureDetected
                 ? "bg-emerald-950/70 border-emerald-500 text-emerald-300 shadow-[0_0_12px_rgba(16,185,129,0.2)]"
                 : "bg-slate-900 border-slate-800 text-slate-400 hover:text-white"
             }`}
           >
-            {pillionMounted ? "● Pillion Passenger Present (Mounted)" : "○ Solo Rider (No Passenger)"}
+            {pressureDetected ? "● Pressure Threshold Met (Pillion Present)" : "○ No Pressure Detected (Solo Rider)"}
           </button>
         </div>
       </div>
 
-      {/* Amazon ML Summer School 2026 Callout */}
+      {/* Patent & Hardware Integration Note */}
       <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-800 flex items-center justify-between gap-3 text-slate-300">
         <div className="flex items-center gap-2">
           <div className="p-1.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-            <Award className="w-4 h-4" />
+            <ShieldCheck className="w-4 h-4" />
           </div>
           <div>
-            <div className="font-bold text-white text-xs">Amazon ML Summer School 2026 Selectee</div>
+            <div className="font-bold text-white text-xs">Sensor-Based Fail-Safe Automation</div>
             <div className="text-[10px] text-slate-400">
-              Advanced deep learning, generative modeling, and LLM scaling mentorship.
+              Embedded microcontroller logic interlocks actuation to prevent road contact and entrapment hazards.
             </div>
           </div>
         </div>
         <span className="text-[10px] font-mono text-emerald-400 font-semibold px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20">
-          SELECTED
+          PUBLISHED 2025
         </span>
       </div>
     </div>

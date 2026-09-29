@@ -73,7 +73,7 @@ export default function Home() {
               Ask the Copilot
             </h2>
             <p className="text-sm text-[#8C8C85] max-w-xl">
-              An interactive grounded lexical retrieval engine trained on technical constraints, data architectures, and system trade-offs.
+              An in-memory lexical BM25 retrieval engine indexing project documentation, technical architectures, and evaluation benchmarks.
             </p>
           </div>
 

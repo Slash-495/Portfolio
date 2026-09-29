@@ -21,13 +21,15 @@ A personal developer portfolio and case-study showcase built with **Next.js 14**
 
 | Project | Category | Live Demo | Repository | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| **RailRoute Agent** | AI Systems | [Live Streamlit ↗](https://rail-route-finder.streamlit.app/) | [Slash-495/Rail-Route-Finder](https://github.com/Slash-495/Rail-Route-Finder) | 3-agent train routing DAG (100% pass rate) *(Free tier: ~30s cold wake)* |
-| **Chambers & Infrastructure** | AI Systems | [Live Streamlit ↗](https://chambersandinfastructures.streamlit.app/) | [Slash-495/GST-RAG](https://github.com/Slash-495/GST-RAG) | Dual-stream FAISS + BM25 legal RAG *(Free tier: ~30s cold wake)* |
+| **RailRoute Agent** | AI Systems | [Live Streamlit ↗](https://rail-route-finder.streamlit.app/) | [Slash-495/Rail-Route-Finder](https://github.com/Slash-495/Rail-Route-Finder) | 3-agent train routing DAG (100% pass rate, n=12 scenarios) *(Free tier: ~30s cold wake)* |
+| **Chambers & Infrastructure** | AI Systems | [Live Streamlit ↗](https://chambersandinfastructures.streamlit.app/) | [Slash-495/GST-RAG](https://github.com/Slash-495/GST-RAG) | Dual-stream FAISS + BM25 legal RAG (94.2% Precision@4, n=20 benchmark) *(Free tier: ~30s cold wake)* |
 | **Roznamcha** | Data & Analytics | [Live Vercel ↗](https://roznamcha-ivj4.vercel.app/) | [Slash-495/Roznamcha](https://github.com/Slash-495/Roznamcha) | Customer Analytics CRM powered by PostgreSQL `NTILE(5)` RFM views |
 | **Olist Analytics Engine** | Data & Analytics | — | [Slash-495/Olist-Analytics-Engine](https://github.com/Slash-495/Olist-Analytics-Engine) | Containerized PostgreSQL 15 ELT warehouse over 100k+ Brazilian orders |
-| **OptiMetrics** | Data & Analytics | — | [Slash-495/OptiMetrics](https://github.com/Slash-495/OptiMetrics) | Statistical A/B testing platform detecting mobile conversion crashes & novelty decay |
+| **OptiMetrics** | Data & Analytics | — | [Slash-495/OptiMetrics](https://github.com/Slash-495/OptiMetrics) | Statistical A/B testing platform detecting mobile conversion crashes & novelty decay (projected $96,300 avoided loss) |
 | **LeetLens** | Full Stack | — | [Slash-495/LeetLens](https://github.com/Slash-495/LeetLens) | Manifest V3 Chrome Extension with BYOK local-first AST visualizer |
-| **Duffy** | Full Stack | [Live Render ↗](https://duffy.onrender.com/) | [Slash-495/Duffy](https://github.com/Slash-495/Duffy) | Web Speech API voice AI & SuperMemo-2 spaced repetition *(~30s cold wake)* |
+| **Duffy** | Full Stack | [Live Render ↗](https://duffy.onrender.com/) | [Slash-495/Duffy](https://github.com/Slash-495/Duffy) | AI-powered real-time communication platform with Whisper transcription *(~30s cold wake)* |
+| **Velora** | Full Stack | [Live Vercel ↗](https://velora-3jpcjj3y1-slashs-projects-1d391125.vercel.app/) | [Slash-495/Velora](https://github.com/Slash-495/Velora) | AI resume builder & ATS job tracking platform |
+| **Two-Tower Recommender** | Applied ML | — | [Slash-495](https://github.com/Slash-495) | PyTorch dual-encoder candidate retrieval with hard-negative InfoNCE (+4.2% Recall@10) |
 | **Conformal Demand Forecasting** | Applied ML | — | [Slash-495/Conformal-Demand-Forecasting](https://github.com/Slash-495/Conformal-Demand-Forecasting) | LightGBM + split conformal intervals with Newsvendor optimization |
 
 ---
@@ -49,7 +51,7 @@ Live demonstration links for Streamlit Cloud and Render free tiers automatically
 ## Career Milestones & Published Applications
 
 - **Amazon ML Summer School 2026**: Selective admission across premier Indian institutions; direct mentorship by Amazon ML Scientists in foundation models, deep learning, and generative AI.
-- **Patent Application Published**: *Centrifugal Speed Interlock Footrest Mechanism for Two-Wheelers* (Indian Patent Application No. 202421034177). Purely passive flyweight governor restricting pillion footrest deployment above 5 km/h with 100% mechanical fail-safety.
+- **Patent Application Published**: *Automatic Footrest Assembly for Two Wheeler* (Indian Patent Application No. 202421034177, Published 2025). Sensor-based automation system using embedded controllers and pressure sensors with fail-safe operational logic.
 - **Competitive Programming**: 400+ algorithmic problems solved on [LeetCode](https://leetcode.com/u/Slash495/) & Codeforces. Author of open-source LeetLens AST visualizer.
 - **Academic Standing**: Final Year B.Tech in Smart Manufacturing at IIITDM Jabalpur (2023 - Present).
 
@@ -117,5 +119,5 @@ npm start
 
 - **Email**: [jainarush423@gmail.com](mailto:jainarush423@gmail.com)
 - **GitHub**: [github.com/Slash-495](https://github.com/Slash-495)
-- **LinkedIn**: [linkedin.com/in/arush-jain](https://www.linkedin.com/in/arush-jain)
+- **LinkedIn**: [linkedin.com/in/arushjain495](https://www.linkedin.com/in/arushjain495)
 - **LeetCode**: [leetcode.com/u/Slash495](https://leetcode.com/u/Slash495/)

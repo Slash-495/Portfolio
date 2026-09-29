@@ -64,7 +64,7 @@ export function OptiMetricsDemo() {
           <div className="space-y-3">
             <div className="flex items-center justify-between text-xs font-mono">
               <span className="text-[#455A30] font-semibold">DEVICE HETEROGENEITY DETECTED</span>
-              <span className="font-bold text-[#B91C1C]">$96,300 Loss Prevented</span>
+              <span className="font-bold text-[#B91C1C]">Projected $96,300 Loss Avoided (per 50K)</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
               {/* Desktop */}
@@ -89,7 +89,7 @@ export function OptiMetricsDemo() {
                   <span className="text-red-700 font-bold">-47.07% Crash</span>
                 </div>
                 <div className="text-xs text-red-900">
-                  Conversion collapsed from 9.92% to 5.25% (p &lt; 0.0001). Prevented catastrophic revenue loss.
+                  Conversion collapsed from 9.92% to 5.25% (p &lt; 0.0001). Projected to avoid $96,300 in lost revenue per 50K users.
                 </div>
               </div>
             </div>

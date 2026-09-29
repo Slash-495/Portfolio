@@ -115,7 +115,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
         description: "Deterministic timetable rule validator runs prior to LLM presentation",
       },
     ],
-    techStack: ["Python", "Gemini 1.5 Pro", "Streamlit", "AsyncIO", "Pydantic", "NetworkX"],
+    techStack: ["Python", "Google Gemini API", "Streamlit", "AsyncIO", "Pydantic"],
     problem: {
       context:
         "Direct Indian Railway journeys frequently face severe ticket waitlists. Split-journey ticketing (booking Leg A -> B then B -> C) often uncovers available seats, but manual search requires checking hundreds of station combinations while accounting for platform walking times and schedule delays.",
@@ -669,10 +669,10 @@ GROUP BY c.customer_state;`,
     year: "2025",
     githubUrl: "https://github.com/Slash-495/OptiMetrics",
     summary:
-      "Engineered a production-grade Python and Power BI statistical experimentation platform designed to prevent costly product rollout failures. In a 50,000-user checkout redesign experiment showing a deceptive +47.96% aggregate conversion lift, OptiMetrics detected a severe hidden mobile conversion crash (-47.07%) and 80.7% novelty decay in Week 2, avoiding over $96,300 in lost revenue.",
+      "Engineered a production-grade Python and Power BI statistical experimentation platform designed to prevent costly product rollout failures. In a 50,000-user checkout redesign experiment showing a deceptive +47.96% aggregate conversion lift, OptiMetrics detected a severe hidden mobile conversion crash (-47.07%) and 80.7% novelty decay in Week 2, projected to avoid $96,300 in lost revenue per 50K users.",
     primaryMetric: {
-      label: "Avoided Loss",
-      value: "$96,300+ Saved",
+      label: "Projected Avoided Loss",
+      value: "$96,300 (per 50K)",
     },
     metrics: [
       {
@@ -729,7 +729,7 @@ GROUP BY c.customer_state;`,
           choice: "Segmented rollout recommendation over binary 100% ship / abort",
           alternative: "Completely aborting the redesign due to mobile failure",
           reason:
-            "Desktop lift was massive and statistically significant (+135.66%). Segmented deployment captured desktop upside while protecting mobile revenue ($96,300+ saved).",
+            "Desktop lift was massive and statistically significant (+135.66%). Segmented deployment captured desktop upside while protecting mobile revenue (projected to avoid $96,300 in lost revenue per 50K users).",
         },
         {
           choice: "Power BI presentation layer over raw Jupyter Notebook reports",
@@ -778,7 +778,7 @@ GROUP BY c.customer_state;`,
         "Calculates 2-proportion Z-test and 95% confidence intervals on conversion lift",
         "Disaggregates results by device type, detecting mobile conversion crash (-47.07%)",
         "Tracks week-over-week lift decay, discovering 80.7% novelty fade in Week 2",
-        "Outputs segmented rollout playbook preventing $96,300 in lost mobile revenue",
+        "Outputs segmented rollout playbook projected to avoid $96,300 in lost mobile revenue per 50K users",
       ],
     },
     codeHighlights: [
@@ -963,152 +963,108 @@ def evaluate_experiment_rigor(control_users, variant_users, control_conv, varian
     id: "duffy",
     slug: "duffy",
     title: "Duffy",
-    tagline: "AI-powered language learning ecosystem with Spaced Repetition, Voice AI & classroom tools",
+    tagline: "AI-Powered Real-Time Communication Platform with Whisper Live Transcription",
     category: "Full Stack",
     status: "DEPLOYED",
-    year: "2024",
+    year: "2025",
     githubUrl: "https://github.com/Slash-495/Duffy",
     liveUrl: "https://duffy.onrender.com/",
     coldStartNote: "Hosted on Render Free Tier • May take ~30s to wake from sleep",
     summary:
-      "Architected a comprehensive language immersion web platform combining an intelligent Spaced Repetition System (SRS) for custom flashcards, real-time in-browser neural voice recognition via the Web Speech API with dynamic pronunciation scoring, Gemini-powered conversational scenario roleplay personas, and B2B classroom roster management.",
+      "Architected an AI-powered real-time communication platform featuring responsive dashboards and reusable UI workflows. Integrated REST APIs, authentication systems, Gemini/GPT-4 features, and Whisper-based live transcription with modular frontend layouts.",
     primaryMetric: {
-      label: "In-Browser Voice AI",
-      value: "Zero-Latency Native Speech",
+      label: "Audio Transcription",
+      value: "Whisper API Live",
     },
     metrics: [
       {
-        label: "Voice Recognition",
-        value: "Web Speech API",
-        change: "Client-native",
-        description: "Zero external audio upload latency for real-time pronunciation checks",
+        label: "Live Transcription",
+        value: "Whisper API",
+        change: "Real-time",
+        description: "Live voice-to-text transcription with low-latency streaming",
       },
       {
-        label: "SRS Algorithm",
-        value: "SuperMemo-2",
-        change: "Mathematical",
-        description: "Dynamically schedules card reviews based on user recall grade",
+        label: "Protocol",
+        value: "WebRTC + REST",
+        change: "Sub-50ms",
+        description: "Direct real-time communication mesh and responsive API dispatch",
       },
       {
-        label: "AI Personas",
-        value: "Interactive Scenarios",
-        change: "Roleplay",
-        description: "Coffee shop ordering, airport transit, and casual small talk",
+        label: "UI Architecture",
+        value: "Reusable Layouts",
+        change: "Modular",
+        description: "Component library of forms, telemetry cards, and interactive layouts",
       },
       {
-        label: "Classroom Tools",
-        value: "B2B Teacher Portal",
-        change: "Multi-tenant",
-        description: "Teacher rosters, shared decks, and student progress telemetry",
+        label: "AI Orchestration",
+        value: "Gemini / GPT-4",
+        change: "Contextual",
+        description: "Context-aware conversational assistance integrated into communication streams",
       },
     ],
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Web Speech API", "Gemini API", "PostgreSQL", "Prisma"],
+    techStack: ["Next.js 14", "Node.js", "WebRTC", "Gemini API", "Whisper API", "REST APIs", "Tailwind CSS"],
     problem: {
       context:
-        "Language learners face two distinct challenges: memorization decay (forgetting vocabulary without systematic review intervals) and speaking anxiety (lack of safe, interactive environments to practice spoken conversation).",
+        "Modern remote collaboration platforms often suffer from fragmented communication tooling, sluggish transcription integrations, and rigid user interfaces that cannot adapt to multi-party communication workflows.",
       painPoints: [
-        "Traditional flashcard apps lack automated spaced retention scheduling",
-        "Cloud voice transcription APIs introduce jarring multi-second latency for conversational drills",
-        "Educators lack tools to assign structured custom vocabulary decks to student cohorts",
+        "High latency in server-side speech transcription and transcription lag",
+        "Complex state reconciliation across concurrent real-time audio streams",
+        "Inconsistent component designs creating disjointed dashboard experiences",
       ],
       constraints: [
-        "Zero-latency speech recognition directly inside standard web browsers",
-        "Mathematically rigorous SuperMemo-2 (SM-2) retention calculation for all card reviews",
-        "Roleplay AI personas strictly adhering to the target language and proficiency level",
+        "Sub-100ms real-time audio communication streaming buffer",
+        "Deterministic local-first session state with seamless REST reconciliation",
+        "Mobile-first responsive dashboard supporting high-density telemetry views",
       ],
     },
     solution: {
       overview:
-        "Built Duffy as an all-in-one language platform pairing browser-native Web Speech recognition with the SuperMemo-2 algorithm and Gemini conversational personas, wrapped in an intuitive full-stack web app.",
+        "Built a modular real-time communication system that couples WebRTC low-latency streaming with Whisper-based transcription and responsive Next.js frontend workflows.",
       architectureHighlights: [
-        "In-Browser Speech Recognition via native SpeechRecognition / webkitSpeechRecognition",
-        "SuperMemo-2 Spaced Repetition implementation computing optimal ease factor and interval days",
-        "Conversational Scenarios: Context-bounded persona roleplays with dynamic feedback",
-        "Teacher Portal: Roster management, student telemetry, and synchronized deck assignments",
+        "WebRTC Mesh: Peer-to-peer audio transmission with minimal server relay overhead",
+        "Whisper Transcription: Real-time speech-to-text processing for live captions and meeting summaries",
+        "Responsive Component Engine: Unified form, card, and modal workflows styled with Tailwind CSS",
       ],
       tradeOffs: [
         {
-          choice: "Browser-native Web Speech API over cloud transcription services (Whisper API)",
-          alternative: "Streaming audio to server-side OpenAI Whisper endpoints",
-          reason:
-            "Web Speech API executes instantly with zero server infrastructure costs and near-zero latency, creating a natural back-and-forth conversational flow.",
+          choice: "WebRTC peer streaming",
+          alternative: "Centralized media server (SFU/MCU)",
+          reason: "Maximizes privacy and delivers minimal latency for direct communication.",
         },
         {
-          choice: "SuperMemo-2 mathematical formulation over fixed interval timers",
-          alternative: "Static review intervals (e.g. review every 2 days)",
-          reason:
-            "SM-2 dynamically adapts to the learner's individual difficulty score, maximizing long-term memory retention efficiency.",
+          choice: "Whisper API live ingestion",
+          alternative: "Browser native Web Speech API only",
+          reason: "Provides superior transcription accuracy across diverse accents and noisy environments.",
         },
       ],
     },
     architecture: {
-      diagramDescription:
-        "Duffy Architecture: Client Audio -> Web Speech API -> Pronunciation Comparator & SM-2 Scheduler -> Gemini Conversation Persona -> Prisma PostgreSQL",
+      diagramDescription: "Client -> WebRTC Mesh -> Whisper Transcription -> AI Contextual Layer",
       nodes: [
-        {
-          id: "mic",
-          title: "Audio Ingress",
-          type: "input",
-          description: "Captures microphone stream and delivers speech recognition events",
-          tech: "Web Speech API",
-        },
-        {
-          id: "sm2",
-          title: "SM-2 Scheduler",
-          type: "process",
-          description: "Calculates next review timestamp based on recall ease and grade",
-          tech: "SM-2 Algorithm",
-        },
-        {
-          id: "persona",
-          title: "Gemini Persona",
-          type: "process",
-          description: "Engages in conversational immersion drills across varied scenarios",
-          tech: "Gemini 1.5 Pro",
-        },
-        {
-          id: "database",
-          title: "Cloud Data Layer",
-          type: "storage",
-          description: "Stores user decks, card retention scores, and teacher classroom rosters",
-          tech: "Prisma / PostgreSQL",
-        },
+        { id: "d1", title: "Audio Input", type: "input", description: "Microphone stream", tech: "Web Audio API" },
+        { id: "d2", title: "WebRTC Engine", type: "process", description: "Peer-to-peer transmission", tech: "WebRTC" },
+        { id: "d3", title: "Whisper Transcription", type: "process", description: "Speech-to-text pipeline", tech: "Whisper API" },
+        { id: "d4", title: "Next.js Dashboard", type: "output", description: "Interactive responsive UI", tech: "Next.js 14" },
       ],
       dataFlowSteps: [
-        "Learner opens vocabulary flashcard deck and speaks target phrase",
-        "Web Speech API transcribes audio client-side and computes phonetic similarity score",
-        "User rates card recall difficulty (0-5 scale)",
-        "SM-2 algorithm calculates next review interval and updates ease factor in PostgreSQL",
-        "In Conversation mode, learner speaks dialogue; Gemini replies in character with corrective hints",
+        "Microphone audio is captured and piped through low-latency WebRTC streams.",
+        "Audio packets are processed via Whisper for near-instant transcription.",
+        "Transcribed text feeds AI contextual assistant for meeting highlights.",
+        "Responsive UI updates dashboards and transcription panels with zero layout shift.",
       ],
     },
     codeHighlights: [
       {
-        title: "SuperMemo-2 (SM-2) Spaced Repetition Algorithm",
+        title: "Whisper Live Audio Ingestion Handler",
         language: "typescript",
-        code: `export function calculateSM2(
-  repetition: number,
-  easeFactor: number,
-  grade: number // 0 to 5 recall quality
-): { repetition: number; intervalDays: number; easeFactor: number } {
-  // Update ease factor according to SuperMemo-2 formula
-  let nextEase = easeFactor + (0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02));
-  nextEase = Math.max(1.3, nextEase);
-
-  let nextInterval: number;
-  if (grade < 3) {
-    // Incorrect recall: restart repetition cycle
-    return { repetition: 0, intervalDays: 1, easeFactor: nextEase };
-  }
-
-  if (repetition === 0) nextInterval = 1;
-  else if (repetition === 1) nextInterval = 6;
-  else nextInterval = Math.round((repetition - 1) * nextEase);
-
-  return { repetition: repetition + 1, intervalDays: nextInterval, easeFactor: nextEase };
+        code: `export async function handleAudioStream(audioBlob: Blob) {
+  const formData = new FormData();
+  formData.append("file", audioBlob, "audio.wav");
+  formData.append("model", "whisper-1");
+  const res = await fetch("/api/transcribe", { method: "POST", body: formData });
+  return await res.json();
 }`,
-        explanation:
-          "Dynamically computes optimal memory recall intervals, ensuring students review weak cards right before forgetting occurs.",
+        explanation: "Pipes real-time audio segments into transcription pipeline with sub-second feedback.",
       },
     ],
     interactiveDemoType: "duffy",
@@ -1120,7 +1076,7 @@ def evaluate_experiment_rigor(control_users, variant_users, control_conv, varian
     tagline: "Probabilistic inventory forecasting engine via LightGBM & Newsvendor optimization",
     category: "Applied ML",
     status: "PRODUCTION",
-    year: "2024",
+    year: "2025",
     githubUrl: "https://github.com/Slash-495/Conformal-Demand-Forecasting",
     summary:
       "Developed an end-to-end probabilistic supply chain forecasting engine combining LightGBM gradient boosting, split conformal prediction intervals, and Newsvendor profit-maximization optimization. Containerized with Docker and served via FastAPI, cutting retail stockout rates from 48% to 11% and reducing total inventory holding costs by 31%.",
@@ -1266,6 +1222,222 @@ def evaluate_experiment_rigor(control_users, variant_users, control_conv, varian
     ],
     interactiveDemoType: "conformal",
   },
+  {
+    id: "velora",
+    slug: "velora",
+    title: "Velora",
+    tagline: "AI-Powered Resume Builder & ATS Job Optimization Platform",
+    category: "Full Stack",
+    status: "DEPLOYED",
+    year: "2025 – 2026",
+    githubUrl: "https://github.com/Slash-495/Velora",
+    liveUrl: "https://velora-3jpcjj3y1-slashs-projects-1d391125.vercel.app/",
+    coldStartNote: "Hosted on Vercel • Active Project",
+    summary:
+      "Designing and developing an AI-powered resume builder that generates ATS-friendly resumes, analyzes job descriptions, and provides personalized resume optimization suggestions. Architected the complete product workflow including resume generation, job tracking, template management, user authentication, and AI-driven content enhancement.",
+    primaryMetric: {
+      label: "ATS Optimization",
+      value: "AI-Driven Scoring",
+    },
+    metrics: [
+      {
+        label: "Resume Generation",
+        value: "ATS-Friendly",
+        change: "Automated",
+        description: "Standardized semantic layouts ensuring parseability by major ATS screening algorithms",
+      },
+      {
+        label: "Job Tracking",
+        value: "Application Pipeline",
+        change: "Full Lifecycle",
+        description: "Tracks status from initial application through technical interviews and offer stages",
+      },
+      {
+        label: "Frontend Architecture",
+        value: "Next.js 14 + TypeScript",
+        change: "Reactive",
+        description: "Multi-step interactive builder with instant preview and optimistic state management",
+      },
+      {
+        label: "Content Enhancement",
+        value: "Contextual AI",
+        change: "Action-Oriented",
+        description: "Analyzes target job descriptions to extract missing skills and highlight quantifiable metrics",
+      },
+    ],
+    techStack: ["Next.js 14", "TypeScript", "Tailwind CSS", "REST APIs", "AI-Assisted Development"],
+    problem: {
+      context:
+        "Job seekers frequently struggle with inconsistent ATS parsing, keyword mismatches, and fragmented application tracking across dozens of open job portals.",
+      painPoints: [
+        "Unstandardized PDF layouts failing automated ATS parser verification",
+        "Lack of actionable keyword alignment between candidate resumes and specific job postings",
+        "Disorganized application tracking leading to missed follow-ups and lost opportunities",
+      ],
+      constraints: [
+        "100% parseable standard ATS document layout hierarchy",
+        "Sub-second client-side preview rendering during typing and section rearrangement",
+        "Secure user authentication and local draft auto-saving",
+      ],
+    },
+    solution: {
+      overview:
+        "Architected an end-to-end platform combining deterministic multi-step resume creation, AI-driven keyword extraction, and centralized application pipeline tracking.",
+      architectureHighlights: [
+        "ATS Layout Engine: Strict semantic HTML-to-PDF rendering conforming to ATS parsing standards",
+        "Job Match Scorer: Compares resume experience bullet points against target job descriptions",
+        "Pipeline Dashboard: Visual application board organizing candidate applications by active stage",
+      ],
+      tradeOffs: [
+        {
+          choice: "Clean semantic templates",
+          alternative: "Complex multi-column graphic layouts",
+          reason: "Multi-column graphics frequently crash automated ATS scanners and result in automatic rejection.",
+        },
+        {
+          choice: "Client-side state caching with periodic server sync",
+          alternative: "Full server roundtrip per keystroke",
+          reason: "Guarantees lag-free editing performance while preventing draft loss.",
+        },
+      ],
+    },
+    architecture: {
+      diagramDescription: "User Draft -> ATS Optimization Engine -> PDF Compiler -> Pipeline Tracker",
+      nodes: [
+        { id: "v1", title: "Resume Builder", type: "input", description: "Form fields and work experience inputs", tech: "Next.js Form Engine" },
+        { id: "v2", title: "AI Keyword Matcher", type: "process", description: "Job description comparative analysis", tech: "Gemini / OpenAI" },
+        { id: "v3", title: "ATS PDF Compiler", type: "process", description: "Parseable single-column layout generator", tech: "Tailwind / PDF Renderer" },
+        { id: "v4", title: "Pipeline Board", type: "output", description: "Job application status tracker", tech: "TypeScript State" },
+      ],
+      dataFlowSteps: [
+        "User inputs career history and target job description.",
+        "AI analyzer extracts crucial hard skills and suggests tailored bullet enhancements.",
+        "ATS layout engine previews formatting in real time without layout shift.",
+        "Finalized resume is compiled and logged into the active job application tracker.",
+      ],
+    },
+    codeHighlights: [
+      {
+        title: "ATS Keyword Alignment & Gap Analyzer",
+        language: "typescript",
+        code: `export function analyzeJobMatch(resumeSkills: string[], jobKeywords: string[]) {
+  const matched = jobKeywords.filter(k => resumeSkills.includes(k.toLowerCase()));
+  const missing = jobKeywords.filter(k => !resumeSkills.includes(k.toLowerCase()));
+  const score = Math.round((matched.length / Math.max(jobKeywords.length, 1)) * 100);
+  return { score, matched, missing };
+}`,
+        explanation: "Quantifies keyword alignment percentage to give candidates transparent scoring before applying.",
+      },
+    ],
+    interactiveDemoType: "velora",
+  },
+  {
+    id: "two-tower-recommender",
+    slug: "two-tower-recommender",
+    title: "Multimodal Two-Tower Product Recommender",
+    tagline: "Deep learning candidate retrieval system with hard-negative InfoNCE contrastive training",
+    category: "Applied ML",
+    status: "DEPLOYED",
+    year: "2025",
+    githubUrl: "https://github.com/Slash-495",
+    summary:
+      "Designed and trained a two-tower dual-encoder retrieval model (user/item MLP towers with FAISS similarity search), benchmarked on a MovieLens warm-start split spanning 55K+ users and 20K+ candidate items. Implemented a hard-negative InfoNCE contrastive training loop with a custom FAISS-based hard-negative sampler, improving Recall@10 by 4.2% and Recall@50 by 3.6% over an in-batch-negative baseline across a controlled 6-model ablation study.",
+    primaryMetric: {
+      label: "Recall@10 Lift",
+      value: "+4.2% (vs baseline)",
+    },
+    metrics: [
+      {
+        label: "Recall@10 Lift",
+        value: "+4.2%",
+        change: "vs In-Batch",
+        description: "Hard-negative InfoNCE sampling over standard in-batch negative baseline",
+      },
+      {
+        label: "Recall@50 Lift",
+        value: "+3.6%",
+        change: "Ablation",
+        description: "Controlled 6-model ablation isolating text features and Stage-2 MLP reranking",
+      },
+      {
+        label: "Benchmark Scale",
+        value: "55K+ Users",
+        change: "MovieLens",
+        description: "Evaluated on 20K+ candidate items with warm-start user representation",
+      },
+      {
+        label: "Test Verification",
+        value: "53 Tests",
+        change: "pytest",
+        description: "Zero train/test leakage verification suite with automated CI assertions",
+      },
+    ],
+    techStack: ["PyTorch", "FAISS", "scikit-learn", "Python", "pytest"],
+    problem: {
+      context:
+        "Large-scale recommendation systems cannot evaluate millions of items in real time. Dual-encoder two-tower architectures enable sub-millisecond retrieval by decoupling user context encoding from item embedding indexing, but naive training suffers from in-batch negative bias.",
+      painPoints: [
+        "In-batch negatives fail to provide challenging negative examples, causing poor discrimination among top items",
+        "Severe distribution shift when transitioning from training loss to top-K evaluation ranking metrics",
+        "High risk of temporal data leakage between candidate interaction history and future test interactions",
+      ],
+      constraints: [
+        "Sub-10ms retrieval latency over 20K+ candidate catalog embeddings via FAISS MIPS index",
+        "Strict temporal split ensuring zero interaction contamination between train and test sets",
+        "Rigorous ablation benchmarking across dense text representations and fusion layers",
+      ],
+    },
+    solution: {
+      overview:
+        "Engineered an end-to-end PyTorch dual-encoder pipeline featuring user and item MLP towers, paired with a custom FAISS-based hard-negative mining loop using InfoNCE contrastive loss.",
+      architectureHighlights: [
+        "Dual-Encoder Towers: Parallel user history and item feature MLP encoders producing shared 64D embeddings",
+        "Hard-Negative Sampler: FAISS MIPS query mining top-K non-interacted items during training batches",
+        "Ablation Suite: 6-model controlled experiment comparing linear, gated fusion, and two-stage architectures",
+      ],
+      tradeOffs: [
+        {
+          choice: "FAISS-based hard-negative sampling",
+          alternative: "Random negative sampling",
+          reason: "Drives steep gradient updates on borderline items, significantly boosting Recall@10.",
+        },
+        {
+          choice: "Shared metric embedding space (64-dim)",
+          alternative: "Full cross-attention scoring",
+          reason: "Enables pre-computed offline item indexing and sub-10ms online vector retrieval.",
+        },
+      ],
+    },
+    architecture: {
+      diagramDescription: "User Features -> User Tower -> Embedding Space <- Item Tower <- Item Features",
+      nodes: [
+        { id: "t1", title: "User Tower", type: "process", description: "Encodes user history and demographic signals", tech: "PyTorch MLP" },
+        { id: "t2", title: "Item Tower", type: "process", description: "Encodes item metadata and genre embeddings", tech: "PyTorch MLP" },
+        { id: "t3", title: "FAISS MIPS Index", type: "storage", description: "Pre-indexed item embedding catalog", tech: "FAISS Vector DB" },
+        { id: "t4", title: "Top-K Candidates", type: "output", description: "Sub-10ms candidate retrieval output", tech: "Cosine / Dot Product" },
+      ],
+      dataFlowSteps: [
+        "Item features are pre-encoded through Item Tower and loaded into FAISS MIPS vector index.",
+        "Online user context passes through User Tower to generate a 64-dimensional query vector.",
+        "FAISS performs maximum inner product search across candidate catalog in <5ms.",
+        "Top candidate items are ranked and scored by cosine similarity.",
+      ],
+    },
+    codeHighlights: [
+      {
+        title: "InfoNCE Hard-Negative Contrastive Loss",
+        language: "python",
+        code: `def info_nce_loss(user_embeds, pos_item_embeds, hard_neg_embeds, temperature=0.07):
+    pos_sim = torch.sum(user_embeds * pos_item_embeds, dim=-1, keepdim=True) / temperature
+    neg_sim = torch.bmm(hard_neg_embeds, user_embeds.unsqueeze(-1)).squeeze(-1) / temperature
+    logits = torch.cat([pos_sim, neg_sim], dim=-1)
+    labels = torch.zeros(user_embeds.size(0), dtype=torch.long, device=user_embeds.device)
+    return F.cross_entropy(logits, labels)`,
+        explanation: "Forces user embeddings closer to true interactions while strongly repelling hard negatives.",
+      },
+    ],
+    interactiveDemoType: "two-tower",
+  },
 ];
 
 export const PROFILE_DATA = {
@@ -1290,7 +1462,7 @@ export const PROFILE_DATA = {
     { label: "RailRoute Pass Rate", value: "100% Verified" },
     { label: "Legal RAG Precision", value: "94.2% P@4" },
     { label: "Logistics Churn Impact", value: "R$ 1.73M Quantified" },
-    { label: "A/B Loss Prevented", value: "$96,300 Saved" },
+    { label: "Projected Loss Avoided", value: "$96,300 (per 50K)" },
   ],
   systemSpecs: {
     education: "IIITDM Jabalpur (2023 - Present)",
@@ -1304,7 +1476,7 @@ export const PROFILE_DATA = {
   },
   socialLinks: [
     { label: "GitHub", url: "https://github.com/Slash-495", icon: "Github" },
-    { label: "LinkedIn", url: "https://www.linkedin.com/in/arush-jain", icon: "Linkedin", isPlaceholder: false },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/arushjain495", icon: "Linkedin", isPlaceholder: false },
     { label: "LeetCode", url: "https://leetcode.com/u/Slash495/", icon: "Code2", isPlaceholder: false },
     { label: "Email", url: "mailto:jainarush423@gmail.com", icon: "Mail" },
   ],
@@ -1314,7 +1486,7 @@ export interface AchievementItem {
   id: string;
   title: string;
   badge: string;
-  category: "Intellectual Property" | "Elite Selection" | "Education" | "Algorithms" | "Open Source";
+  category: "Intellectual Property" | "Selected Attendee" | "Education" | "Algorithms" | "Open Source";
   year: string;
   organization: string;
   description: string;
@@ -1332,8 +1504,8 @@ export const ACHIEVEMENTS: AchievementItem[] = [
   {
     id: "amazon-ml-summer-school-2026",
     title: "Amazon ML Summer School 2026",
-    badge: "SELECTIVE ADMISSION",
-    category: "Elite Selection",
+    badge: "SELECTED ATTENDEE",
+    category: "Selected Attendee",
     year: "2026",
     organization: "Amazon Science & Machine Learning Division",
     description:
@@ -1351,22 +1523,22 @@ export const ACHIEVEMENTS: AchievementItem[] = [
   },
   {
     id: "two-wheeler-footrest-patent",
-    title: "Centrifugal Speed Interlock Footrest Mechanism for Two-Wheelers",
-    badge: "PATENT APPLICATION PUBLISHED • APP. NO. 202421034177",
+    title: "Automatic Footrest Assembly for Two Wheeler",
+    badge: "PATENT APPLICATION PUBLISHED • 2025",
     category: "Intellectual Property",
-    year: "2024",
-    organization: "Indian Patent Office",
+    year: "2025",
+    organization: "Indian Patent Office (App. No. 202421034177)",
     patentNumber: "202421034177",
     description:
-      "Invented a novel mechanical safety footrest mechanism for two-wheelers with a patent application published (App. No. 202421034177, Indian Patent Office). Employs a passive centrifugal flyweight governor that locks footrest actuation when velocity exceeds 5 km/h, preventing pillion foot entrapment and road contact accidents.",
+      "Designed a sensor-based automation system using embedded controllers and pressure sensors. Implemented hardware-software integration workflows with fail-safe operational logic (Indian Patent Application Published, App. No. 202421034177).",
     highlights: [
-      "Passive centrifugal governor: Locks footrest actuation above 5 km/h with 100% mechanical fail-safety",
-      "Zero parasitic battery draw: Eliminates complex electrical actuators and vulnerability to electrical failure",
-      "Complete CAD modeling, dynamic kinematic simulation, and physical prototype fabrication at IIITDMJ",
+      "Sensor-based automation: Pressure sensors & embedded microcontroller detecting passenger mounting state",
+      "Fail-safe operational logic: Hardware-software integration workflows preventing deployment at speed",
+      "Patent Application Published: Indian Patent Office (App. No. 202421034177, Published 2025)",
     ],
     metrics: [
-      { label: "Interlock Speed", value: "≤ 5 km/h" },
-      { label: "Status", value: "Application Published" },
+      { label: "Architecture", value: "Sensor & Embedded" },
+      { label: "Publication", value: "Published 2025" },
     ],
     iconName: "FileCheck2",
   },
@@ -1392,7 +1564,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
   },
   {
     id: "algorithmic-problem-solving",
-    title: "Competitive Programming & Problem Solving Mastery",
+    title: "Competitive Programming & Problem Solving (400+ Problems)",
     badge: "400+ PROBLEMS SOLVED",
     category: "Algorithms",
     year: "2024 - Present",
@@ -1416,17 +1588,17 @@ export const ACHIEVEMENTS: AchievementItem[] = [
   },
   {
     id: "open-source-production-shipments",
-    title: "Shipped Real-World Multi-Agent, Full-Stack & Analytics Systems",
+    title: "Open-Source Software & Deployed Systems",
     badge: "6+ PUBLIC REPOSITORIES & DEPLOYMENTS",
     category: "Open Source",
-    year: "2024 - 2025",
-    organization: "Global Open Source & Live Users",
+    year: "2025 - 2026",
+    organization: "Public Repositories & Deployments",
     description:
       "Built and deployed end-to-end applications across multi-agent systems, data warehouses, and web products: Roznamcha CRM, Olist Analytics Engine, OptiMetrics A/B engine, Chambers GST-RAG legal intelligence, RailRoute Finder, and Duffy voice AI.",
     highlights: [
       "Roznamcha (Live CRM): PostgreSQL NTILE(5) RFM customer analytics & monthly cohort retention",
       "Olist Analytics: Containerized 100k+ order data warehouse with Metabase BI & R$ 1.73M delay quantification",
-      "OptiMetrics: Statistical A/B experimentation engine in Python & Power BI saving $96.3k+",
+      "OptiMetrics: Statistical A/B experimentation engine in Python & Power BI projected to avoid $96,300 in lost revenue per 50K users",
       "Chambers GST-RAG: Dual-stream FAISS + BM25 hybrid legal retrieval cutting hallucinations to 2.1%",
     ],
     metrics: [

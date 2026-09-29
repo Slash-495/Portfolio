@@ -26,34 +26,34 @@ const RESUMES: ResumeItem[] = [
     isPrimary: true,
     roleNote: "Web Architecture & Distributed Systems",
     description:
-      "Engineered for roles focusing on modern web architecture, distributed client state, WebRTC peer-to-peer streaming, and reactive microservices.",
+      "Engineered for roles focusing on modern web architecture, distributed client state, WebRTC real-time streaming, and responsive microservices.",
     keyProjects: [
       {
         name: "Duffy",
-        detail: "Real-time collaborative canvas workspace & WebRTC mesh communication with sub-50ms latency.",
+        detail: "AI-powered real-time communication platform with responsive dashboards and Whisper live transcription.",
       },
       {
         name: "LeetLens",
-        detail: "Interactive algorithm execution profiler & AST call tree visualizer (400+ problems analyzed).",
+        detail: "Interactive coding assistant Chrome extension with multi-level hints, AST call tree visualizer & BYOK.",
       },
       {
         name: "Velora",
-        detail: "High-concurrency e-commerce platform with deterministic cart state & optimistic UI updates.",
+        detail: "AI-powered resume builder and job tracking platform with ATS optimization suggestions (under development).",
       },
     ],
     skills: [
-      "React",
-      "Next.js 14",
+      "JavaScript",
       "TypeScript",
+      "React.js",
+      "Next.js 14",
       "Node.js",
-      "Express",
+      "Express.js",
       "Tailwind CSS",
       "WebRTC",
       "PostgreSQL",
-      "Prisma",
       "Docker",
     ],
-    pdfUrl: "/resumes/arush_jain_fullstack_23bsm015.pdf",
+    pdfUrl: "/resumes/arush_jain_fullstack.pdf",
     downloadName: "Arush_Jain_FullStack_Resume.pdf",
     fileName: "arush_jain_fullstack.pdf",
   },
@@ -64,34 +64,34 @@ const RESUMES: ResumeItem[] = [
     isPrimary: false,
     roleNote: "Multi-Agent DAGs & Hybrid Vector Retrieval",
     description:
-      "Engineered for roles building agentic workflows, deterministic rule verification gates, dual-stream hybrid search (dense + sparse), and RAG pipelines.",
+      "Engineered for roles building agentic workflows, deterministic verification gates, dual-stream hybrid search (dense + sparse), and RAG pipelines.",
     keyProjects: [
       {
         name: "RailRoute Agent",
-        detail: "3-agent triad DAG (Planner -> Verifier -> Ranker) raising operational pass rate to 100% and halving latency.",
+        detail: "3-agent Gemini reflection system cutting latency 2.2x and raising operational pass rate to 100% (n=12 test scenarios).",
       },
       {
         name: "Chambers & Infrastructure",
-        detail: "Dual-stream FAISS + BM25 hybrid legal RAG with Cohere reranking, achieving 94.2% Precision@4.",
+        detail: "Dual-stream FAISS + BM25 hybrid legal RAG with Cohere reranking, achieving 94.2% Precision@4 (20-question statutory benchmark).",
       },
       {
         name: "Two-Tower Recommender",
-        detail: "InfoNCE contrastive dual-encoder retrieval with FAISS MIPS index (+34% MRR@10).",
+        detail: "PyTorch dual-encoder candidate retrieval with hard-negative InfoNCE contrastive training (+4.2% Recall@10 over baseline).",
       },
     ],
     skills: [
       "Python 3.11+",
-      "LangGraph",
+      "Google Gemini API",
       "FastAPI",
       "FAISS",
       "BM25",
       "Cohere Rerank",
-      "Gemini 1.5",
-      "Redis",
+      "Streamlit",
       "Docker",
+      "AWS (S3, Textract)",
     ],
     pdfUrl: "/resumes/arush_jain_ai_systems.pdf",
-    downloadName: "Arush_Jain_AI_Systems.pdf",
+    downloadName: "Arush_Jain_AI_Systems_Resume.pdf",
     fileName: "arush_jain_ai_systems.pdf",
   },
   {
@@ -105,30 +105,30 @@ const RESUMES: ResumeItem[] = [
     keyProjects: [
       {
         name: "Conformal Demand Forecasting",
-        detail: "LightGBM + Conformal Quantile Regression (CQR 90%) mapped to Newsvendor, reducing stockouts to 11%.",
+        detail: "LightGBM + CQR 90% prediction intervals mapped to Newsvendor, cutting stockout rate from 48% to 11% (3,680 test items).",
       },
       {
-        name: "Multimodal Two-Tower Encoder",
-        detail: "PyTorch dual-encoder matching user intent against high-dimensional catalog embeddings.",
+        name: "Two-Tower Product Recommender",
+        detail: "PyTorch dual-encoder candidate retrieval with hard-negative InfoNCE sampling (+4.2% Recall@10, 55K+ users / 20K+ items).",
       },
       {
-        name: "Centrifugal Safety Footrest",
-        detail: "Patent Application Published (App. No. 202421034177) for automated mechanical actuation.",
+        name: "Automatic Footrest Assembly",
+        detail: "Sensor-based automation system using embedded controllers and pressure sensors (Patent Application Published 2025).",
       },
     ],
     skills: [
       "PyTorch",
       "LightGBM",
-      "Scikit-learn",
+      "scikit-learn",
       "FAISS",
-      "Optuna",
       "NumPy",
       "Pandas",
+      "Conformal Prediction",
       "FastAPI",
       "Docker",
     ],
     pdfUrl: "/resumes/arush_jain_machine_learning.pdf",
-    downloadName: "Arush_Jain_Machine_Learning.pdf",
+    downloadName: "Arush_Jain_Machine_Learning_Resume.pdf",
     fileName: "arush_jain_machine_learning.pdf",
   },
   {
@@ -136,33 +136,33 @@ const RESUMES: ResumeItem[] = [
     title: "Data & Business Analytics",
     badge: "Analytics Track • Warehousing & BI",
     isPrimary: false,
-    roleNote: "PostgreSQL Dimensional Marts & Statistical Testing",
+    roleNote: "Financial Operations & SQL Warehousing",
     description:
-      "Engineered for analytics engineering and quantitative operations involving ELT SQL transformations, Metabase dashboards, and A/B hypothesis testing.",
+      "Engineered for analytics engineering and quantitative operations involving ELT SQL transformations, Metabase dashboards, inventory models, and A/B testing.",
     keyProjects: [
       {
-        name: "Olist Analytics Engine",
-        detail: "100k+ order PostgreSQL 15 warehouse with 4-layer ELT, quantifying R$ 1.73M in delivery delay churn.",
+        name: "Conformal Inventory Optimization",
+        detail: "Mapped calibrated intervals to Newsvendor cost optimization, cutting holding cost by 31% across 3,680 test items.",
       },
       {
         name: "OptiMetrics",
-        detail: "Statistical A/B experimentation suite with SRM validation saving $96,300+ in revenue.",
+        detail: "Audited checkout A/B test detecting -47.07% mobile collapse, projected to avoid $96,300 in lost revenue per 50K users.",
       },
       {
-        name: "Roznamcha",
-        detail: "PostgreSQL NTILE(5) RFM quintiles and time-series cohort retention matrices with sub-45ms latency.",
+        name: "Olist Analytics Engine",
+        detail: "4-layer ELT SQL warehouse (100K+ transaction records), quantifying R$ 1.73M logistics delay opportunity.",
       },
     ],
     skills: [
       "PostgreSQL 15",
+      "SQL (CTEs, Window Functions)",
       "Metabase",
       "Python (Pandas, SciPy)",
       "Power BI (DAX)",
-      "Statistical A/B Testing",
-      "Docker Compose",
+      "Docker",
     ],
     pdfUrl: "/resumes/arush_jain_data_analytics.pdf",
-    downloadName: "Arush_Jain_Data_Analytics.pdf",
+    downloadName: "Arush_Jain_Data_Analytics_Resume.pdf",
     fileName: "arush_jain_data_analytics.pdf",
   },
 ];
@@ -173,7 +173,7 @@ export function ResumeSection() {
   return (
     <section id="resume" className="scroll-mt-24 flex flex-col gap-10">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#E5E5DF] pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-[#E5E5DF] pb-6">
         <div className="flex flex-col gap-2">
           <span className="text-xs uppercase tracking-widest text-[#8C8C85]">
             Credentials // 05
@@ -181,10 +181,19 @@ export function ResumeSection() {
           <h2 className="text-3xl sm:text-4xl font-normal tracking-tight text-[#1A1A1A]">
             Curated Resumes
           </h2>
+          <p className="text-sm text-[#8C8C85] max-w-md pt-1">
+            Role-tailored single-page CVs emphasizing specialized engineering capabilities. Download the primary full-stack profile or review specialized domain tracks below.
+          </p>
         </div>
-        <p className="text-sm text-[#8C8C85] max-w-md">
-          Role-tailored single-page CVs emphasizing specialized engineering capabilities. Download the specific track aligned with your team&apos;s technical requirements.
-        </p>
+        <div className="shrink-0 flex items-center gap-3">
+          <a
+            href="/resumes/arush_jain_fullstack.pdf"
+            download="Arush_Jain_FullStack_Resume.pdf"
+            className="px-4 py-2 bg-[#1A1A1A] text-[#F9F9F6] hover:bg-[#455A30] transition-colors text-xs font-normal inline-flex items-center gap-2"
+          >
+            <span>Download Primary Resume (Full Stack) ↓</span>
+          </a>
+        </div>
       </div>
 
       {/* Editorial List of Tailored Resumes */}

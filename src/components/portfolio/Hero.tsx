@@ -31,19 +31,26 @@ export function Hero({ onOpenCopilot }: HeroProps) {
         className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-t border-[#E5E5DF] pt-8"
       >
         <div className="max-w-xl flex flex-col gap-3">
-          <div className="flex items-center gap-2.5 text-xs text-[#666662] tracking-wide">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-[#666662] tracking-wide">
             <span className="w-2 h-2 rounded-full bg-[#455A30] shrink-0" />
-            <span>AI Systems, Analytics & Full-Stack Engineer</span>
+            <span>Final Year @ IIITDM Jabalpur (Graduating 2026)</span>
             <span>•</span>
-            <span>IIITDM Jabalpur</span>
+            <span className="text-[#455A30] font-medium">Open to Full-Time Roles</span>
           </div>
           <p className="text-base sm:text-lg text-[#666662] font-light leading-relaxed">
-            Focused on deterministic multi-agent graphs, relational analytics warehouses, and thoughtful developer experiences.
+            Building reliable AI systems, full-stack web applications, and data analytics pipelines that solve real problems without unnecessary jargon.
           </p>
         </div>
 
-        {/* Quiet Minimal Actions */}
-        <div className="flex flex-wrap items-center gap-5 sm:gap-6 text-sm text-[#1A1A1A]">
+        {/* Quiet Minimal Actions with Single Primary Download */}
+        <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-[#1A1A1A]">
+          <a
+            href="/resume.pdf"
+            download="Arush_Jain_Resume.pdf"
+            className="px-4 py-2 bg-[#1A1A1A] text-[#F9F9F6] hover:bg-[#455A30] transition-colors inline-flex items-center gap-2 font-normal text-xs"
+          >
+            <span>Download Resume ↓</span>
+          </a>
           <a
             href="#work"
             className="hover:text-[#455A30] transition-colors underline underline-offset-4 decoration-[#E5E5DF] hover:decoration-[#455A30]"
@@ -54,7 +61,7 @@ export function Hero({ onOpenCopilot }: HeroProps) {
             href="#resume"
             className="text-[#666662] hover:text-[#1A1A1A] transition-colors"
           >
-            Resumes ↓
+            Domain Tracks ↓
           </a>
           <button
             onClick={onOpenCopilot}

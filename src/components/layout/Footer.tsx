@@ -30,7 +30,7 @@ export function Footer() {
             GitHub ↗
           </a>
           <a
-            href="https://www.linkedin.com/in/arush-jain"
+            href="https://www.linkedin.com/in/arushjain495"
             target="_blank"
             rel="noreferrer"
             className="hover:text-[#1A1A1A] transition-colors"

@@ -17,7 +17,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "RailRoute Agent: 3-Agent Split-Journey Train Routing",
     keywords: ["railroute", "train", "agent", "multi-agent", "planner", "verifier", "ranker", "gemini", "streamlit", "python", "latency", "pass rate"],
     content:
-      "RailRoute Agent is a specialized 3-agent autonomous routing system built by Arush Jain using Python, Gemini, and Streamlit (live at https://rail-route-finder.streamlit.app/, GitHub: https://github.com/Slash-495/Rail-Route-Finder). It discovers operationally safe split-journey train routes when direct tickets are waitlisted or unavailable. By executing a triad DAG (Route Planner -> Schedule Verifier -> Journey Ranker) with parallel verification, it cut latency from 3.2s to 1.45s and raised the operational pass rate to 100%.",
+      "RailRoute Agent is a specialized 3-agent autonomous routing system built by Arush Jain using Python, Gemini, and Streamlit (live at https://rail-route-finder.streamlit.app/, GitHub: https://github.com/Slash-495/Rail-Route-Finder). It discovers operationally safe split-journey train routes when direct tickets are waitlisted or unavailable. By executing a 3-agent (Planner/Verifier/Ranker) Gemini reflection system with parallel verification, it cut latency from 3.2s to 1.45s and raised the operational pass rate to 100%.",
   },
   {
     id: "kb-railroute-2",
@@ -77,7 +77,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "OptiMetrics: Statistical A/B Experimentation Engine & Novelty Decay Platform",
     keywords: ["optimetrics", "ab testing", "experimentation", "scipy", "statsmodels", "power bi", "dax", "srm", "sample ratio mismatch", "novelty decay", "statistics"],
     content:
-      "OptiMetrics is a production-grade Python and Power BI statistical experimentation platform engineered by Arush Jain to detect hidden segment friction and prevent product rollout failures (GitHub: https://github.com/Slash-495/OptiMetrics). In a 50,000-user checkout redesign experiment showing a deceptive +47.96% aggregate lift, OptiMetrics detected an alarming -47.07% conversion crash on Mobile despite a +135.66% surge on Desktop, and quantified an 80.7% novelty decay in Week 2, saving over $96,300 in lost mobile revenue through a segmented rollout strategy.",
+      "OptiMetrics is a production-grade Python and Power BI statistical experimentation platform engineered by Arush Jain to detect hidden segment friction and prevent product rollout failures (GitHub: https://github.com/Slash-495/OptiMetrics). In a 50,000-user checkout redesign experiment showing a deceptive +47.96% aggregate lift, OptiMetrics detected an alarming -47.07% conversion crash on Mobile despite a +135.66% surge on Desktop, and quantified an 80.7% novelty decay in Week 2, projected to avoid $96,300 in lost mobile revenue per 50K users through a segmented rollout strategy.",
   },
   {
     id: "kb-conformal-1",
@@ -87,7 +87,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "Conformal Demand Forecasting: Probabilistic Supply Chain Engine",
     keywords: ["conformal", "demand", "forecasting", "lightgbm", "newsvendor", "fastapi", "docker", "stockout", "inventory", "inventory cost"],
     content:
-      "Conformal Demand Forecasting is a probabilistic inventory forecasting engine engineered by Arush Jain using LightGBM, FastAPI, and Docker (GitHub: https://github.com/Slash-495/Conformal-Demand-Forecasting). By combining non-parametric Split Conformal Prediction intervals (90% coverage guarantee) with Newsvendor profit-maximization optimization, it cut retail stockout rates from 48% to 11% and reduced total inventory holding costs by 31%.",
+      "Conformal Demand Forecasting is a probabilistic inventory forecasting engine engineered by Arush Jain using LightGBM, FastAPI, and Docker (GitHub: https://github.com/Slash-495/Conformal-Demand-Forecasting). By combining non-parametric Split Conformal Prediction intervals (90% coverage guarantee) with Newsvendor profit-maximization optimization, it cut retail stockout rates from 48% to 11% and reduced total inventory holding costs by 31% across 3,680 evaluated SKU items.",
   },
   {
     id: "kb-leetlens-1",
@@ -104,18 +104,38 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     projectId: "duffy",
     projectTitle: "Duffy",
     category: "Case Study",
-    title: "Duffy: AI Language Learning Ecosystem with In-Browser Voice AI",
-    keywords: ["duffy", "language", "spaced repetition", "srs", "web speech", "voice", "gemini", "render", "duffy.onrender.com"],
+    title: "Duffy: AI-Powered Real-Time Communication Platform with Whisper Live Transcription",
+    keywords: ["duffy", "communication", "whisper", "live transcription", "webrtc", "rest api", "gemini", "gpt-4", "real-time"],
     content:
-      "Duffy is an AI-powered full-stack language immersion platform built by Arush Jain (live at duffy.onrender.com, GitHub: https://github.com/Slash-495/Duffy). It combines an intelligent Spaced Repetition System (SRS) for custom flashcard decks, free in-browser neural voice recognition via the Web Speech API with dynamic pronunciation grading, Gemini-powered adaptive scenario roleplay (cafes, immigration), and B2B classroom roster tools for teachers.",
+      "Duffy is an AI-powered real-time communication platform built by Arush Jain (GitHub: https://github.com/Slash-495/Duffy, deployed on Render: https://duffy.onrender.com/). It features responsive dashboards, reusable UI workflows, REST APIs, authentication systems, Gemini/GPT-4 integrations, and low-latency Whisper-based live voice transcription with modular frontend layouts.",
+  },
+  {
+    id: "kb-velora-1",
+    projectId: "velora",
+    projectTitle: "Velora",
+    category: "Case Study",
+    title: "Velora: AI-Powered Resume Builder & ATS Job Optimization Platform",
+    keywords: ["velora", "resume builder", "ats", "job tracker", "resume", "optimization", "nextjs", "tailwind", "ai resume", "vercel"],
+    content:
+      "Velora is an AI-powered resume builder and job tracking platform developed by Arush Jain (deployed on Vercel: https://velora-3jpcjj3y1-slashs-projects-1d391125.vercel.app/, GitHub: https://github.com/Slash-495/Velora). It generates ATS-friendly resumes, analyzes job descriptions, extracts missing skills, and provides personalized resume optimization suggestions alongside a centralized job application pipeline tracker.",
+  },
+  {
+    id: "kb-two-tower-1",
+    projectId: "two-tower-recommender",
+    projectTitle: "Two-Tower Recommender",
+    category: "Case Study",
+    title: "Multimodal Two-Tower Product Recommender with Hard-Negative InfoNCE Sampling",
+    keywords: ["two-tower", "recommender", "infonce", "hard negative", "faiss", "pytorch", "movielens", "candidate retrieval", "recall@10"],
+    content:
+      "The Multimodal Two-Tower Product Recommender is a candidate retrieval deep learning system engineered by Arush Jain in PyTorch and FAISS (GitHub: https://github.com/Slash-495). Implemented a hard-negative InfoNCE contrastive training loop benchmarked across 55K+ users and 20K+ candidate items on MovieLens, achieving a +4.2% Recall@10 lift over standard in-batch negative baselines across a controlled 6-model ablation study.",
   },
   {
     id: "kb-patent-1",
     category: "Patent",
-    title: "Patent Application Published: Centrifugal Speed Interlock Footrest Mechanism (App. No. 202421034177)",
-    keywords: ["patent", "footrest", "two-wheeler", "interlock", "application published", "202421034177", "indian patent office", "mechanical"],
+    title: "Patent Application Published: Automatic Footrest Assembly for Two Wheeler (2025)",
+    keywords: ["patent", "footrest", "two-wheeler", "sensor", "embedded", "pressure sensor", "202421034177", "indian patent office", "2025"],
     content:
-      "Arush Jain has a published patent application (Indian Patent Application No. 202421034177) for a novel Centrifugal Speed Interlock Footrest Mechanism for Two-Wheelers. The invention employs a mechanical centrifugal flyweight interlock system that restricts footrest deployment when vehicle velocity exceeds 5 km/h, preventing pillion foot entrapment and road contact injuries without electrical actuators.",
+      "Arush Jain has a published patent application (Indian Patent Application No. 202421034177, published 2025) for an Automatic Footrest Assembly for Two Wheeler. The invention is a sensor-based automation system using embedded controllers and pressure sensors, implementing hardware-software integration workflows with fail-safe operational logic.",
   },
   {
     id: "kb-achievements-1",
@@ -123,7 +143,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "Major Achievements, Honors & Distinctions",
     keywords: ["achievements", "honors", "distinctions", "awards", "amazon ml", "patent", "iiitdm", "leetcode", "open source"],
     content:
-      "Arush Jain's major achievements include: 1) Amazon ML Summer School 2026 selective admission (mentored by Amazon ML Scientists on LLMs and scalable systems), 2) Indian Patent Application No. 202421034177 published for a novel Centrifugal Speed Interlock Footrest Mechanism, 3) 400+ algorithmic problems solved across LeetCode & Codeforces, 4) Author of LeetLens open-source Chrome extension with AST recursion visualizers, and 5) Real-world deployed systems including Roznamcha CRM, Olist Analytics Engine, OptiMetrics, Chambers GST-RAG, and RailRoute Agent.",
+      "Arush Jain's major achievements include: 1) Amazon ML Summer School 2026 selected attendee (mentored by Amazon ML Scientists on LLMs and scalable systems), 2) Indian Patent Application No. 202421034177 published in 2025 for an Automatic Footrest Assembly for Two Wheeler (sensor-based with embedded controllers), 3) 400+ algorithmic problems solved across LeetCode & Codeforces, 4) Author of LeetLens open-source Chrome extension with AST recursion visualizers, and 5) Deployed engineering systems including Velora, Duffy, Roznamcha CRM, Olist Analytics Engine, OptiMetrics, Chambers GST-RAG, and RailRoute Agent.",
   },
   {
     id: "kb-education-1",
@@ -162,23 +182,23 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "side quests"
     ],
     content:
-      "Arush Jain is a final-year engineering student at IIITDM Jabalpur majoring in Smart Manufacturing, spending all his time architecting scalable AI systems, analytics warehouses, and full-stack applications. His path spans filing a patent application for a centrifugal safety footrest, engineering multi-agent LLM pipelines, probabilistic demand forecasting, and attending the Amazon ML Summer School. Offline, he stresses over McLaren's tire strategy in Formula 1, aggressively supports Liverpool FC, logs miles on Strava, geeks out over classic rock (AC/DC), and is learning Japanese (Rōmaji). His core belief: 'The best software comes from genuine curiosity and good taste, not just typing fast.'",
+      "Arush Jain is a final-year engineering student at IIITDM Jabalpur majoring in Smart Manufacturing, spending all his time architecting scalable AI systems, analytics warehouses, and full-stack applications. His path spans filing a patent application for a sensor-based safety footrest, engineering multi-agent LLM pipelines, probabilistic demand forecasting, and attending the Amazon ML Summer School. Offline, he stresses over McLaren's tire strategy in Formula 1, aggressively supports Liverpool FC, logs miles on Strava, geeks out over classic rock (AC/DC), and is learning Japanese (Rōmaji). His core belief: 'The best software comes from genuine curiosity and good taste, not just typing fast.'",
   },
   {
-    id: "kb-resume-fullstack-23bsm015",
+    id: "kb-resume-fullstack",
     category: "Resume",
-    title: "Full-Stack Software Engineering Resume (23bsm015)",
-    keywords: ["resume", "cv", "23bsm015", "full stack", "fullstack", "react", "nextjs", "node", "webrtc", "duffy", "leetlens", "velora", "download"],
+    title: "Full-Stack Software Engineering Resume",
+    keywords: ["resume", "cv", "fullstack", "full stack", "react", "nextjs", "node", "webrtc", "duffy", "leetlens", "velora", "download"],
     content:
-      "The resume marked with identifier 23bsm015 is specifically tailored for Full-Stack Software Engineering positions. It features Arush Jain's expertise in React, Next.js 14, TypeScript, Node.js, Express, WebRTC, Tailwind CSS, PostgreSQL, Prisma, and Docker. Highlighted projects include Duffy (collaborative canvas & WebRTC mesh networking), LeetLens (interactive algorithm execution profiler & AST call tree visualizer), and Velora (high-concurrency e-commerce platform). Download or view directly at /resumes/arush_jain_fullstack_23bsm015.pdf.",
+      "The resume is specifically tailored for Full-Stack Software Engineering positions. It features Arush Jain's expertise in React, Next.js 14, TypeScript, Node.js, Express, WebRTC, Tailwind CSS, PostgreSQL, Prisma, and Docker. Highlighted projects include Duffy (AI-powered real-time communication platform with responsive dashboards and Whisper live transcription), LeetLens (interactive algorithm execution profiler & AST call tree visualizer), and Velora (AI-powered resume builder and ATS job optimization platform). Download or view directly at /resumes/arush_jain_fullstack.pdf.",
   },
   {
     id: "kb-resume-overview",
     category: "Resume",
     title: "Targeted Resumes Overview (Full Stack, AI Systems, Applied ML, Data Analytics)",
-    keywords: ["resumes", "cv", "download", "ai systems", "machine learning", "data analytics", "tracks", "recruiter", "pdf", "23bsm015"],
+    keywords: ["resumes", "cv", "download", "ai systems", "machine learning", "data analytics", "tracks", "recruiter", "pdf", "fullstack"],
     content:
-      "Arush Jain provides 4 specialized, single-page resumes tailored for distinct engineering tracks: 1) Full-Stack Software Engineering (marked as 23bsm015: React, Next.js, Node.js, WebRTC, Duffy, LeetLens, Velora - /resumes/arush_jain_fullstack_23bsm015.pdf), 2) AI & LLM Systems Engineering (LangGraph, FastAPI, FAISS, BM25, Cohere Rerank, RailRoute, Chambers GST-RAG - /resumes/arush_jain_ai_systems.pdf), 3) Machine Learning & Applied ML (Conformal Quantile Regression, PyTorch dual encoders, Newsvendor optimization, Centrifugal safety footrest patent - /resumes/arush_jain_machine_learning.pdf), and 4) Data & Business Analytics (PostgreSQL 15 dimensional warehouse, Metabase BI, SciPy statistical A/B testing, Olist, OptiMetrics, Roznamcha - /resumes/arush_jain_data_analytics.pdf). All PDFs can be reviewed in the Resumes section (#resume) or downloaded directly.",
+      "Arush Jain provides 4 specialized, single-page resumes tailored for distinct engineering tracks: 1) Full-Stack Software Engineering (React.js, Next.js, Node.js, Express, WebRTC, Duffy, LeetLens, Velora - /resumes/arush_jain_fullstack.pdf), 2) AI & LLM Systems Engineering (Python, Gemini API, Cohere Rerank, FAISS, BM25, FastAPI, RailRoute, Chambers GST-RAG - /resumes/arush_jain_ai_systems.pdf), 3) Machine Learning & Applied ML (Conformal Quantile Regression, PyTorch dual encoders, Newsvendor optimization, Automatic footrest assembly patent - /resumes/arush_jain_machine_learning.pdf), and 4) Data & Business Analytics (PostgreSQL 15 dimensional warehouse, Metabase BI, SciPy statistical A/B testing, Olist, OptiMetrics, Roznamcha - /resumes/arush_jain_data_analytics.pdf). All PDFs can be reviewed in the Resumes section (#resume) or downloaded directly.",
   },
   {
     id: "kb-contact-1",
@@ -186,7 +206,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "Contact Information & Developer Profiles",
     keywords: ["contact", "email", "github", "linkedin", "leetcode", "hire", "arush"],
     content:
-      "Arush Jain can be reached via email at jainarush423@gmail.com. Check out his code repositories on GitHub at https://github.com/Slash-495, his LeetCode profile at https://leetcode.com/u/Slash495/, and his LinkedIn profile at https://www.linkedin.com/in/arush-jain.",
+      "Arush Jain can be reached via email at jainarush423@gmail.com. Check out his code repositories on GitHub at https://github.com/Slash-495, his LeetCode profile at https://leetcode.com/u/Slash495/, and his LinkedIn profile at https://www.linkedin.com/in/arushjain495.",
   },
 ];
 

@@ -6,31 +6,31 @@ export function SystemSpecs() {
   const coreTenets = [
     {
       num: "01",
-      title: "Deterministic Multi-Agent Graphs Over Stochastic Loops",
+      title: "Deterministic Validation Gates Over Uncontrolled Loops",
       description:
-        "Replacing unbounded LLM generation with topologically sorted pipelines and deterministic rule validators. Enforces hard operational constraints and prevents runaway hallucination loops.",
-      metric: "100% Pass Rate",
+        "Multi-agent systems must separate generative hypothesis discovery from operational validation. Hard operational constraints, time windows, and safety rules belong in deterministic code validators, not stochastic LLM prompts.",
+      metric: "Constraint Enforcement",
     },
     {
       num: "02",
-      title: "Database-Level Aggregation & Dimensional Marts",
+      title: "Database-Level Aggregation & Dimensional Modeling",
       description:
-        "Pushing heavy mathematical scoring, NTILE quintiles, and time-series cohort logic directly into PostgreSQL views. Eliminates client-side compute lag and protects browser performance.",
-      metric: "<45ms Query Latency",
+        "Pushing analytical aggregations, NTILE quintile scoring, and time-series cohort logic directly into PostgreSQL views and dimensional marts. Eliminates client-side memory compute lag and preserves frontend snappiness.",
+      metric: "In-Database Compute",
     },
     {
       num: "03",
-      title: "Hybrid Dense-Sparse Grounding with Cross-Encoders",
+      title: "Dense-Sparse Hybrid Fusion for High-Stakes Grounding",
       description:
-        "Pairing dense vector semantic retrieval (FAISS) with sparse exact keyword matching (BM25) fused via Reciprocal Rank Fusion, eliminating alphanumeric citation hallucinations in statutory corpora.",
-      metric: "2.1% Hallucination Rate",
+        "Pairing dense vector semantic retrieval (FAISS) with sparse statutory keyword matching (BM25) and cross-encoder reranking. Prevents semantic vector drift on exact section numbers, statutory clauses, and alphanumeric IDs.",
+      metric: "Grounding Veracity",
     },
     {
       num: "04",
-      title: "Statistical Rigor & Subgroup Experimentation",
+      title: "Subgroup Disaggregation Before Wide Rollouts",
       description:
-        "Validating traffic allocation via Sample Ratio Mismatch (SRM) tests and disaggregating metrics by device cohort to prevent Simpson's Paradox and catastrophic rollout failures.",
-      metric: "$96,300+ Loss Saved",
+        "Always disaggregate experimentation telemetry across device and traffic cohorts, and monitor novelty decay across multi-week evaluation horizons to avoid Simpson's Paradox before approving feature rollouts.",
+      metric: "Simpson's Paradox Guard",
     },
   ];
 
