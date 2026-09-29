@@ -7,6 +7,7 @@ import { ProjectGrid } from "@/components/portfolio/ProjectGrid";
 import { AchievementsSection } from "@/components/portfolio/AchievementsSection";
 import { AboutSection } from "@/components/portfolio/AboutSection";
 import { SystemSpecs } from "@/components/portfolio/SystemSpecs";
+import { ResumeSection } from "@/components/portfolio/ResumeSection";
 import { RagCopilotWidget } from "@/components/copilot/RagCopilotWidget";
 import { Footer } from "@/components/layout/Footer";
 import { CaseStudyModal } from "@/components/portfolio/CaseStudyModal";
@@ -59,17 +60,20 @@ export default function Home() {
         {/* Architectural Tenets */}
         <SystemSpecs />
 
+        {/* Curated Resumes */}
+        <ResumeSection />
+
         {/* Ask AI Section */}
         <section id="ai-chat" className="scroll-mt-24 flex flex-col gap-8">
           <div className="flex flex-col gap-2 border-b border-[#E5E5DF] pb-6">
             <span className="text-xs uppercase tracking-widest text-[#8C8C85]">
-              Intelligence // 05
+              Intelligence // 06
             </span>
             <h2 className="text-3xl sm:text-4xl font-normal tracking-tight text-[#1A1A1A]">
               Ask the Copilot
             </h2>
             <p className="text-sm text-[#8C8C85] max-w-xl">
-              An interactive grounded semantic engine trained on technical constraints, architecture diagrams, and system trade-offs.
+              An interactive grounded lexical retrieval engine trained on technical constraints, data architectures, and system trade-offs.
             </p>
           </div>
 
@@ -88,9 +92,9 @@ export default function Home() {
       <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setIsCopilotModalOpen(true)}
-          className="group flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A1A1A] text-[#F9F9F6] hover:bg-[#7A8B6B] transition-colors shadow-lg text-xs font-normal"
+          className="group flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A1A1A] text-[#F9F9F6] hover:bg-[#455A30] transition-colors shadow-lg text-xs font-normal"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#7A8B6B]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#455A30]" />
           <span>Ask AI</span>
           <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-white/70 hidden sm:inline-block font-mono">
             ⌘K
@@ -103,7 +107,7 @@ export default function Home() {
         isOpen={isCopilotModalOpen}
         onClose={() => setIsCopilotModalOpen(false)}
         title="Ask AI Copilot"
-        subtitle="Grounded semantic search across architecture specs and case studies"
+        subtitle="Grounded retrieval across architecture specs, warehouses, and case studies"
         maxWidth="2xl"
       >
         <div className="h-[480px]">

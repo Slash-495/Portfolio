@@ -100,7 +100,7 @@ export function RagCopilotWidget({
       <div className="flex items-center justify-between border-b border-[#E5E5DF] pb-4 mb-4">
         <div className="flex flex-col gap-0.5">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#7A8B6B]" />
+            <span className="w-2 h-2 rounded-full bg-[#455A30]" />
             <h3 className="text-base sm:text-lg font-normal tracking-tight text-[#1A1A1A]">
               Ask AI
             </h3>
@@ -126,7 +126,7 @@ export function RagCopilotWidget({
           <button
             key={idx}
             onClick={() => handleSend(prompt)}
-            className="text-xs text-[#666662] hover:text-[#1A1A1A] border border-[#E5E5DF] hover:border-[#7A8B6B] rounded-full px-3 py-1 bg-white/60 transition-colors"
+            className="text-xs text-[#666662] hover:text-[#1A1A1A] border border-[#E5E5DF] hover:border-[#455A30] rounded-full px-3 py-1 bg-white/60 transition-colors"
           >
             {prompt}
           </button>
@@ -160,7 +160,7 @@ export function RagCopilotWidget({
                     <button
                       key={cite.id}
                       onClick={() => handleCitationClick(cite)}
-                      className="text-[#7A8B6B] hover:text-[#1A1A1A] underline underline-offset-2 decoration-[#7A8B6B]/40 hover:decoration-[#1A1A1A] transition-colors inline-flex items-center gap-1"
+                      className="text-[#455A30] hover:text-[#1A1A1A] underline underline-offset-2 decoration-[#455A30]/40 hover:decoration-[#1A1A1A] transition-colors inline-flex items-center gap-1"
                     >
                       <span>{cite.projectTitle || cite.title}</span>
                       <ArrowUpRight className="w-3 h-3" />
@@ -193,12 +193,12 @@ export function RagCopilotWidget({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Ask a question about systems, latency, or background..."
-          className="flex-1 bg-white border border-[#E5E5DF] focus:border-[#7A8B6B] rounded-full px-4 py-2.5 text-sm text-[#1A1A1A] placeholder:text-[#8C8C85] outline-none transition-colors"
+          className="flex-1 bg-white border border-[#E5E5DF] focus:border-[#455A30] rounded-full px-4 py-2.5 text-sm text-[#1A1A1A] placeholder:text-[#8C8C85] outline-none transition-colors"
         />
         <button
           type="submit"
           disabled={!query.trim() || isTyping}
-          className="w-10 h-10 rounded-full bg-[#1A1A1A] text-white hover:bg-[#7A8B6B] disabled:opacity-30 disabled:hover:bg-[#1A1A1A] transition-colors flex items-center justify-center shrink-0"
+          className="w-10 h-10 rounded-full bg-[#1A1A1A] text-white hover:bg-[#455A30] disabled:opacity-30 disabled:hover:bg-[#1A1A1A] transition-colors flex items-center justify-center shrink-0"
         >
           <ArrowRight className="w-4 h-4" />
         </button>

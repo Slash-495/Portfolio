@@ -1,6 +1,7 @@
 {
-  "name": "my-portfolio",
+  "name": "portfolio",
   "version": "0.1.0",
+  "description": "Portfolio of Arush Jain — AI Systems, Data Analytics & Full-Stack Engineering",
   "private": true,
   "scripts": {
     "dev": "next dev",

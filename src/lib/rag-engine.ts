@@ -16,16 +16,35 @@ export interface RagResponse {
   suggestedFollowUps: string[];
 }
 
-// Tokenize text into normalized lowercase alphanumeric terms
+const STOP_WORDS = new Set([
+  "a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are",
+  "as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but", "by", "can",
+  "could", "did", "do", "does", "doing", "down", "during", "each", "few", "for", "from", "further",
+  "had", "has", "have", "having", "he", "her", "here", "hers", "herself", "him", "himself", "his",
+  "how", "i", "if", "in", "into", "is", "it", "its", "itself", "me", "more", "most", "my", "myself",
+  "no", "nor", "not", "of", "off", "on", "once", "only", "or", "other", "our", "ours", "ourselves",
+  "out", "over", "own", "same", "she", "should", "so", "some", "such", "than", "that", "the", "their",
+  "theirs", "them", "themselves", "then", "there", "these", "they", "this", "those", "through", "to",
+  "too", "under", "until", "up", "very", "was", "we", "were", "what", "when", "where", "which",
+  "while", "who", "whom", "why", "with", "would", "you", "your", "yours", "yourself", "yourselves",
+  "tell", "show", "give", "explain", "please"
+]);
+
+/**
+ * Tokenizes query text into normalized lowercase alphanumeric terms, stripping stop words.
+ */
 function tokenize(text: string): string[] {
   return text
     .toLowerCase()
     .replace(/[^a-z0-9\s_-]/g, " ")
     .split(/\s+/)
-    .filter((word) => word.length > 1);
+    .filter((word) => word.length > 1 && !STOP_WORDS.has(word));
 }
 
-// Score a chunk against a query
+/**
+ * In-Memory Lexical & BM25 Keyword Search Engine
+ * Scores knowledge chunks using exact keyword weights, title tokens, and phrase matches.
+ */
 function scoreChunk(queryTokens: string[], chunk: KnowledgeChunk): number {
   let score = 0;
   const chunkText = `${chunk.title} ${chunk.content} ${chunk.keywords.join(" ")}`.toLowerCase();
@@ -59,15 +78,29 @@ function scoreChunk(queryTokens: string[], chunk: KnowledgeChunk): number {
 export function queryRagCopilot(query: string): RagResponse {
   const queryTokens = tokenize(query);
 
+  const fallbackRefusal: RagResponse = {
+    answer:
+      "I don't have information on that topic. I am a specialized portfolio assistant strictly dedicated to answering questions about Arush Jain's engineering projects, data analytics pipelines, and technical background. You can ask me about his multi-agent systems, analytics warehouses, or A/B experimentation engines.",
+    citations: [],
+    confidence: 0,
+    matchedChunks: 0,
+    suggestedFollowUps: [
+      "How did RailRoute Agent achieve a 100% pass rate?",
+      "Explain the dual-stream retrieval in Chambers Legal RAG.",
+      "Tell me about Roznamcha's PostgreSQL RFM segmentation.",
+    ],
+  };
+
   if (queryTokens.length === 0) {
     return {
-      answer: "Please ask a question about my engineering projects, system architectures, or technical philosophy.",
+      answer: "Please ask a question about Arush's engineering projects, data analytics pipelines, or technical background.",
       citations: [],
       confidence: 0,
       matchedChunks: 0,
       suggestedFollowUps: [
-        "How does Chronos Engine achieve 1.2M events/sec?",
-        "Explain the deterministic DAG architecture in Nexus Graph.",
+        "How did RailRoute Agent achieve a 100% pass rate?",
+        "Explain the dual-stream retrieval in Chambers Legal RAG.",
+        "Tell me about Roznamcha's PostgreSQL RFM segmentation.",
       ],
     };
   }
@@ -80,22 +113,12 @@ export function queryRagCopilot(query: string): RagResponse {
 
   scored.sort((a, b) => b.score - a.score);
 
-  const topMatches = scored.slice(0, 3);
-
-  if (topMatches.length === 0) {
-    return {
-      answer:
-        "I don't have direct benchmark or architectural documentation specifically for that query. You can ask me about **RailRoute Agent** (3-agent train routing), **Chambers & Infrastructure** (dual-stream legal RAG), **Conformal Demand Forecasting** (LightGBM Newsvendor optimization), **Multimodal Two-Tower Recommender** (PyTorch InfoNCE), **Duffy & LeetLens** (WebRTC Whisper & BYOK extension), or Arush's **two-wheeler footrest patent** and selection for **Amazon ML Summer School 2026**.",
-      citations: [],
-      confidence: 0.1,
-      matchedChunks: 0,
-      suggestedFollowUps: [
-        "How did RailRoute Agent achieve a 100% pass rate?",
-        "Explain the dual-stream retrieval in Chambers Legal RAG.",
-        "Tell me about Arush's patent and Amazon ML selection.",
-      ],
-    };
+  // Strict confidence cutoff: if no match or top score is weak, refuse safely
+  if (scored.length === 0 || scored[0].score < 2.5) {
+    return fallbackRefusal;
   }
+
+  const topMatches = scored.slice(0, 3);
 
   // Gather unique citations
   const citations: Citation[] = [];
@@ -122,7 +145,7 @@ export function queryRagCopilot(query: string): RagResponse {
     synthesizedAnswer += `\n\nAdditionally, ${topMatches[1].chunk.content}`;
   }
 
-  // Determine relevant follow-ups
+  // Determine relevant follow-ups based on primary match
   const suggestedFollowUps: string[] = [];
   if (primaryMatch.projectId === "railroute-agent") {
     suggestedFollowUps.push(
@@ -134,15 +157,25 @@ export function queryRagCopilot(query: string): RagResponse {
       "How does BM25 and FAISS fusion lower hallucinations to 2.1%?",
       "Why is Cohere Cross-Encoder reranking critical for GST sections?"
     );
+  } else if (primaryMatch.projectId === "roznamcha") {
+    suggestedFollowUps.push(
+      "How do PostgreSQL NTILE(5) window functions calculate RFM quintiles?",
+      "How does Roznamcha track month-over-month cohort retention using CTEs?"
+    );
+  } else if (primaryMatch.projectId === "olist-analytics") {
+    suggestedFollowUps.push(
+      "How does the 4-layer ELT pipeline quantify the R$ 1.73M logistics delay penalty?",
+      "What does the Metabase BI dashboard reveal about repeat customer AOV?"
+    );
+  } else if (primaryMatch.projectId === "optimetrics") {
+    suggestedFollowUps.push(
+      "How did OptiMetrics detect the -47.07% mobile conversion crash?",
+      "How does OptiMetrics isolate 80.7% novelty decay in A/B testing?"
+    );
   } else if (primaryMatch.projectId === "conformal-demand-forecasting") {
     suggestedFollowUps.push(
       "How does Newsvendor critical ratio map asymmetric stockout risk?",
       "What guarantees does Split Conformal prediction provide?"
-    );
-  } else if (primaryMatch.projectId === "two-tower-recommender") {
-    suggestedFollowUps.push(
-      "How does InfoNCE contrastive loss leverage in-batch negatives?",
-      "What gives the +4.2% lift in Recall@10 over matrix factorization?"
     );
   } else if (primaryMatch.projectId === "leetlens") {
     suggestedFollowUps.push(
@@ -154,15 +187,10 @@ export function queryRagCopilot(query: string): RagResponse {
       "How does Duffy's Web Speech API deliver in-browser pronunciation scoring?",
       "How does the SuperMemo-2 Spaced Repetition algorithm schedule cards?"
     );
-  } else if (primaryMatch.projectId === "velora") {
+  } else if (primaryMatch.category === "Patent") {
     suggestedFollowUps.push(
-      "How does Velora achieve sub-45ms API response latency?",
-      "How do Next.js Server Actions and Zod ensure end-to-end type safety?"
-    );
-  } else if (primaryMatch.projectId === "embedded-footrest-patent") {
-    suggestedFollowUps.push(
-      "How does the speed interlock gate prevent highway deployment?",
-      "Tell me about Arush's experience at Amazon ML Summer School 2026."
+      "What is the status of Arush's two-wheeler footrest patent application?",
+      "How does the centrifugal flyweight interlock operate without battery power?"
     );
   } else {
     suggestedFollowUps.push(

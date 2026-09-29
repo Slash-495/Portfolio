@@ -47,7 +47,7 @@ export function AboutSection() {
           </p>
 
           <p>
-            My journey here has been anything but a straight line—I’ve gone from designing a patented automated footrest for two-wheelers to engineering multi-agent LLM pipelines and probabilistic demand forecasting models. I love the chaos of bridging hardware intuition with deep software engineering, whether that means optimizing a vector retrieval system for a legal RAG copilot or getting selected for the Amazon ML Summer School.
+            My journey here has been anything but a straight line—I’ve gone from filing a published patent application for a novel centrifugal safety footrest for two-wheelers to engineering multi-agent LLM pipelines, data warehouse architectures, and probabilistic demand forecasting models. I love the chaos of bridging hardware intuition with deep software engineering, whether that means optimizing a vector retrieval system for a legal RAG copilot or getting selected for the Amazon ML Summer School.
           </p>
 
           <p>
@@ -55,7 +55,7 @@ export function AboutSection() {
           </p>
 
           {/* Pull Quote */}
-          <div className="border-l-2 border-[#7A8B6B] pl-6 my-2">
+          <div className="border-l-2 border-[#455A30] pl-6 my-2">
             <blockquote className="text-xl sm:text-2xl font-normal tracking-tight text-[#1A1A1A] italic leading-snug">
               "I believe the best software comes from genuine curiosity and good taste, not just typing fast. Good work starts with a conversation, so let's make something worth putting into the world."
             </blockquote>
@@ -87,7 +87,7 @@ export function AboutSection() {
           <div className="pt-4">
             <a
               href="mailto:jainarush423@gmail.com"
-              className="text-xs text-[#7A8B6B] hover:text-[#1A1A1A] font-medium tracking-wide transition-colors inline-flex items-center gap-1.5 underline underline-offset-4 decoration-[#7A8B6B]/40 hover:decoration-[#1A1A1A]"
+              className="text-xs text-[#455A30] hover:text-[#1A1A1A] font-medium tracking-wide transition-colors inline-flex items-center gap-1.5 underline underline-offset-4 decoration-[#455A30]/40 hover:decoration-[#1A1A1A]"
             >
               <span>Start a conversation</span>
               <span>↗</span>

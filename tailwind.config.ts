@@ -19,9 +19,9 @@ const config: Config = {
           light: "#8C8C85",
         },
         olive: {
-          DEFAULT: "#7A8B6B",
-          hover: "#6B7A5D",
-          soft: "rgba(122, 139, 107, 0.12)",
+          DEFAULT: "#455A30",
+          hover: "#3B4E29",
+          soft: "rgba(69, 90, 48, 0.12)",
         },
         hairline: {
           DEFAULT: "#E5E5DF",

@@ -18,7 +18,7 @@ export function AchievementsSection() {
           </h2>
         </div>
         <p className="text-sm text-[#8C8C85] max-w-sm">
-          A documented history of competitive selections, patents, academic background, and production milestones.
+          A documented history of competitive selections, published patent applications, academic background, and real-world milestones.
         </p>
       </div>
 
@@ -37,12 +37,12 @@ export function AchievementsSection() {
             {/* Center: Title & Description */}
             <div className="flex-1 flex flex-col gap-1.5">
               <div className="flex items-baseline justify-between">
-                <h3 className="text-lg sm:text-xl font-normal text-[#1A1A1A] group-hover:text-[#7A8B6B] transition-colors tracking-tight">
+                <h3 className="text-lg sm:text-xl font-normal text-[#1A1A1A] group-hover:text-[#455A30] transition-colors tracking-tight">
                   {item.title}
                 </h3>
               </div>
 
-              <div className="text-xs uppercase tracking-wider text-[#7A8B6B] font-medium">
+              <div className="text-xs uppercase tracking-wider text-[#455A30] font-medium">
                 {item.organization}
               </div>
 

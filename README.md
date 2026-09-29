@@ -1,132 +1,111 @@
-# Arush Jain — Portfolio & Semantic RAG Copilot
+# Arush Jain — Portfolio & Engineering Showcase
 
-A hyper-minimalist, editorial portfolio web application inspired by [Will Dzierson](https://dzierson.com), featuring an embedded grounded RAG Copilot, technical case-study showcases, and zero-compromise typography.
+A personal developer portfolio and case-study showcase built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**. Features technical deep-dives into multi-agent systems, data analytics pipelines, and full-stack applications, alongside an embedded local-first retrieval copilot.
 
-Built for **Arush Jain** (AI Systems & Full-Stack Engineer, IIITDM Jabalpur • Amazon ML Summer School 2026).
-
----
-
-## ✦ Design Language & Visual Ethos
-
-- **Editorial Light Canvas**: Warm, soft off-white/beige canvas (`#F9F9F6`) replacing conventional neon-accented dark themes.
-- **High-Contrast Typography**: Deep charcoal (`#1A1A1A`) primary headings with tight letter-tracking, paired with airy secondary copy (`#666660`).
-- **Earthy Olive Accents**: Understated olive green (`#7A8B6B`) for active status indicators, citation badges, and link transitions.
-- **Anti-Bento Row Architecture**: Projects and achievements displayed as borderless wide-row lists with hairline horizontal dividers (`#E5E5DF`) rather than cluttered bento cards.
-- **Micro-Interactions**: Smooth spring animations, subtle arrow glyph hover transitions, and fluid slide-over technical case-study modals powered by Framer Motion.
+**Live Application**: [portfolio-slash.vercel.app](https://github.com/Slash-495/Portfolio)  
+**Author**: Arush Jain (B.Tech Smart Manufacturing @ IIITDM Jabalpur • Amazon ML Summer School 2026)
 
 ---
 
-## ✦ Core Features
+## Technical Highlights
 
-### 1. In-Browser Local-First RAG Copilot
-- **Hybrid Retrieval**: In-memory semantic vector similarity and keyword search across chunked portfolio knowledge bases.
-- **Grounded Citations**: Responses are strictly tied to verifiable project milestones, architectural trade-offs, and career events with interactive clickable citation badges.
-- **API & Client Parity**: Instant sub-millisecond client queries combined with a fully typed Next.js App Router route (`/api/chat`).
-- **Clean Chat Bubble Interface**: Soft gray bubbles (`#EFEFEA`), borderless AI output, and quick suggested prompt chips.
-
-### 2. Deep-Dive Case Study Modals
-- High-density technical breakdowns for featured projects with system architecture diagrams, state machines, trade-offs (e.g. latency vs. cost vs. recall), and live deployment links.
-
-### 3. Career & Honors Timeline
-- Strictly curated chronological timeline without repetitive badges:
-  - **Amazon ML Summer School 2026**: Mentored by Amazon ML Scientists on LLMs and scalable deep learning architectures.
-  - **Patented Safety Mechanism**: Centrifugal Speed Interlock Footrest Mechanism for Two-Wheelers (Indian Patent App. No. 202421034177).
-  - **IIITDM Jabalpur**: B.Tech in Smart Manufacturing (Autonomous systems, computational intelligence).
-  - **Competitive Programming**: 400+ algorithmic problems solved on [LeetCode](https://leetcode.com/u/Slash495/) & Codeforces.
-  - **Production Shipments**: Live deployments including Duffy, Chambers GST-RAG, RailRoute Finder, and Velora.
-
-### 4. Authentic About & Offline Pursuits
-- Non-linear engineering story spanning physical hardware safety mechanisms to multi-agent LLM DAGs.
-- Offline side quests: McLaren F1 tire degradation strategy, Liverpool FC (*YNWA*), Strava pavement miles, classic rock (AC/DC), and learning Japanese (Romaji).
+- **Anti-Bento Editorial Layout**: Clean, borderless list-based project navigation with tight-tracked typography, subtle forest olive status indicators, and extreme whitespace inspired by minimalist editorial portfolios.
+- **In-Memory Grounded Search Copilot**: A client-side lexical BM25 retrieval engine with token-weighted scoring, returning verified citations and refusing off-topic queries without external LLM dependencies.
+- **Case-Study Modals**: Deep technical breakdowns for each system, covering architecture diagrams, execution lifecycles, trade-off matrices, and interactive client-side simulators.
+- **Data & Analytics Specialization**: Dedicated coverage of dimensional data warehouses (PostgreSQL 15 + Metabase), statistical A/B experimentation engines (SciPy + Power BI), and customer retention CRM logic (PostgreSQL RFM window functions).
+- **Accessibility & Performance**: WCAG AA compliant color contrast (4.8:1+), native `prefers-reduced-motion` support, OpenGraph metadata, and zero layout shift.
 
 ---
 
-## ✦ Featured Projects
+## Featured Engineering Projects
 
-| Project | Category | Live Demo | Repository |
-| :--- | :--- | :--- | :--- |
-| **LeetLens** | Full Stack / AI | [View](https://github.com/Slash-495/LeetLens) | [Slash-495/LeetLens](https://github.com/Slash-495/LeetLens) |
-| **Duffy** | Full Stack / Voice | [Live Demo](https://duffy.onrender.com/) | [Slash-495/Duffy](https://github.com/Slash-495/Duffy) |
-| **Velora** | Full Stack / Cloud | [Live Demo](https://velora-3jpcjj3y1-slashs-projects-1d391125.vercel.app/) | [Slash-495/Velora](https://github.com/Slash-495/Velora) |
-| **RailRoute Agent** | AI Systems | [Live Demo](https://rail-route-finder.streamlit.app/) | [Slash-495/Rail-Route-Finder](https://github.com/Slash-495/Rail-Route-Finder) |
-| **Chambers & Infrastructure** | AI Systems | [Live Demo](https://chambersandinfastructures.streamlit.app/) | [Slash-495/GST-RAG](https://github.com/Slash-495/GST-RAG) |
-| **Conformal Demand Forecasting** | Applied ML | [View](https://github.com/Slash-495/Conformal-Demand-Forecasting) | [Slash-495/Conformal-Demand-Forecasting](https://github.com/Slash-495/Conformal-Demand-Forecasting) |
-| **Two-Tower Recommender** | Applied ML | [View](https://github.com/Slash-495/Two-Tower-Recommender) | [Slash-495/Two-Tower-Recommender](https://github.com/Slash-495/Two-Tower-Recommender) |
-
----
-
-## ✦ Tech Stack
-
-- **Framework**: [Next.js 14](https://nextjs.org/) (App Router, Server & Client Components)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Animation**: [Framer Motion](https://www.framer.com/motion/)
-- **Icons**: [Lucide React](https://lucide.dev/)
-- **RAG & Search**: Custom In-Memory Vector Search Engine + BM25 keyword matching
+| Project | Category | Live Demo | Repository | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| **RailRoute Agent** | AI Systems | [Live Streamlit ↗](https://rail-route-finder.streamlit.app/) | [Slash-495/Rail-Route-Finder](https://github.com/Slash-495/Rail-Route-Finder) | 3-agent train routing DAG (100% pass rate) *(Free tier: ~30s cold wake)* |
+| **Chambers & Infrastructure** | AI Systems | [Live Streamlit ↗](https://chambersandinfastructures.streamlit.app/) | [Slash-495/GST-RAG](https://github.com/Slash-495/GST-RAG) | Dual-stream FAISS + BM25 legal RAG *(Free tier: ~30s cold wake)* |
+| **Roznamcha** | Data & Analytics | [Live Vercel ↗](https://roznamcha-ivj4.vercel.app/) | [Slash-495/Roznamcha](https://github.com/Slash-495/Roznamcha) | Customer Analytics CRM powered by PostgreSQL `NTILE(5)` RFM views |
+| **Olist Analytics Engine** | Data & Analytics | — | [Slash-495/Olist-Analytics-Engine](https://github.com/Slash-495/Olist-Analytics-Engine) | Containerized PostgreSQL 15 ELT warehouse over 100k+ Brazilian orders |
+| **OptiMetrics** | Data & Analytics | — | [Slash-495/OptiMetrics](https://github.com/Slash-495/OptiMetrics) | Statistical A/B testing platform detecting mobile conversion crashes & novelty decay |
+| **LeetLens** | Full Stack | — | [Slash-495/LeetLens](https://github.com/Slash-495/LeetLens) | Manifest V3 Chrome Extension with BYOK local-first AST visualizer |
+| **Duffy** | Full Stack | [Live Render ↗](https://duffy.onrender.com/) | [Slash-495/Duffy](https://github.com/Slash-495/Duffy) | Web Speech API voice AI & SuperMemo-2 spaced repetition *(~30s cold wake)* |
+| **Conformal Demand Forecasting** | Applied ML | — | [Slash-495/Conformal-Demand-Forecasting](https://github.com/Slash-495/Conformal-Demand-Forecasting) | LightGBM + split conformal intervals with Newsvendor optimization |
 
 ---
 
-## ✦ Project Structure
+## Architectural Notes
+
+### 1. In-Memory Retrieval Copilot (`/api/chat` & Client Engine)
+To maintain fast, deterministic, zero-cost operation without exposing third-party LLM keys:
+- **Retrieval Mechanism**: Tokenized lexical BM25 scoring over structured knowledge chunks (`src/lib/knowledge-base.ts`), evaluating exact keyword matches (4.5x), title tokens (3.0x), and body phrases.
+- **Safety & Guardrails**: Queries scoring below a strict confidence threshold (< 2.5) or lacking technical context trigger an automated refusal:
+  > *"I don't have information on that topic. I am a specialized portfolio assistant strictly dedicated to answering questions about Arush Jain's engineering projects, data analytics pipelines, and technical background."*
+- **Execution Location**: Runs instantaneously inside the client browser (`queryRagCopilot`) with a parallel Next.js App Router POST endpoint at `/api/chat` for headless testing and external integrations.
+
+### 2. Free-Tier Cloud Hosting Disclaimers
+Live demonstration links for Streamlit Cloud and Render free tiers automatically sleep during inactivity. A note indicator (`sleep tier`) is displayed in the UI to notify visitors that cold boots may take ~30 seconds to spin up.
+
+---
+
+## Career Milestones & Published Applications
+
+- **Amazon ML Summer School 2026**: Selective admission across premier Indian institutions; direct mentorship by Amazon ML Scientists in foundation models, deep learning, and generative AI.
+- **Patent Application Published**: *Centrifugal Speed Interlock Footrest Mechanism for Two-Wheelers* (Indian Patent Application No. 202421034177). Purely passive flyweight governor restricting pillion footrest deployment above 5 km/h with 100% mechanical fail-safety.
+- **Competitive Programming**: 400+ algorithmic problems solved on [LeetCode](https://leetcode.com/u/Slash495/) & Codeforces. Author of open-source LeetLens AST visualizer.
+- **Academic Standing**: Final Year B.Tech in Smart Manufacturing at IIITDM Jabalpur (2023 - Present).
+
+---
+
+## Project Structure
 
 ```text
-MyPortfolio/
+Portfolio/
+├── public/
+│   └── resume.pdf             # Static resume document for direct download
 ├── src/
 │   ├── app/
-│   │   ├── api/
-│   │   │   └── chat/          # RAG Copilot POST route
-│   │   ├── globals.css        # Custom color tokens & typography resets
-│   │   ├── layout.tsx         # Root layout with editorial font settings
-│   │   └── page.tsx           # Home page composition
+│   │   ├── api/chat/route.ts  # Fallback JSON endpoint for portfolio retrieval
+│   │   ├── globals.css        # CSS variables, WCAG AA tokens, reduced-motion rules
+│   │   ├── layout.tsx         # OpenGraph, Twitter, and SEO metadata configuration
+│   │   └── page.tsx           # Main single-page composition
 │   ├── components/
-│   │   ├── copilot/
-│   │   │   └── RagCopilotWidget.tsx  # Interactive chat bubble UI
-│   │   ├── layout/
-│   │   │   ├── Header.tsx     # Transparent top bar with far-spaced links
-│   │   │   └── Footer.tsx     # Minimalist footer with profile links
-│   │   ├── portfolio/
-│   │   │   ├── AboutSection.tsx        # Personal narrative & side quests
-│   │   │   ├── AchievementsSection.tsx # Chronological career timeline
-│   │   │   ├── Hero.tsx                # Bold typographic headline
-│   │   │   ├── ProjectCard.tsx         # Borderless wide-row component
-│   │   │   ├── ProjectGrid.tsx         # Filterable project showcase
-│   │   │   ├── ProjectModal.tsx        # Deep-dive case study modal
-│   │   │   └── SystemSpecs.tsx         # Architectural tenets reading list
-│   │   └── ui/                # Base primitives (Badge, Button, Modal, Tabs)
+│   │   ├── copilot/           # Chat interface & floating copilot trigger
+│   │   ├── layout/            # Top transparent navigation bar & footer
+│   │   ├── portfolio/         # Hero, ProjectGrid, Achievements, About, SystemSpecs
+│   │   │   └── demos/         # Interactive browser simulators (Olist, OptiMetrics, etc.)
+│   │   └── ui/                # Accessible primitives (Modal, Tabs, Badge, Button)
 │   └── lib/
-│       ├── knowledge-base.ts  # Grounded chunks for RAG Copilot
-│       ├── projects-data.ts   # Project specifications & technical details
-│       ├── rag-engine.ts      # Semantic vector & keyword retrieval engine
-│       └── utils.ts           # Class merging utilities
-├── tailwind.config.ts
+│       ├── knowledge-base.ts  # Grounded knowledge chunks for search
+│       ├── projects-data.ts   # Project specifications & technical metrics
+│       └── rag-engine.ts      # Token-weighted BM25 search engine with guardrails
+├── tailwind.config.ts         # WCAG AA forest olive tokens & typography
 ├── tsconfig.json
 └── package.json
 ```
 
 ---
 
-## ✦ Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18.17 or higher
-- npm, yarn, or pnpm
+- npm, pnpm, or yarn
 
-### 1. Installation
-Clone the repository and install dependencies:
+### 1. Clone & Install
 ```bash
-git clone https://github.com/Slash-495/MyPortfolio.git
-cd MyPortfolio
+git clone https://github.com/Slash-495/Portfolio.git
+cd Portfolio
 npm install
 ```
 
-### 2. Development Server
-Start the local Next.js development server:
+### 2. Development
+Run the local development server:
 ```bash
 npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### 3. Production Build
-Create an optimized production build and verify type safety:
+Verify TypeScript types and compile the static build:
 ```bash
 npm run build
 npm start
@@ -134,9 +113,9 @@ npm start
 
 ---
 
-## ✦ Connect
+## Connect
 
-- **GitHub**: [github.com/Slash-495](https://github.com/Slash-495)
-- **LeetCode**: [leetcode.com/u/Slash495](https://leetcode.com/u/Slash495/)
 - **Email**: [jainarush423@gmail.com](mailto:jainarush423@gmail.com)
-- **Phone**: +91 91713 56822
+- **GitHub**: [github.com/Slash-495](https://github.com/Slash-495)
+- **LinkedIn**: [linkedin.com/in/arush-jain](https://www.linkedin.com/in/arush-jain)
+- **LeetCode**: [leetcode.com/u/Slash495](https://leetcode.com/u/Slash495/)

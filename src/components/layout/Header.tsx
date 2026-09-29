@@ -13,7 +13,7 @@ export function Header({ onOpenCopilot }: HeaderProps) {
         {/* Left: Author Brand */}
         <a
           href="#"
-          className="text-base sm:text-lg font-medium tracking-tight text-[#1A1A1A] hover:text-[#7A8B6B] transition-colors"
+          className="text-base sm:text-lg font-medium tracking-tight text-[#1A1A1A] hover:text-[#455A30] transition-colors"
         >
           Arush Jain
         </a>
@@ -38,18 +38,24 @@ export function Header({ onOpenCopilot }: HeaderProps) {
           >
             About
           </a>
+          <a
+            href="#resume"
+            className="text-[#666662] hover:text-[#1A1A1A] transition-colors"
+          >
+            Resumes ↓
+          </a>
           <button
             onClick={onOpenCopilot}
-            className="text-[#666662] hover:text-[#7A8B6B] transition-colors"
+            className="text-[#666662] hover:text-[#455A30] transition-colors"
           >
             Ask AI
           </button>
           <a
             href="mailto:jainarush423@gmail.com"
-            className="text-[#1A1A1A] hover:text-[#7A8B6B] transition-colors inline-flex items-center gap-1 font-medium"
+            className="text-[#1A1A1A] hover:text-[#455A30] transition-colors inline-flex items-center gap-1 font-medium"
           >
             <span>Contact</span>
-            <span className="text-xs text-[#7A8B6B]">↗</span>
+            <span className="text-xs text-[#455A30]">↗</span>
           </a>
         </nav>
       </div>

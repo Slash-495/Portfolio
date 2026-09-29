@@ -17,10 +17,10 @@ export function ProjectGrid({ onOpenCopilotWithProject }: ProjectGridProps) {
 
   const categories = [
     { label: "All", value: "ALL" },
-    { label: "Full Stack", value: "Full Stack Project" },
-    { label: "Multi-Agent", value: "AI & Multi-Agent" },
-    { label: "RAG & Search", value: "RAG & Search" },
-    { label: "Machine Learning", value: "Machine Learning" },
+    { label: "AI Systems", value: "AI Systems" },
+    { label: "Data & Analytics", value: "Data & Analytics" },
+    { label: "Full Stack", value: "Full Stack" },
+    { label: "Applied ML", value: "Applied ML" },
   ];
 
   const filteredProjects = React.useMemo(() => {

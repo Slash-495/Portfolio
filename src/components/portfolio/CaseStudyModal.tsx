@@ -26,6 +26,9 @@ import { LeetLensDemo } from "./demos/LeetLensDemo";
 import { DuffyDemo } from "./demos/DuffyDemo";
 import { VeloraDemo } from "./demos/VeloraDemo";
 import { PatentFootrestDemo } from "./demos/PatentFootrestDemo";
+import { OlistAnalyticsDemo } from "./demos/OlistAnalyticsDemo";
+import { OptiMetricsDemo } from "./demos/OptiMetricsDemo";
+import { RoznamchaDemo } from "./demos/RoznamchaDemo";
 
 interface CaseStudyModalProps {
   project: ProjectCaseStudy | null;
@@ -92,6 +95,12 @@ export function CaseStudyModal({
         return <TwoTowerRecDemo />;
       case "patent-footrest":
         return <PatentFootrestDemo />;
+      case "olist":
+        return <OlistAnalyticsDemo />;
+      case "optimetrics":
+        return <OptiMetricsDemo />;
+      case "roznamcha":
+        return <RoznamchaDemo />;
       default:
         return null;
     }

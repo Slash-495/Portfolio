@@ -8,29 +8,29 @@ export function SystemSpecs() {
       num: "01",
       title: "Deterministic Multi-Agent Graphs Over Stochastic Loops",
       description:
-        "Replacing unbounded LLM loops with typed, topologically sorted DAGs and bounded execution checkpoints. Reduces token burn by 68% and prevents runaway hallucination loops.",
-      metric: "99.4% Task Completion",
+        "Replacing unbounded LLM generation with topologically sorted pipelines and deterministic rule validators. Enforces hard operational constraints and prevents runaway hallucination loops.",
+      metric: "100% Pass Rate",
     },
     {
       num: "02",
-      title: "Algorithmic Rigor & Data Structure Efficiency",
+      title: "Database-Level Aggregation & Dimensional Marts",
       description:
-        "Deep application of optimal time/space complexity, cache-conscious memory layouts, and lock-free ring buffers to achieve sub-millisecond dispatching.",
-      metric: "1.2M events/sec",
+        "Pushing heavy mathematical scoring, NTILE quintiles, and time-series cohort logic directly into PostgreSQL views. Eliminates client-side compute lag and protects browser performance.",
+      metric: "<45ms Query Latency",
     },
     {
       num: "03",
-      title: "Scalable AI Serving & Vector Proximity Routing",
+      title: "Hybrid Dense-Sparse Grounding with Cross-Encoders",
       description:
-        "Evaluating cosine similarity across high-dimensional vector embeddings in under 140ms, routing incoming user intent to specialized micro-agents.",
-      metric: "135ms Routing",
+        "Pairing dense vector semantic retrieval (FAISS) with sparse exact keyword matching (BM25) fused via Reciprocal Rank Fusion, eliminating alphanumeric citation hallucinations in statutory corpora.",
+      metric: "2.1% Hallucination Rate",
     },
     {
       num: "04",
-      title: "Single-Flight Coalescing & Origin Shielding",
+      title: "Statistical Rigor & Subgroup Experimentation",
       description:
-        "Protecting database clusters during burst traffic by locking concurrent requests into broadcast channels and filtering missing keys with Counting Bloom filters.",
-      metric: "99.98% Cache Hit",
+        "Validating traffic allocation via Sample Ratio Mismatch (SRM) tests and disaggregating metrics by device cohort to prevent Simpson's Paradox and catastrophic rollout failures.",
+      metric: "$96,300+ Loss Saved",
     },
   ];
 
@@ -65,7 +65,7 @@ export function SystemSpecs() {
 
             {/* Title & Description */}
             <div className="flex-1 flex flex-col gap-1.5">
-              <h3 className="text-lg sm:text-xl font-normal text-[#1A1A1A] group-hover:text-[#7A8B6B] transition-colors tracking-tight">
+              <h3 className="text-lg sm:text-xl font-normal text-[#1A1A1A] group-hover:text-[#455A30] transition-colors tracking-tight">
                 {tenet.title}
               </h3>
               <p className="text-sm text-[#666662] font-light leading-relaxed max-w-2xl">
@@ -75,7 +75,7 @@ export function SystemSpecs() {
 
             {/* Benchmark Metric Tag */}
             <div className="shrink-0 self-start md:self-baseline pt-1 md:pt-0">
-              <span className="text-xs text-[#7A8B6B] font-mono tracking-wide">
+              <span className="text-xs text-[#455A30] font-mono tracking-wide">
                 {tenet.metric}
               </span>
             </div>

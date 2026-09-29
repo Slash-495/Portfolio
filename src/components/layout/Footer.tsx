@@ -30,7 +30,7 @@ export function Footer() {
             GitHub ↗
           </a>
           <a
-            href="https://linkedin.com/in/#"
+            href="https://www.linkedin.com/in/arush-jain"
             target="_blank"
             rel="noreferrer"
             className="hover:text-[#1A1A1A] transition-colors"
@@ -51,9 +51,15 @@ export function Footer() {
           >
             jainarush423@gmail.com
           </a>
+          <a
+            href="#resume"
+            className="hover:text-[#1A1A1A] transition-colors"
+          >
+            Resumes ↓
+          </a>
           <button
             onClick={scrollToTop}
-            className="hover:text-[#7A8B6B] transition-colors pl-2"
+            className="hover:text-[#455A30] transition-colors pl-2"
           >
             Back to top ↑
           </button>

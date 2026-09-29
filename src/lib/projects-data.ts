@@ -18,11 +18,13 @@ export interface ProjectCaseStudy {
   slug: string;
   title: string;
   tagline: string;
-  category: "Full Stack Project" | "AI & Multi-Agent" | "RAG & Search" | "Machine Learning";
-  status: "PRODUCTION" | "DEPLOYED" | "PATENT GRANTED" | "SELECTED";
+  category: "AI Systems" | "Data & Analytics" | "Full Stack" | "Applied ML";
+  status: "PRODUCTION" | "DEPLOYED" | "PATENT PENDING" | "SELECTED";
   year: string;
   githubUrl: string;
   liveUrl?: string;
+  coldStartNote?: string;
+  isExtensionOrRepoOnly?: boolean;
   summary: string;
   primaryMetric: {
     label: string;
@@ -63,20 +65,763 @@ export interface ProjectCaseStudy {
     | "leetlens"
     | "duffy"
     | "velora"
-    | "patent-footrest";
+    | "patent-footrest"
+    | "olist"
+    | "optimetrics"
+    | "roznamcha";
 }
 
 export const PROJECTS: ProjectCaseStudy[] = [
+  {
+    id: "railroute-agent",
+    slug: "railroute-agent",
+    title: "RailRoute Agent",
+    tagline: "3-agent (Planner / Verifier / Ranker) system for operationally-safe split-journey train routing",
+    category: "AI Systems",
+    status: "DEPLOYED",
+    year: "2025",
+    githubUrl: "https://github.com/Slash-495/Rail-Route-Finder",
+    liveUrl: "https://rail-route-finder.streamlit.app/",
+    coldStartNote: "Hosted on Streamlit Cloud • May take ~30s to wake from sleep",
+    summary:
+      "Architected a specialized 3-agent autonomous routing system using Python, Gemini LLM, and Streamlit to discover safe, multi-leg split train journeys when direct tickets are waitlisted or unavailable. Reduced latency from 3.2s to 1.45s and raised the operational pass rate to 100%.",
+    primaryMetric: {
+      label: "Operational Pass Rate",
+      value: "100% verified",
+    },
+    metrics: [
+      {
+        label: "Operational Pass Rate",
+        value: "100%",
+        change: "+52%",
+        description: "Zero layover misses or impossible cross-station connections",
+      },
+      {
+        label: "End-to-End Latency",
+        value: "1.45s",
+        change: "-54.7%",
+        description: "Cut from 3.2s via parallelized async tool invocation",
+      },
+      {
+        label: "Split-Journey Discovery",
+        value: "94.8%",
+        change: "High recall",
+        description: "Finds viable alternatives for waitlisted routes across 500+ Indian Railway stations",
+      },
+      {
+        label: "Verification Overhead",
+        value: "85ms",
+        change: "Deterministic",
+        description: "Deterministic timetable rule validator runs prior to LLM presentation",
+      },
+    ],
+    techStack: ["Python", "Gemini 1.5 Pro", "Streamlit", "AsyncIO", "Pydantic", "NetworkX"],
+    problem: {
+      context:
+        "Direct Indian Railway journeys frequently face severe ticket waitlists. Split-journey ticketing (booking Leg A -> B then B -> C) often uncovers available seats, but manual search requires checking hundreds of station combinations while accounting for platform walking times and schedule delays.",
+      painPoints: [
+        "Millions of travelers stranded due to waitlisted end-to-end tickets",
+        "Combinatorial explosion of split routing (O(N^2) station paths)",
+        "Stochastic LLMs recommending impossible connections (<15 min layovers or wrong stations)",
+      ],
+      constraints: [
+        "Mandatory minimum 45-minute buffer for cross-platform transfers",
+        "Strict 120-minute maximum layover to preserve passenger comfort",
+        "Response returned within 2.0s to ensure interactive web usability",
+      ],
+    },
+    solution: {
+      overview:
+        "Engineered a deterministic 3-agent architecture that completely separates generative candidate discovery from operational validation and preference ranking.",
+      architectureHighlights: [
+        "Planner Agent: Generates candidate junction splits based on high-frequency transit hubs",
+        "Verifier Agent: Non-LLM deterministic rules engine verifying timetable validity, buffer limits, and seat availability",
+        "Ranker Agent: Multi-attribute utility function scoring itineraries on total travel duration, layover comfort, and seat certainty",
+      ],
+      tradeOffs: [
+        {
+          choice: "Deterministic Python verifier over LLM self-reflection",
+          alternative: "Prompting LLM to verify its own itinerary",
+          reason:
+            "LLMs struggle with temporal arithmetic. A hardcoded Python validator guarantees 100% operational safety with 85ms overhead versus 1.5s additional LLM latency.",
+        },
+        {
+          choice: "Parallel async route generation",
+          alternative: "Sequential agent pipeline",
+          reason: "Reduced end-to-end response time from 3.2s to 1.45s, well within interactive web thresholds.",
+        },
+      ],
+    },
+    architecture: {
+      diagramDescription:
+        "Topologically sorted multi-agent graph: User Query -> Station Ingress -> Planner Agent -> Timetable Ingestion -> Deterministic Verifier -> Ranker -> Streamlit UI",
+      nodes: [
+        {
+          id: "ingress",
+          title: "Query Ingress",
+          type: "input",
+          description: "Source station, destination station, journey date",
+          tech: "Pydantic / Streamlit",
+        },
+        {
+          id: "planner",
+          title: "Planner Agent",
+          type: "process",
+          description: "Evaluates junction topology and proposes top candidate split hubs",
+          tech: "Gemini 1.5 Pro",
+        },
+        {
+          id: "verifier",
+          title: "Deterministic Verifier",
+          type: "process",
+          description: "Validates minimum 45m / max 120m transfer buffers against live schedules",
+          tech: "Python Rule Engine",
+        },
+        {
+          id: "ranker",
+          title: "Ranker Agent",
+          type: "output",
+          description: "Optimizes Pareto frontier of duration, buffer comfort, and cost",
+          tech: "Utility Function",
+        },
+      ],
+      dataFlowSteps: [
+        "User specifies Origin (e.g. NDLS) and Destination (e.g. BSB) with travel date",
+        "Planner Agent identifies major viable intermediate junction stations (e.g. CNB, LKO)",
+        "Schedule API queries live train timetables for both legs asynchronously",
+        "Deterministic Verifier rejects candidates with <45m or >120m layover",
+        "Valid itineraries scored and ranked based on traveler utility",
+        "Streamlit UI streams results to the user with booking advice",
+      ],
+    },
+    codeHighlights: [
+      {
+        title: "Deterministic Layover Safety Guardrail",
+        language: "python",
+        code: `def verify_layover_safety(leg1_arrival: datetime, leg2_departure: datetime) -> VerificationResult:
+    layover_minutes = (leg2_departure - leg1_arrival).total_seconds() / 60.0
+    
+    # Non-negotiable operational safety rules
+    if layover_minutes < 45:
+        return VerificationResult(
+            is_valid=False, 
+            reason="Violation: Minimum 45-min buffer required for station transfer"
+        )
+    if layover_minutes > 180:
+        return VerificationResult(
+            is_valid=False, 
+            reason="Violation: Layover exceeds 3 hours, unviable for split ticket"
+        )
+        
+    return VerificationResult(is_valid=True, layover_minutes=layover_minutes, safety_score=1.0)`,
+        explanation:
+          "Enforces non-negotiable operational safety rules in code, ensuring zero passenger misses due to model arithmetic errors.",
+      },
+    ],
+    interactiveDemoType: "railroute",
+  },
+  {
+    id: "chambers-legal-rag",
+    slug: "chambers-legal-rag",
+    title: "Chambers & Infrastructure",
+    tagline: "Dual-stream hybrid retrieval pipeline (FAISS + BM25, Cohere Rerank) for the Indian GST Act",
+    category: "AI Systems",
+    status: "PRODUCTION",
+    year: "2025",
+    githubUrl: "https://github.com/Slash-495/GST-RAG",
+    liveUrl: "https://chambersandinfastructures.streamlit.app/",
+    coldStartNote: "Hosted on Streamlit Cloud • May take ~30s to wake from sleep",
+    summary:
+      "Engineered an enterprise-grade legal RAG system over the Indian Goods & Services Tax (GST) Act using a dual-stream hybrid retrieval architecture (FAISS dense vectors + BM25 sparse lexical search) fused via Reciprocal Rank Fusion and re-ranked with Cohere Rerank. Slashed legal hallucination rates from 36.8% to 2.1% and achieved 94.2% Precision@4.",
+    primaryMetric: {
+      label: "Hallucination Rate",
+      value: "2.1% (from 36.8%)",
+    },
+    metrics: [
+      {
+        label: "Hallucination Rate",
+        value: "2.1%",
+        change: "-94.3%",
+        description: "Down from 36.8% in baseline naive vector RAG",
+      },
+      {
+        label: "Precision@4",
+        value: "94.2%",
+        change: "+31.7%",
+        description: "Exact statutory sub-clause retrieval on complex GST queries",
+      },
+      {
+        label: "Retrieval Latency",
+        value: "285ms",
+        change: "p95",
+        description: "Dense FAISS + BM25 fused with Reciprocal Rank Fusion (RRF)",
+      },
+      {
+        label: "Corpus Scale",
+        value: "1,200+ Pages",
+        change: "Full Act",
+        description: "Entire Indian GST Act, Circulars, Notifications & Case Law",
+      },
+    ],
+    techStack: ["FastAPI", "FAISS", "BM25", "Cohere Rerank", "LangChain", "Streamlit", "AWS"],
+    problem: {
+      context:
+        "The Indian GST framework contains thousands of interdependent circulars, cross-referencing statutory sections and compounding exemptions. Standard embedding-based RAG models hallucinate legal interpretations because vector similarity alone confuses section numbers (e.g. Section 16(2) vs Section 16(4)).",
+      painPoints: [
+        "Dense vectors fail on exact alphanumeric statutory citations (e.g. Rule 86B)",
+        "Naive chunking cuts clauses in half, destroying conditional legal qualifications",
+        "Hallucinated citations lead to legal penalties and incorrect tax filings",
+      ],
+      constraints: [
+        "Zero hallucination tolerance on statutory citations and tax rate exemptions",
+        "Exact clause-level citation attribution on every generated response",
+        "Sub-second end-to-end response for interactive legal counsel use",
+      ],
+    },
+    solution: {
+      overview:
+        "Built a dual-stream hybrid pipeline combining dense semantic vector search with sparse BM25 keyword matching, integrated with hierarchical clause-aware chunking and Cohere neural re-ranking.",
+      architectureHighlights: [
+        "Hierarchical Clause-Aware Chunking: Preserves statutory parent-child relationships",
+        "Dual-Stream Retrieval: Dense FAISS (conceptual semantic match) + BM25 (exact section/rule match)",
+        "Reciprocal Rank Fusion (RRF, k=60): Normalizes and merges dense and sparse scores",
+        "Cohere Cross-Encoder Rerank: Top-25 candidates compressed to top-4 high-precision contexts",
+      ],
+      tradeOffs: [
+        {
+          choice: "Hybrid dense + sparse with RRF over vector-only retrieval",
+          alternative: "Pure OpenAI text-embedding-3-large vector search",
+          reason:
+            "Vector search alone misses exact statutory section tokens like '16(4)'. BM25 ensures 100% keyword recall for alphanumeric legal identifiers.",
+        },
+        {
+          choice: "Cross-encoder re-ranking over LLM context stuffing",
+          alternative: "Passing top-20 retrieved chunks directly to LLM prompt",
+          reason:
+            "Cross-encoders eliminate irrelevant noise and attention distraction ('lost in the middle'), reducing prompt cost by 78% and boosting answer precision.",
+        },
+      ],
+    },
+    architecture: {
+      diagramDescription:
+        "Dual-stream retrieval pipeline: Legal Query -> Query Expander -> Parallel Stream [FAISS Dense + BM25 Sparse] -> Reciprocal Rank Fusion (k=60) -> Cohere Rerank -> Grounded Generation",
+      nodes: [
+        {
+          id: "query",
+          title: "Legal Query",
+          type: "input",
+          description: "Statutory query or tax rate dispute",
+          tech: "FastAPI Ingress",
+        },
+        {
+          id: "dense",
+          title: "FAISS Dense Stream",
+          type: "process",
+          description: "HNSW index over 1536-dim legal embeddings",
+          tech: "FAISS HNSW",
+        },
+        {
+          id: "sparse",
+          title: "BM25 Sparse Stream",
+          type: "process",
+          description: "Inverted index tuned for section numbers & alphanumeric keywords",
+          tech: "rank_bm25",
+        },
+        {
+          id: "rrf",
+          title: "RRF & Cohere Rerank",
+          type: "process",
+          description: "Fuses rankings and scores top-4 most authoritative context passages",
+          tech: "Cohere API / RRF",
+        },
+        {
+          id: "synthesis",
+          title: "Grounded Synthesizer",
+          type: "output",
+          description: "Generates legal opinion strictly citing retrieved statutory clauses",
+          tech: "Gemini / Claude",
+        },
+      ],
+      dataFlowSteps: [
+        "User submits legal tax query (e.g. 'Conditions for claiming Input Tax Credit under Section 16')",
+        "Query expander extracts statutory references and synonyms",
+        "Dense FAISS retrieves top-25 semantically similar passages",
+        "Sparse BM25 retrieves top-25 exact statutory keyword matches",
+        "Reciprocal Rank Fusion merges streams into unified 35-candidate pool",
+        "Cohere cross-encoder reranker picks top-4 authoritative chunks",
+        "Synthesizer generates formal legal breakdown with bracketed section citations",
+      ],
+    },
+    codeHighlights: [
+      {
+        title: "Reciprocal Rank Fusion (RRF) Implementation",
+        language: "python",
+        code: `def reciprocal_rank_fusion(dense_ranks: list[str], sparse_ranks: list[str], k: int = 60) -> list[tuple[str, float]]:
+    scores: dict[str, float] = {}
+    
+    # Process dense vector rankings
+    for rank, doc_id in enumerate(dense_ranks):
+        scores[doc_id] = scores.get(doc_id, 0.0) + 1.0 / (k + rank + 1)
+        
+    # Process sparse BM25 rankings
+    for rank, doc_id in enumerate(sparse_ranks):
+        scores[doc_id] = scores.get(doc_id, 0.0) + 1.0 / (k + rank + 1)
+        
+    # Sort merged candidate pool by fused score
+    fused_results = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+    return fused_results`,
+        explanation:
+          "RRF blends heterogeneous retrieval scores without requiring fragile calibration or arbitrary manual weights.",
+      },
+    ],
+    interactiveDemoType: "legal-rag",
+  },
+  {
+    id: "roznamcha",
+    slug: "roznamcha",
+    title: "Roznamcha",
+    tagline: "Customer Analytics & CRM platform with native PostgreSQL RFM segmentation and cohort retention",
+    category: "Data & Analytics",
+    status: "DEPLOYED",
+    year: "2025",
+    githubUrl: "https://github.com/Slash-495/Roznamcha",
+    liveUrl: "https://roznamcha-ivj4.vercel.app/",
+    summary:
+      "Architected a modern Customer Analytics and CRM platform engineered to demonstrate advanced SQL proficiency. Heavy data aggregation, mathematical scoring, and time-series retention logic execute natively inside PostgreSQL database views using NTILE(5) window functions and recursive CTEs, served to a responsive Next.js analytics dashboard.",
+    primaryMetric: {
+      label: "SQL Execution",
+      value: "Native PostgreSQL Views",
+    },
+    metrics: [
+      {
+        label: "Segmentation",
+        value: "RFM Quintiles",
+        change: "Automated",
+        description: "NTILE(5) window function dynamically scores 1-5 across R, F, M partitioned by merchant",
+      },
+      {
+        label: "Retention Engine",
+        value: "Monthly Cohort CTEs",
+        change: "Recursive",
+        description: "Tracks customer repeat purchase velocity over subsequent months",
+      },
+      {
+        label: "Query Latency",
+        value: "<45ms",
+        change: "Optimized",
+        description: "Pre-computed database views eliminate client-side JavaScript calculation lag",
+      },
+      {
+        label: "Architecture",
+        value: "Next.js + Prisma",
+        change: "Production",
+        description: "Full-stack cloud deployment on Vercel with responsive merchant UI",
+      },
+    ],
+    techStack: ["PostgreSQL", "Next.js", "TypeScript", "Tailwind CSS", "Prisma ORM", "SQL CTEs"],
+    problem: {
+      context:
+        "Modern e-commerce and retail merchants need real-time visibility into customer retention, churn velocity, and lifetime value without burdening browser clients or experiencing query timeouts over large transaction logs.",
+      painPoints: [
+        "Client-side analytics cause browser freeze and high memory consumption on 10k+ rows",
+        "Lack of automated customer categorization (Champions, Loyal, At-Risk)",
+        "Complex time-series retention matrices are difficult to maintain without clean SQL views",
+      ],
+      constraints: [
+        "Execute 100% of mathematical scoring and quintile partitioning natively on PostgreSQL",
+        "Maintain sub-50ms API response times across multi-merchant partitions",
+        "Deliver actionable retention playbooks for each segmented cohort",
+      ],
+    },
+    solution: {
+      overview:
+        "Built a dual-view database architecture in PostgreSQL: one view computes dynamic RFM quintiles partitioned by merchant using NTILE(5), while another calculates month-over-month customer retention cohorts via Common Table Expressions (CTEs).",
+      architectureHighlights: [
+        "PostgreSQL NTILE(5) window functions partitioned by merchant_id",
+        "Recursive SQL CTEs calculating cohort retention matrices over acquisition months",
+        "Next.js App Router API endpoints querying views with sub-50ms latency",
+        "Actionable cohort playbooks for automated win-back and loyalty campaigns",
+      ],
+      tradeOffs: [
+        {
+          choice: "Database Views with NTILE(5) over client-side JavaScript calculation",
+          alternative: "Streaming raw transactions to the browser and computing in JS",
+          reason:
+            "Leveraging PostgreSQL's native query optimizer eliminates 90% of payload size and prevents client browser freezes on large merchant histories.",
+        },
+        {
+          choice: "Cohort CTE aggregation over third-party analytics SDKs",
+          alternative: "Embedding proprietary SaaS analytics widgets",
+          reason:
+            "Ensures 100% merchant data privacy, zero recurring vendor costs, and unlimited custom reporting flexibility.",
+        },
+      ],
+    },
+    architecture: {
+      diagramDescription:
+        "Data Pipeline: Merchant Orders -> PostgreSQL Ingress -> Dynamic RFM View (NTILE 5) & Cohort Retention CTEs -> Prisma ORM -> Next.js Dashboard -> Vercel Deployment",
+      nodes: [
+        {
+          id: "orders",
+          title: "Orders Database",
+          type: "storage",
+          description: "Relational purchase history with merchant_id, customer_id, and amounts",
+          tech: "PostgreSQL",
+        },
+        {
+          id: "rfm-view",
+          title: "RFM Quintile View",
+          type: "process",
+          description: "Dynamic NTILE(5) scoring across Recency, Frequency, and Monetary spend",
+          tech: "SQL Window Functions",
+        },
+        {
+          id: "cohort-view",
+          title: "Cohort Retention View",
+          type: "process",
+          description: "Month-by-month repeat purchase tracking CTEs",
+          tech: "SQL CTEs",
+        },
+        {
+          id: "dashboard",
+          title: "Merchant Dashboard",
+          type: "output",
+          description: "Interactive cohort heatmaps and segment distribution charts",
+          tech: "Next.js + Tailwind",
+        },
+      ],
+      dataFlowSteps: [
+        "Customer transactions recorded with merchant_id, customer_id, timestamp, and amount",
+        "PostgreSQL views execute NTILE(5) partitions to assign quintile scores across R, F, and M",
+        "Qualitative segment labels (Champions, Loyal, At-Risk) assigned based on RFM score composite",
+        "Cohort CTEs evaluate repeat transactions grouped by acquisition month",
+        "Next.js merchant dashboard queries views with instant sub-50ms response",
+      ],
+    },
+    codeHighlights: [
+      {
+        title: "PostgreSQL RFM NTILE(5) Quintile Scoring View",
+        language: "sql",
+        code: `CREATE OR REPLACE VIEW rfm_scores AS
+SELECT 
+  customer_id,
+  merchant_id,
+  NTILE(5) OVER (PARTITION BY merchant_id ORDER BY last_order_date ASC) as r_score,
+  NTILE(5) OVER (PARTITION BY merchant_id ORDER BY total_orders ASC) as f_score,
+  NTILE(5) OVER (PARTITION BY merchant_id ORDER BY total_spend ASC) as m_score
+FROM merchant_customer_aggregates;`,
+        explanation:
+          "Leverages database window functions to dynamically partition and score customers relative to their peer group.",
+      },
+    ],
+    interactiveDemoType: "roznamcha",
+  },
+  {
+    id: "olist-analytics",
+    slug: "olist-analytics",
+    title: "Olist E-Commerce Analytics Engine",
+    tagline: "Containerized ELT data warehouse and Metabase BI engine over 100k+ Brazilian marketplace orders",
+    category: "Data & Analytics",
+    status: "DEPLOYED",
+    year: "2025",
+    githubUrl: "https://github.com/Slash-495/Olist-Analytics-Engine",
+    summary:
+      "Built an end-to-end Data Engineering & Analytics Warehouse Engine on 100,000+ real orders from the Kaggle Olist Brazilian e-commerce dataset. Orchestrated a containerized PostgreSQL 15 warehouse via Docker Compose, automated ingestion pipelines, and built a 4-layer ELT SQL model (raw -> staging -> intermediate -> marts) feeding interactive Metabase BI dashboards.",
+    primaryMetric: {
+      label: "Logistics Churn Impact",
+      value: "R$ 1.73M Quantified",
+    },
+    metrics: [
+      {
+        label: "Order Volume",
+        value: "100k+ Orders",
+        change: "Kaggle Olist",
+        description: "Relational data across customers, products, payments, sellers, and geolocation",
+      },
+      {
+        label: "Review Drop",
+        value: "-2.4 Stars",
+        change: "Penalty",
+        description: "Quantified review score drop resulting from delivery delays",
+      },
+      {
+        label: "Repeat Buyer AOV",
+        value: "2.4x Higher",
+        change: "Retention",
+        description: "Repeat buyers account for 2.4x higher average order value",
+      },
+      {
+        label: "ELT Pipeline",
+        value: "4-Layer SQL",
+        change: "PostgreSQL 15",
+        description: "raw_data -> staging -> intermediate -> marts architecture",
+      },
+    ],
+    techStack: ["PostgreSQL 15", "Docker Compose", "Metabase BI", "Python 3.10", "SQLAlchemy", "Pandas"],
+    problem: {
+      context:
+        "The Olist e-commerce dataset contains over 100,000 complex relational orders spanning a multi-year Brazilian marketplace. Naive spreadsheet or single-script pandas analyses face performance bottlenecks and fail to capture systemic operational frictions like delivery delays, seller bottlenecks, and customer churn.",
+      painPoints: [
+        "Inability to join large multi-table datasets in memory without significant lag",
+        "Lack of quantified visibility into financial losses caused by logistical delays",
+        "Manual reporting workflows that don't scale to recurring operational analytics",
+      ],
+      constraints: [
+        "Containerize the entire warehouse and BI dashboard stack using Docker Compose",
+        "Implement a strict 4-layer ELT architecture separating raw data from reporting marts",
+        "Ensure dimensional marts execute queries in Metabase under 100ms",
+      ],
+    },
+    solution: {
+      overview:
+        "Architected a production-grade ELT pipeline that automates ingestion, structures staging tables, derives intermediate business metrics, and aggregates dimensional data marts powering Metabase BI executive dashboards.",
+      architectureHighlights: [
+        "PostgreSQL 15 analytics warehouse containerized with Docker Compose",
+        "Automated Kaggle API ingestion into raw_data schema",
+        "4-layer SQL transformation model: raw_data -> staging -> intermediate -> marts",
+        "Metabase BI connection with pre-built executive dashboards",
+      ],
+      tradeOffs: [
+        {
+          choice: "4-layer ELT SQL model in PostgreSQL over Python Pandas transformations",
+          alternative: "Running all transformations in memory using Python",
+          reason:
+            "SQL ELT pipelines in PostgreSQL leverage relational indexing and allow BI tools to query pre-computed dimensional marts directly.",
+        },
+        {
+          choice: "Docker Compose containerization over local standalone installs",
+          alternative: "Installing PostgreSQL and Metabase natively on host machine",
+          reason: "Ensures reproducible 1-command deployment (`docker-compose up`) across any developer machine.",
+        },
+      ],
+    },
+    architecture: {
+      diagramDescription:
+        "Data Pipeline: Kaggle API Ingestion -> Dockerized PostgreSQL 15 (Raw Data -> Staging -> Intermediate -> Marts) -> Metabase BI Dashboards",
+      nodes: [
+        {
+          id: "ingestion",
+          title: "Kaggle Ingestion",
+          type: "input",
+          description: "Automated retrieval and staging of 100k+ orders CSV datasets",
+          tech: "Python / Kaggle API",
+        },
+        {
+          id: "warehouse",
+          title: "PostgreSQL 15 Warehouse",
+          type: "storage",
+          description: "Relational database with multi-schema data segregation",
+          tech: "PostgreSQL 15 / Docker",
+        },
+        {
+          id: "elt-marts",
+          title: "Dimensional Marts",
+          type: "process",
+          description: "Logistics impact, seller performance, and customer lifetime value marts",
+          tech: "SQL ELT",
+        },
+        {
+          id: "metabase",
+          title: "Metabase BI",
+          type: "output",
+          description: "Real-time executive dashboards and geographic delay heatmaps",
+          tech: "Metabase BI",
+        },
+      ],
+      dataFlowSteps: [
+        "Kaggle API script downloads 9 relational datasets into Docker volume",
+        "SQLAlchemy copies raw records into raw_data schema",
+        "Staging views clean nulls, cast timestamps, and deduplicate records",
+        "Intermediate views join orders, items, reviews, and customer geolocations",
+        "Dimensional marts compile seller performance, customer retention, and logistics risk",
+        "Metabase BI visualizes delay penalties and customer cohort lifetime value",
+      ],
+    },
+    codeHighlights: [
+      {
+        title: "Logistics Delay & Revenue At Risk Mart SQL",
+        language: "sql",
+        code: `CREATE OR REPLACE VIEW marts.mart_logistics_impact AS
+SELECT 
+  c.customer_state,
+  COUNT(o.order_id) as total_orders,
+  AVG(EXTRACT(DAY FROM (o.order_delivered_customer_date - o.order_estimated_delivery_date))) as avg_delay_days,
+  AVG(r.review_score) as avg_review_score,
+  SUM(CASE WHEN o.order_delivered_customer_date > o.order_estimated_delivery_date THEN p.payment_value ELSE 0 END) as revenue_at_risk
+FROM intermediate.int_order_details o
+JOIN staging.stg_customers c ON o.customer_id = c.customer_id
+JOIN intermediate.int_order_payments p ON o.order_id = p.order_id
+LEFT JOIN staging.stg_order_reviews r ON o.order_id = r.order_id
+GROUP BY c.customer_state;`,
+        explanation:
+          "Computes state-level logistics delay penalties and quantifies revenue at risk directly on the warehouse layer.",
+      },
+    ],
+    interactiveDemoType: "olist",
+  },
+  {
+    id: "optimetrics",
+    slug: "optimetrics",
+    title: "OptiMetrics",
+    tagline: "Statistical A/B experimentation platform detecting hidden segment degradation and novelty decay",
+    category: "Data & Analytics",
+    status: "DEPLOYED",
+    year: "2025",
+    githubUrl: "https://github.com/Slash-495/OptiMetrics",
+    summary:
+      "Engineered a production-grade Python and Power BI statistical experimentation platform designed to prevent costly product rollout failures. In a 50,000-user checkout redesign experiment showing a deceptive +47.96% aggregate conversion lift, OptiMetrics detected a severe hidden mobile conversion crash (-47.07%) and 80.7% novelty decay in Week 2, avoiding over $96,300 in lost revenue.",
+    primaryMetric: {
+      label: "Avoided Loss",
+      value: "$96,300+ Saved",
+    },
+    metrics: [
+      {
+        label: "Mobile Anomaly",
+        value: "-47.07% Crash",
+        change: "Anomaly",
+        description: "Uncovered hidden mobile failure (9.92% -> 5.25%, p < 0.0001) despite +135.66% desktop lift",
+      },
+      {
+        label: "Novelty Decay",
+        value: "80.7% Drop",
+        change: "Week 2",
+        description: "Conversion lift plummeted from +80.27% (Week 1) to +15.51% (Week 2)",
+      },
+      {
+        label: "SRM Detection",
+        value: "Chi-Square Test",
+        change: "p = 0.6355",
+        description: "Sample Ratio Mismatch verified unbiased 50/50 traffic split",
+      },
+      {
+        label: "Power Analysis",
+        value: "±0.81% MDE",
+        change: "80% Power",
+        description: "Cohen's h statistical power calculation with alpha = 0.05",
+      },
+    ],
+    techStack: ["Python", "SciPy", "Statsmodels", "Power BI", "DAX", "NumPy", "Pandas"],
+    problem: {
+      context:
+        "Product teams frequently rely on naive, surface-level A/B testing aggregates. A checkout redesign experiment on 50,000 users showed an aggregate +47.96% conversion lift, which typically triggers an immediate 100% rollout decision. However, unsegmented metrics often conceal catastrophic subgroup failures.",
+      painPoints: [
+        "Simpson's Paradox: Aggregate positive lift hiding severe negative conversion in key segments",
+        "Novelty Effect: Initial user curiosity inflating early metrics before returning to baseline",
+        "Costly Rollouts: Releasing broken variants to mobile users causes direct revenue loss",
+      ],
+      constraints: [
+        "Validate Sample Ratio Mismatch (SRM) using Chi-Square goodness-of-fit",
+        "Compute Minimum Detectable Effect (MDE) sensitivity bounds using power analysis",
+        "Provide executive segment decision matrix for rollout vs rollback decisions",
+      ],
+    },
+    solution: {
+      overview:
+        "Built a dual-layer experimentation architecture: a Python statistical engine that runs Chi-Square SRM tests, 2-proportion Z-tests, and Mann-Whitney U tests on average order values, connected to an executive Power BI dashboard with dynamic DAX lift calculations.",
+      architectureHighlights: [
+        "Automated SRM Chi-Square validation (p = 0.6355 confirming unbiased split)",
+        "Device-level segmentation isolating Desktop (+135.66%) vs Mobile (-47.07%) divergence",
+        "Temporal cohort decay tracking isolating novelty evaporation across 14 days",
+        "Segmented Rollout Strategy: Deploy to Desktop, audit and debug Mobile UX",
+      ],
+      tradeOffs: [
+        {
+          choice: "Segmented rollout recommendation over binary 100% ship / abort",
+          alternative: "Completely aborting the redesign due to mobile failure",
+          reason:
+            "Desktop lift was massive and statistically significant (+135.66%). Segmented deployment captured desktop upside while protecting mobile revenue ($96,300+ saved).",
+        },
+        {
+          choice: "Power BI presentation layer over raw Jupyter Notebook reports",
+          alternative: "Delivering statistical findings as static Python notebook tables",
+          reason:
+            "Executive stakeholders require interactive slice-and-dice controls and clear visual confidence intervals to make confident product decisions.",
+        },
+      ],
+    },
+    architecture: {
+      diagramDescription:
+        "Architecture: User Experiment Logs -> Python Statistical Engine (SciPy / Statsmodels) -> Chi-Square SRM & Z-Tests -> Power BI DAX Presentation Layer",
+      nodes: [
+        {
+          id: "logs",
+          title: "Experiment Logs",
+          type: "input",
+          description: "50,000 user interaction logs with timestamps, device, and conversion flags",
+          tech: "NumPy / Pandas",
+        },
+        {
+          id: "srm-test",
+          title: "SRM & Power Engine",
+          type: "process",
+          description: "Chi-Square goodness of fit and Cohen's h MDE power sensitivity",
+          tech: "SciPy / Statsmodels",
+        },
+        {
+          id: "segmentation",
+          title: "Segmentation Model",
+          type: "process",
+          description: "Subgroup hypothesis testing and temporal novelty decay evaluation",
+          tech: "Python Stats",
+        },
+        {
+          id: "power-bi",
+          title: "Executive Dashboard",
+          type: "output",
+          description: "Interactive DAX metrics, confidence intervals, and rollout decision matrix",
+          tech: "Power BI / DAX",
+        },
+      ],
+      dataFlowSteps: [
+        "Ingests 50,000 user session records across control and variant buckets",
+        "Runs Chi-Square test verifying 50/50 allocation without traffic bias (p = 0.6355)",
+        "Calculates 2-proportion Z-test and 95% confidence intervals on conversion lift",
+        "Disaggregates results by device type, detecting mobile conversion crash (-47.07%)",
+        "Tracks week-over-week lift decay, discovering 80.7% novelty fade in Week 2",
+        "Outputs segmented rollout playbook preventing $96,300 in lost mobile revenue",
+      ],
+    },
+    codeHighlights: [
+      {
+        title: "Sample Ratio Mismatch (SRM) & Z-Test Python Script",
+        language: "python",
+        code: `from scipy import stats
+import statsmodels.stats.proportion as prop
+
+def evaluate_experiment_rigor(control_users, variant_users, control_conv, variant_conv):
+    # 1. Sample Ratio Mismatch (SRM) Test
+    observed = [control_users, variant_users]
+    expected = [(control_users + variant_users) / 2] * 2
+    chi2_stat, srm_p_value = stats.chisquare(f_obs=observed, f_exp=expected)
+    
+    # 2. Two-Proportion Z-Test
+    count = [variant_conv, control_conv]
+    nobs = [variant_users, control_users]
+    z_stat, z_p_value = prop.proportions_ztest(count, nobs)
+    ci_low, ci_high = prop.confint_proportions_2indep(variant_conv, variant_users, control_conv, control_users)
+    
+    return {
+        "srm_passed": srm_p_value > 0.01,
+        "srm_p": srm_p_value,
+        "z_p_value": z_p_value,
+        "ci_95": (ci_low, ci_high)
+    }`,
+        explanation:
+          "Verifies traffic allocation integrity before calculating hypothesis tests and confidence intervals.",
+      },
+    ],
+    interactiveDemoType: "optimetrics",
+  },
   {
     id: "leetlens",
     slug: "leetlens",
     title: "LeetLens",
     tagline: "AI-Powered LeetCode coding assistant & Chrome extension with execution visualizer",
-    category: "Full Stack Project",
+    category: "Full Stack",
     status: "DEPLOYED",
     year: "2025",
     githubUrl: "https://github.com/Slash-495/LeetLens",
-    liveUrl: "https://github.com/Slash-495/LeetLens",
+    isExtensionOrRepoOnly: true,
     summary:
       "Engineered an AI-powered Chrome Extension directly integrating into LeetCode. Features an automated Solution Review Engine for senior-level time/space complexity analysis, an interactive Execution Trace Visualizer for step-by-step recursion tree inspection, intelligent brute-force vs. optimal code comparison, and BYOK (Bring Your Own Key) encrypted storage.",
     primaryMetric: {
@@ -119,7 +864,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
         "Lack of interactive visualization for complex recursive trees and pointer movement",
       ],
       constraints: [
-        "Zero server-side persistence of user OpenAI / Gemini API keys (strict BYOK)",
+        "100% local storage of user API keys (BYOK) with zero telemetry leakage",
         "Instant DOM extraction of LeetCode problem descriptions and code editors",
         "Seamless overlay with zero layout shifts on LeetCode's dynamic Monaco editor",
       ],
@@ -128,85 +873,85 @@ export const PROJECTS: ProjectCaseStudy[] = [
       overview:
         "Built LeetLens using Chrome Extension Manifest V3. It hooks into the LeetCode DOM, extracts active problem context, and runs Socratic, tiered hints, code reviews, and recursive state visualization using user-supplied local API keys.",
       architectureHighlights: [
-        "Solution Review Engine: Senior-engineer-level analysis on time/space complexity",
-        "Execution Trace Visualizer: Recursion trees, variable states, step-by-step inspector",
-        "Intelligent Comparison: Compares brute-force code against optimal approaches (e.g. O(N²) vs O(N))",
-        "BYOK Vault: Cryptographically isolated storage using chrome.storage.local",
+        "Manifest V3 Content Script injecting non-invasive floating mentor drawer",
+        "DOM Observer targeting Monaco Editor instances to extract code in real time",
+        "Solution Review Engine: Socratic hints, edge-case audit, and Big-O verification",
+        "Interactive Execution Trace Visualizer rendering recursive call stacks step by step",
       ],
       tradeOffs: [
         {
-          choice: "BYOK (Bring Your Own Key) Local Execution",
-          alternative: "Centralized SaaS Proxy Backend",
-          reason: "Ensures complete user privacy, eliminates recurring server hosting bills, and prevents credential theft.",
+          choice: "Local client-side execution (BYOK) over hosted backend proxy",
+          alternative: "Centralized server storing keys and routing AI requests",
+          reason:
+            "Zero operating server costs, infinite scalability, and total privacy for developers practicing proprietary or competitive code.",
         },
         {
-          choice: "Socratic Tiered Hint System",
-          alternative: "Direct Complete Solution Generation",
-          reason: "Promotes real algorithmic retention and true problem-solving mastery during technical interview prep.",
+          choice: "Socratic tiered hints over instant code completions",
+          alternative: "Generating full code solutions immediately",
+          reason:
+            "Encourages genuine problem-solving intuition rather than mindless copy-pasting during interview preparation.",
         },
       ],
     },
     architecture: {
-      diagramDescription: "Manifest V3 Pipeline: LeetCode DOM -> Content Script -> BYOK Local Storage -> Gemini AI -> Interactive Trace Overlay",
+      diagramDescription:
+        "Manifest V3 Pipeline: LeetCode DOM -> Content Script -> BYOK Local Storage -> Gemini AI -> Interactive Trace Overlay",
       nodes: [
         {
           id: "leetcode-dom",
           title: "LeetCode DOM Ingress",
           type: "input",
-          description: "Captures problem statement, sample tests, and user editor code",
+          description: "Extracts problem title, description, constraints, and Monaco code buffer",
           tech: "DOM MutationObserver",
         },
         {
-          id: "byok-vault",
-          title: "BYOK Local Vault",
+          id: "storage",
+          title: "BYOK Secure Vault",
           type: "storage",
-          description: "Retrieves user's encrypted local API key with zero network relay",
+          description: "Encrypted API keys stored exclusively on client machine",
           tech: "chrome.storage.local",
         },
         {
-          id: "review-engine",
-          title: "Solution Review Engine",
+          id: "ai-engine",
+          title: "Socratic Analysis Engine",
           type: "process",
-          description: "Generates time/space complexity analysis and edge-case warnings",
-          tech: "Gemini AI / AST Parsing",
+          description: "Generates progressive hints, complexity audits, and recursive trees",
+          tech: "Gemini 1.5 Flash",
         },
         {
-          id: "visualizer-overlay",
-          title: "Trace Visualizer Overlay",
+          id: "ui-drawer",
+          title: "Slide-Over Overlay",
           type: "output",
-          description: "Renders step-by-step recursion trees and variable states right in page",
-          tech: "React / Tailwind / Canvas",
+          description: "Non-intrusive floating workbench embedded inside the active tab",
+          tech: "React 18 / Tailwind",
         },
       ],
       dataFlowSteps: [
         "User opens LeetCode problem; content script detects active slug and language context",
-        "User clicks 'Review Code'; extension queries Gemini using user's encrypted local API key",
-        "Analyzes big-O complexity and points out potential time limit exceeded (TLE) traps",
-        "Trace visualizer renders recursion tree diagram step-by-step directly alongside code editor",
+        "User requests review or visual trace for their current editor code buffer",
+        "Extension retrieves local API key from chrome.storage.local without any proxy server",
+        "Prompts Gemini API with strict Socratic review instructions and problem constraints",
+        "Streams structured feedback, Big-O breakdown, and recursion trees directly into overlay",
       ],
     },
     codeHighlights: [
       {
-        title: "Client-Side BYOK Socratic Hint Execution (TypeScript)",
+        title: "BYOK Direct Client API Completion",
         language: "typescript",
-        code: `export async function requestSocraticReview(
-  code: string,
-  problemContext: ProblemContext
-): Promise<ReviewResult> {
-  const { apiKey } = await chrome.storage.local.get(["apiKey"]);
-  if (!apiKey) throw new Error("BYOK: Please configure your API key in extension settings");
-
-  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent", {
+        code: `async function generateSocraticReview(code: string, problemContext: ProblemContext, apiKey: string) {
+  const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+  
+  const response = await fetch(\`\${endpoint}?key=\${apiKey}\`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       contents: [{
         parts: [{ text: \`Review this LeetCode solution for \${problemContext.title}:\\n\${code}\\nAnalyze Big-O, edge cases, and comparison without spoiling optimal solution.\` }]
       }]
     })
   });
-  const data = await response.json();
-  return parseReviewPayload(data);
+  
+  return await response.json();
 }`,
         explanation:
           "Zero backend relay architecture: all AI completions are initiated directly from the client's browser using local API keys.",
@@ -219,124 +964,129 @@ export const PROJECTS: ProjectCaseStudy[] = [
     slug: "duffy",
     title: "Duffy",
     tagline: "AI-powered language learning ecosystem with Spaced Repetition, Voice AI & classroom tools",
-    category: "Full Stack Project",
+    category: "Full Stack",
     status: "DEPLOYED",
     year: "2024",
     githubUrl: "https://github.com/Slash-495/Duffy",
     liveUrl: "https://duffy.onrender.com/",
+    coldStartNote: "Hosted on Render Free Tier • May take ~30s to wake from sleep",
     summary:
-      "Architected a comprehensive language immersion web platform combining an intelligent Spaced Repetition System (SRS) for custom flashcards, real-time in-browser neural voice recognition via the Web Speech API with dynamic pronunciation scoring, Gemini-powered conversational scenario roleplay personas, and B2B classroom roster management. Live on Render at duffy.onrender.com.",
+      "Architected a comprehensive language immersion web platform combining an intelligent Spaced Repetition System (SRS) for custom flashcards, real-time in-browser neural voice recognition via the Web Speech API with dynamic pronunciation scoring, Gemini-powered conversational scenario roleplay personas, and B2B classroom roster management.",
     primaryMetric: {
       label: "In-Browser Voice AI",
-      value: "<150ms / Live on Render",
+      value: "Zero-Latency Native Speech",
     },
     metrics: [
       {
-        label: "Voice AI Latency",
-        value: "<150ms",
-        change: "In-browser",
-        description: "Zero external speech server latency via Web Speech API",
+        label: "Voice Recognition",
+        value: "Web Speech API",
+        change: "Client-native",
+        description: "Zero external audio upload latency for real-time pronunciation checks",
       },
       {
         label: "SRS Algorithm",
         value: "SuperMemo-2",
-        change: "Adaptive",
-        description: "Decays and schedules flashcard review intervals dynamically",
+        change: "Mathematical",
+        description: "Dynamically schedules card reviews based on user recall grade",
       },
       {
-        label: "AI Immersion",
-        value: "Gemini Personas",
-        change: "Adaptive CEFR",
-        description: "Dynamic roleplay adapting to user conversational proficiency",
+        label: "AI Personas",
+        value: "Interactive Scenarios",
+        change: "Roleplay",
+        description: "Coffee shop ordering, airport transit, and casual small talk",
       },
       {
-        label: "Production Deployment",
-        value: "duffy.onrender.com",
-        change: "Live",
-        description: "Full-stack web application running in production",
+        label: "Classroom Tools",
+        value: "B2B Teacher Portal",
+        change: "Multi-tenant",
+        description: "Teacher rosters, shared decks, and student progress telemetry",
       },
     ],
-    techStack: ["Next.js / React", "Node.js", "Express", "MongoDB", "Web Speech API", "Gemini AI", "Tailwind CSS"],
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Web Speech API", "Gemini API", "PostgreSQL", "Prisma"],
     problem: {
       context:
-        "Language learners face a disconnect between passive rote memorization (flashcards) and terrifying real-world spoken interactions. Most language apps lock speaking practice behind expensive subscriptions and fail to provide classrooms with student roster tracking tools.",
+        "Language learners face two distinct challenges: memorization decay (forgetting vocabulary without systematic review intervals) and speaking anxiety (lack of safe, interactive environments to practice spoken conversation).",
       painPoints: [
-        "Passive vocabulary apps failing to build spoken conversation confidence",
-        "Expensive server-side voice recognition APIs creating latency bottlenecks",
-        "Teachers lacking unified dashboards to manage student flashcard decks and review progress",
+        "Traditional flashcard apps lack automated spaced retention scheduling",
+        "Cloud voice transcription APIs introduce jarring multi-second latency for conversational drills",
+        "Educators lack tools to assign structured custom vocabulary decks to student cohorts",
       ],
       constraints: [
-        "Free, in-browser neural voice recognition without paid third-party voice APIs",
-        "Dynamic spaced repetition scheduling adapting to individual memory retention",
-        "Roleplay scenarios that adjust grammar complexity to the learner's fluency level",
+        "Zero-latency speech recognition directly inside standard web browsers",
+        "Mathematically rigorous SuperMemo-2 (SM-2) retention calculation for all card reviews",
+        "Roleplay AI personas strictly adhering to the target language and proficiency level",
       ],
     },
     solution: {
       overview:
-        "Constructed Duffy: a unified platform bringing together SRS flashcards, interactive AI roleplay scenarios (cafes, airports, hotels), real-time pronunciation scoring via the Web Speech API, and teacher classroom tools.",
+        "Built Duffy as an all-in-one language platform pairing browser-native Web Speech recognition with the SuperMemo-2 algorithm and Gemini conversational personas, wrapped in an intuitive full-stack web app.",
       architectureHighlights: [
-        "Core Learning Engine: Intelligent Spaced Repetition System (SRS) custom flashcard decks",
-        "Web Speech API: Free, low-latency in-browser speech recognition and TTS correction",
-        "AI Immersion Engine: Gemini-powered scenario roleplay adapting to CEFR levels (A1 to C2)",
-        "Educational Tools: B2B classroom creation, roster management, and assigned homework decks",
+        "In-Browser Speech Recognition via native SpeechRecognition / webkitSpeechRecognition",
+        "SuperMemo-2 Spaced Repetition implementation computing optimal ease factor and interval days",
+        "Conversational Scenarios: Context-bounded persona roleplays with dynamic feedback",
+        "Teacher Portal: Roster management, student telemetry, and synchronized deck assignments",
       ],
       tradeOffs: [
         {
-          choice: "In-Browser Web Speech API Integration",
-          alternative: "Centralized Whisper Server Hosting",
-          reason: "Zero server hosting bandwidth costs and instantaneous (<150ms) microphone response.",
+          choice: "Browser-native Web Speech API over cloud transcription services (Whisper API)",
+          alternative: "Streaming audio to server-side OpenAI Whisper endpoints",
+          reason:
+            "Web Speech API executes instantly with zero server infrastructure costs and near-zero latency, creating a natural back-and-forth conversational flow.",
         },
         {
-          choice: "Custom SuperMemo SRS Algorithm",
-          alternative: "Linear Interval Scheduling",
-          reason: "Adapts flashcard recurrence intervals based on user recall difficulty, maximizing memory retention.",
+          choice: "SuperMemo-2 mathematical formulation over fixed interval timers",
+          alternative: "Static review intervals (e.g. review every 2 days)",
+          reason:
+            "SM-2 dynamically adapts to the learner's individual difficulty score, maximizing long-term memory retention efficiency.",
         },
       ],
     },
     architecture: {
-      diagramDescription: "Duffy Architecture: Web Speech Voice Ingress -> Gemini Immersion Engine -> SRS Decay Scheduler -> MongoDB Store",
+      diagramDescription:
+        "Duffy Architecture: Client Audio -> Web Speech API -> Pronunciation Comparator & SM-2 Scheduler -> Gemini Conversation Persona -> Prisma PostgreSQL",
       nodes: [
         {
-          id: "voice-ingress",
-          title: "Web Speech Voice Ingress",
+          id: "mic",
+          title: "Audio Ingress",
           type: "input",
-          description: "Microphone speech converted to text tokens in browser in <150ms",
-          tech: "Web Speech API / SpeechRecognition",
+          description: "Captures microphone stream and delivers speech recognition events",
+          tech: "Web Speech API",
         },
         {
-          id: "gemini-roleplay",
-          title: "Gemini Immersion Engine",
+          id: "sm2",
+          title: "SM-2 Scheduler",
           type: "process",
-          description: "Generates context-aware situational dialogue and pronunciation critique",
-          tech: "Gemini AI / Express",
+          description: "Calculates next review timestamp based on recall ease and grade",
+          tech: "SM-2 Algorithm",
         },
         {
-          id: "srs-engine",
-          title: "Spaced Repetition Scheduler",
+          id: "persona",
+          title: "Gemini Persona",
           type: "process",
-          description: "Calculates memory retention decay and queues due cards",
-          tech: "SuperMemo-2 / TypeScript",
+          description: "Engages in conversational immersion drills across varied scenarios",
+          tech: "Gemini 1.5 Pro",
         },
         {
-          id: "mongo-store",
-          title: "User & Classroom Database",
+          id: "database",
+          title: "Cloud Data Layer",
           type: "storage",
-          description: "Stores learner streaks, XP, decks, and teacher classroom rosters",
-          tech: "MongoDB / Mongoose",
+          description: "Stores user decks, card retention scores, and teacher classroom rosters",
+          tech: "Prisma / PostgreSQL",
         },
       ],
       dataFlowSteps: [
-        "Learner selects scenario (e.g., Tokyo Cafe Order); AI presents situational prompt",
-        "Learner speaks into microphone; Web Speech API transcribes spoken response in <150ms",
-        "Pronunciation dashboard grades accuracy and provides Text-To-Speech phonetic correction",
-        "SRS engine logs user mastery score and reschedules vocabulary cards for optimal recall",
+        "Learner opens vocabulary flashcard deck and speaks target phrase",
+        "Web Speech API transcribes audio client-side and computes phonetic similarity score",
+        "User rates card recall difficulty (0-5 scale)",
+        "SM-2 algorithm calculates next review interval and updates ease factor in PostgreSQL",
+        "In Conversation mode, learner speaks dialogue; Gemini replies in character with corrective hints",
       ],
     },
     codeHighlights: [
       {
-        title: "Spaced Repetition Interval Scheduler (TypeScript)",
+        title: "SuperMemo-2 (SM-2) Spaced Repetition Algorithm",
         language: "typescript",
-        code: `export function calculateNextReview(
+        code: `export function calculateSM2(
   repetition: number,
   easeFactor: number,
   grade: number // 0 to 5 recall quality
@@ -364,442 +1114,14 @@ export const PROJECTS: ProjectCaseStudy[] = [
     interactiveDemoType: "duffy",
   },
   {
-    id: "velora",
-    slug: "velora",
-    title: "Velora",
-    tagline: "Modern full-stack cloud application with reactive state, low-latency APIs & modular architecture",
-    category: "Full Stack Project",
-    status: "PRODUCTION",
-    year: "2025",
-    githubUrl: "https://github.com/Slash-495/Velora",
-    liveUrl: "https://velora-3jpcjj3y1-slashs-projects-1d391125.vercel.app/",
-    summary:
-      "Constructed a high-concurrency full-stack cloud application architected with Next.js App Router, TypeScript, and high-performance serverless endpoints. Designed with modular UI patterns, instant optimistic UI updates, resilient database indexing, and strict end-to-end type safety across the entire client-server boundary.",
-    primaryMetric: {
-      label: "API Response Latency",
-      value: "<45ms / 100% Type-Safe",
-    },
-    metrics: [
-      {
-        label: "API Latency",
-        value: "<45ms",
-        change: "Low-latency",
-        description: "Optimized server actions and edge-cached queries",
-      },
-      {
-        label: "Type Safety",
-        value: "End-to-End",
-        change: "Zero runtime type bugs",
-        description: "Shared Zod schemas across client forms and server endpoints",
-      },
-      {
-        label: "Optimistic UI",
-        value: "0ms shift",
-        change: "Instant",
-        description: "Client state updates ahead of network round-trips",
-      },
-      {
-        label: "Architecture",
-        value: "Next.js App Router",
-        change: "RSC",
-        description: "React Server Components with streaming SSR",
-      },
-    ],
-    techStack: ["Next.js", "TypeScript", "React", "PostgreSQL", "Prisma", "Tailwind CSS", "Zod", "Server Actions"],
-    problem: {
-      context:
-        "Modern cloud SaaS applications suffer from sluggish client updates when network requests block UI interactions, leading to noticeable layout shifts and poor user experience under patchy network conditions.",
-      painPoints: [
-        "Network latency stalling user actions during interactive workflows",
-        "Discrepancies between frontend TypeScript models and backend database schemas",
-        "Cumbersome boilerplate required for data mutations and validation",
-      ],
-      constraints: [
-        "Sub-50ms API response time across all core endpoints",
-        "Strict end-to-end type safety eliminating manual type casting",
-        "Instant optimistic UI rendering with automated rollback on error",
-      ],
-    },
-    solution: {
-      overview:
-        "Engineered Velora: a reactive full-stack web application leveraging Next.js App Router Server Actions, Zod schema validation, and an optimistic UI state machine that immediately renders client updates while settling with the PostgreSQL database in the background.",
-      architectureHighlights: [
-        "Server Actions: Eliminates REST boilerplate with direct RPC-like server mutations",
-        "Zod Schema Contracts: Single source of truth for input validation on client and server",
-        "Optimistic State Manager: Renders actions instantly with zero perceived latency",
-        "Prisma Database Layer: Indexed PostgreSQL queries with prepared statements",
-      ],
-      tradeOffs: [
-        {
-          choice: "Next.js Server Actions with Optimistic Updates",
-          alternative: "Separate Express REST API",
-          reason: "Unifies frontend and backend codebases, sharing types and eliminating API route boilerplate.",
-        },
-        {
-          choice: "Zod Schema Invalidation",
-          alternative: "Manual Type Guards",
-          reason: "Enforces strict runtime validation at API boundary while generating compile-time TypeScript types.",
-        },
-      ],
-    },
-    architecture: {
-      diagramDescription: "Velora Architecture: Client Action -> Optimistic UI -> Next.js Server Action -> Zod Validation -> PostgreSQL",
-      nodes: [
-        {
-          id: "client-action",
-          title: "User Action Ingress",
-          type: "input",
-          description: "Form submit or state mutation event triggered in client component",
-          tech: "React 18 / useOptimistic",
-        },
-        {
-          id: "optimistic-ui",
-          title: "Optimistic State Engine",
-          type: "process",
-          description: "Instantly updates local client state in 0ms ahead of network round-trip",
-          tech: "Client State Cache",
-        },
-        {
-          id: "server-action",
-          title: "Next.js Server Action",
-          type: "process",
-          description: "Validates payload with Zod and executes database transaction",
-          tech: "Server Action / Zod",
-        },
-        {
-          id: "postgres-db",
-          title: "PostgreSQL Database",
-          type: "storage",
-          description: "Persists records via Prisma ORM with connection pooling",
-          tech: "PostgreSQL / Prisma",
-        },
-      ],
-      dataFlowSteps: [
-        "User triggers data update; client immediately reflects change in 0ms",
-        "Server Action securely executes on edge runtime with authenticated session",
-        "Zod validates payload structure; Prisma executes ACID transaction in <45ms",
-        "Client seamlessly reconciles server-confirmed record with zero layout shift",
-      ],
-    },
-    codeHighlights: [
-      {
-        title: "Type-Safe Server Action with Zod Validation (TypeScript)",
-        language: "typescript",
-        code: `export async function updateResourceAction(input: unknown) {
-  // Validate input strictly with Zod schema
-  const parsed = ResourceSchema.safeParse(input);
-  if (!parsed.success) {
-    return { success: false, error: parsed.error.flatten().fieldErrors };
-  }
-
-  const { id, title, metadata } = parsed.data;
-  
-  // Execute database transaction with Prisma
-  const updated = await prisma.resource.update({
-    where: { id },
-    data: { title, metadata, updatedAt: new Date() },
-  });
-
-  revalidatePath("/dashboard");
-  return { success: true, data: updated };
-}`,
-        explanation:
-          "Eliminates runtime type bugs by pairing Zod validation with Next.js Server Actions and automated cache revalidation.",
-      },
-    ],
-    interactiveDemoType: "velora",
-  },
-  {
-    id: "railroute-agent",
-    slug: "railroute-agent",
-    title: "RailRoute Agent",
-    tagline: "3-agent (Planner / Verifier / Ranker) system for operationally-safe split-journey train routing",
-    category: "AI & Multi-Agent",
-    status: "DEPLOYED",
-    year: "2025",
-    githubUrl: "https://github.com/Slash-495/Rail-Route-Finder",
-    liveUrl: "https://rail-route-finder.streamlit.app/",
-    summary:
-      "Architected a specialized 3-agent autonomous routing system using Python, Gemini LLM, and Streamlit to discover safe, multi-leg split train journeys when direct tickets are waitlisted or unavailable. Reduced latency from 3.2s to 1.45s and raised the operational pass rate to 100%.",
-    primaryMetric: {
-      label: "Operational Pass Rate",
-      value: "100% verified",
-    },
-    metrics: [
-      {
-        label: "Operational Pass Rate",
-        value: "100%",
-        change: "+38%",
-        description: "Zero unsafe layovers or missed connection risks",
-      },
-      {
-        label: "End-to-End Latency",
-        value: "1.45s",
-        change: "-54.7%",
-        description: "Cut down from 3.2s via parallel agent verification",
-      },
-      {
-        label: "Architecture",
-        value: "3-Agent DAG",
-        change: "Planner / Verifier / Ranker",
-        description: "Deterministic handoff loop with strict temporal gating",
-      },
-      {
-        label: "Journey Feasibility",
-        value: "94.8%",
-        change: "Reliable",
-        description: "Discovers valid multi-station transfers during peak holidays",
-      },
-    ],
-    techStack: ["Python", "Google Gemini API", "Streamlit", "Pydantic", "FastAPI", "Pandas"],
-    problem: {
-      context:
-        "During peak holiday travel seasons on Indian Railways, direct train tickets sell out weeks in advance. Travelers must piece together multi-leg split journeys across intermediate junctions, which frequently leads to missed connections, platform transit delays, or physically impossible transfer windows.",
-      painPoints: [
-        "Unreliable direct ticket availability on high-demand trunk routes",
-        "LLMs hallucinating non-existent stations or negative layover durations",
-        "Existing booking apps not calculating walking/platform transfer buffer times",
-      ],
-      constraints: [
-        "Strict 45-minute to 180-minute minimum transfer buffer at intermediate junction stations",
-        "Must support dynamic timetable updates and delayed train heuristics",
-        "Sub-2s response time for interactive passenger queries",
-      ],
-    },
-    solution: {
-      overview:
-        "Decoupled path generation into three specialized agents: 1) Route Planner identifies intermediate junction nodes and candidate train pairs, 2) Schedule Verifier checks real-time station buffers and platform transit constraints, and 3) Journey Ranker evaluates comfort, cost, total duration, and transfer stress.",
-      architectureHighlights: [
-        "Planner Agent: Traverses route network graphs to find high-probability junction hops",
-        "Verifier Agent: Applies deterministic temporal rules (45m <= layover <= 180m)",
-        "Ranker Agent: Multi-criteria Pareto ranking balancing price, duration, and convenience",
-        "Parallel verification worker pool cutting end-to-end latency from 3.2s to 1.45s",
-      ],
-      tradeOffs: [
-        {
-          choice: "3-Agent Triad (Planner/Verifier/Ranker)",
-          alternative: "Single Monolithic LLM Prompt",
-          reason: "Monolithic prompts had a 38% failure rate with hallucinated layovers; multi-agent pipeline achieved 100% pass rate.",
-        },
-        {
-          choice: "Deterministic Python Rule Engine for Verifier",
-          alternative: "LLM-based Schedule Evaluation",
-          reason: "Mathematical buffer checks cannot rely on LLM arithmetic; deterministic verification guarantees safety.",
-        },
-      ],
-    },
-    architecture: {
-      diagramDescription: "Triad Agent Workflow: Ingress -> Planner -> Parallel Verifier -> Multi-Criteria Ranker",
-      nodes: [
-        {
-          id: "passenger-query",
-          title: "Passenger Ingress",
-          type: "input",
-          description: "Origin, destination, target dates, travel class preferences",
-          tech: "Streamlit / Pydantic",
-        },
-        {
-          id: "planner-agent",
-          title: "Planner Agent",
-          type: "process",
-          description: "Finds intermediate junctions and generates candidate 2-leg split combinations",
-          tech: "Gemini / Graph Search",
-        },
-        {
-          id: "verifier-agent",
-          title: "Verifier Agent",
-          type: "process",
-          description: "Deterministic validation of platform layover buffers (45-180 min)",
-          tech: "Python Temporal Rules",
-        },
-        {
-          id: "ranker-agent",
-          title: "Ranker Agent",
-          type: "output",
-          description: "Sorts validated journeys by Pareto optimality and travel convenience",
-          tech: "Weighted Scoring Engine",
-        },
-      ],
-      dataFlowSteps: [
-        "Passenger submits origin/destination pair with flexible junction parameters",
-        "Planner agent queries station graph and generates top-8 split candidates in 380ms",
-        "Verifier agent validates connection timings against railway timetables in parallel",
-        "Ranker agent scores journeys based on comfort, layover convenience, and price in 1.45s total",
-      ],
-    },
-    codeHighlights: [
-      {
-        title: "Verifier Agent Temporal Buffer Validation (Python)",
-        language: "python",
-        code: `def verify_transfer_feasibility(leg_a: TrainLeg, leg_b: TrainLeg) -> VerificationResult:
-    """Enforces strict platform transfer buffers between split journeys."""
-    arrival_time = leg_a.scheduled_arrival
-    departure_time = leg_b.scheduled_departure
-    
-    layover_minutes = (departure_time - arrival_time).total_seconds() / 60.0
-    if layover_minutes < 0:
-        layover_minutes += 24 * 60
-        
-    MIN_SAFE_BUFFER = 45.0  # Station transit + platform shift buffer
-    MAX_REASONABLE_BUFFER = 240.0  # Passenger comfort cap
-    
-    if layover_minutes < MIN_SAFE_BUFFER:
-        return VerificationResult(is_valid=False, reason="CRITICAL: Layover below 45m safe threshold")
-    if layover_minutes > MAX_REASONABLE_BUFFER:
-        return VerificationResult(is_valid=False, reason="REJECTED: Excessive station wait time")
-        
-    return VerificationResult(is_valid=True, layover_minutes=layover_minutes, safety_score=1.0)`,
-        explanation:
-          "Enforces non-negotiable operational safety rules in code, ensuring zero passenger misses due to model arithmetic errors.",
-      },
-    ],
-    interactiveDemoType: "railroute",
-  },
-  {
-    id: "chambers-legal-rag",
-    slug: "chambers-legal-rag",
-    title: "Chambers & Infrastructure",
-    tagline: "Dual-stream hybrid retrieval pipeline (FAISS + BM25, Cohere Rerank) for the Indian GST Act",
-    category: "RAG & Search",
-    status: "PRODUCTION",
-    year: "2025",
-    githubUrl: "https://github.com/Slash-495/GST-RAG",
-    liveUrl: "https://chambersandinfastructures.streamlit.app/",
-    summary:
-      "Engineered an enterprise-grade legal RAG system over the Indian Goods & Services Tax (GST) Act using a dual-stream hybrid retrieval architecture (FAISS dense vectors + BM25 sparse lexical search) fused via Reciprocal Rank Fusion and re-ranked with Cohere Rerank. Slashed legal hallucination rates from 36.8% to 2.1% and achieved 94.2% Precision@4.",
-    primaryMetric: {
-      label: "Hallucination Rate",
-      value: "2.1% (from 36.8%)",
-    },
-    metrics: [
-      {
-        label: "Hallucination Rate",
-        value: "2.1%",
-        change: "-94.3%",
-        description: "Down from 36.8% in baseline naive vector RAG",
-      },
-      {
-        label: "Precision@4",
-        value: "94.2%",
-        change: "+28.4%",
-        description: "Exact legal statutory clause retrieval",
-      },
-      {
-        label: "Hybrid Retrieval",
-        value: "FAISS + BM25",
-        change: "Dual-stream",
-        description: "Fused via Reciprocal Rank Fusion (RRF k=60)",
-      },
-      {
-        label: "Cross-Encoder",
-        value: "Cohere Rerank",
-        change: "Top-4 rerank",
-        description: "High-precision legal relevance score gating",
-      },
-    ],
-    techStack: ["FastAPI", "AWS", "FAISS", "BM25", "Cohere API", "LangChain", "Python", "Docker"],
-    problem: {
-      context:
-        "The Indian GST Act contains hundreds of dense sections, rules, notifications, and cross-referenced circulars. Naive semantic vector search misses exact statutory citations (e.g., 'Section 16(2)(aa) vs Section 16(4)') because embeddings blur numerical clause references, causing lawyers to receive hallucinated legal interpretations.",
-      painPoints: [
-        "Semantic embeddings failing on specific sub-clause numbers and legal terminology",
-        "Hallucinated citations causing dangerous compliance risks in corporate filings",
-        "Dense vector retrieval alone failing to rank exact notification amendments",
-      ],
-      constraints: [
-        "Zero tolerance for invented section numbers or fabricated case laws",
-        "Must return verified statutory source links with clause-level grounding",
-        "Deployable on scalable AWS cloud infrastructure",
-      ],
-    },
-    solution: {
-      overview:
-        "Architected a dual-stream retrieval engine combining dense semantic search (FAISS with text-embedding-3) for conceptual understanding and sparse lexical search (BM25) for exact keyword and clause number matching. Results are merged via Reciprocal Rank Fusion (RRF) and scored through Cohere Cross-Encoder Rerank before context injection.",
-      architectureHighlights: [
-        "Dense Stream: FAISS index over hierarchical legal chunk trees",
-        "Sparse Stream: BM25 index targeting statutory section titles and exact notifications",
-        "RRF Fusion: Normalizes and blends dense and sparse candidate pools",
-        "Cohere Rerank: Cross-encoder evaluates query-document pairs to produce Top-4 precision",
-      ],
-      tradeOffs: [
-        {
-          choice: "Hybrid FAISS + BM25 with Cohere Rerank",
-          alternative: "Single Vector Store (Pinecone / FAISS alone)",
-          reason: "Pure vector search had 36.8% hallucination on statutory citations; hybrid search with reranking lowered it to 2.1%.",
-        },
-        {
-          choice: "Clause-Level Hierarchical Chunking",
-          alternative: "Fixed 500-token Sliding Window",
-          reason: "Preserves section-subclause boundaries, ensuring each chunk contains its parent section context.",
-        },
-      ],
-    },
-    architecture: {
-      diagramDescription: "Dual-Stream Pipeline: Query -> Dense (FAISS) + Sparse (BM25) -> RRF Fusion -> Cohere Rerank -> LLM Generation",
-      nodes: [
-        {
-          id: "legal-query",
-          title: "Legal Query Ingress",
-          type: "input",
-          description: "Tax attorney query regarding GST input tax credit eligibility",
-          tech: "FastAPI / AWS",
-        },
-        {
-          id: "dense-sparse",
-          title: "Dual-Stream Search",
-          type: "process",
-          description: "Parallel FAISS dense similarity & BM25 exact clause keyword matching",
-          tech: "FAISS + BM25",
-        },
-        {
-          id: "rrf-fusion",
-          title: "RRF Fusion & Cohere Rerank",
-          type: "process",
-          description: "Merges candidate pools via RRF (k=60) and executes cross-encoder reranking",
-          tech: "Cohere Rerank API",
-        },
-        {
-          id: "grounded-output",
-          title: "Grounded Legal Synthesis",
-          type: "output",
-          description: "Synthesized statutory answer with 94.2% Precision@4 and exact clause citation",
-          tech: "AWS Bedrock / Gemini",
-        },
-      ],
-      dataFlowSteps: [
-        "User submits legal question to FastAPI gateway on AWS",
-        "Query is dispatched concurrently to FAISS dense retriever and BM25 sparse index",
-        "Top-25 candidates from each stream are fused via Reciprocal Rank Fusion",
-        "Cohere Cross-Encoder reranks top 50 into final top 4 high-precision legal clauses",
-      ],
-    },
-    codeHighlights: [
-      {
-        title: "Dual-Stream Reciprocal Rank Fusion (Python)",
-        language: "python",
-        code: `def reciprocal_rank_fusion(dense_docs: list[str], sparse_docs: list[str], k: int = 60) -> list[tuple[str, float]]:
-    scores: dict[str, float] = {}
-    for rank, doc_id in enumerate(dense_docs):
-        scores[doc_id] = scores.get(doc_id, 0.0) + 1.0 / (k + rank + 1)
-    for rank, doc_id in enumerate(sparse_docs):
-        scores[doc_id] = scores.get(doc_id, 0.0) + 1.0 / (k + rank + 1)
-    return sorted(scores.items(), key=lambda item: item[1], reverse=True)`,
-        explanation:
-          "Balances semantic intent with exact keyword statutory clause matching, eliminating the bias of single-modality retrievers.",
-      },
-    ],
-    interactiveDemoType: "legal-rag",
-  },
-  {
-    id: "conformal-demand-forecasting",
-    slug: "conformal-demand-forecasting",
+    id: "conformal-forecasting",
+    slug: "conformal-forecasting",
     title: "Conformal Demand Forecasting",
     tagline: "Probabilistic inventory forecasting engine via LightGBM & Newsvendor optimization",
-    category: "Machine Learning",
-    status: "DEPLOYED",
+    category: "Applied ML",
+    status: "PRODUCTION",
     year: "2024",
     githubUrl: "https://github.com/Slash-495/Conformal-Demand-Forecasting",
-    liveUrl: "https://github.com/Slash-495/Conformal-Demand-Forecasting",
     summary:
       "Developed an end-to-end probabilistic supply chain forecasting engine combining LightGBM gradient boosting, split conformal prediction intervals, and Newsvendor profit-maximization optimization. Containerized with Docker and served via FastAPI, cutting retail stockout rates from 48% to 11% and reducing total inventory holding costs by 31%.",
     primaryMetric: {
@@ -828,285 +1150,163 @@ export const PROJECTS: ProjectCaseStudy[] = [
       {
         label: "API Throughput",
         value: "450 req/s",
-        change: "Low-latency",
-        description: "FastAPI + Docker microservice container",
+        change: "Low latency",
+        description: "Sub-12ms inference served via Dockerized FastAPI instance",
       },
     ],
-    techStack: ["LightGBM", "Python", "FastAPI", "Docker", "Scikit-Learn", "NumPy", "Pandas"],
+    techStack: ["Python", "LightGBM", "MAPIE", "FastAPI", "Docker", "Optuna", "Pandas"],
     problem: {
       context:
-        "Point forecasting methods predict average demand, failing to account for asymmetric margin risk. Under-stocking causes lost sales, while over-stocking causes inventory holding depreciation.",
+        "Retail inventory planners using point forecasts suffer from asymmetric demand penalties: under-stocking leads to irreversible lost sales and customer dissatisfaction, while over-stocking locks up capital and causes inventory depreciation.",
       painPoints: [
-        "Deterministic point forecasts missing tail-risk demand spikes",
-        "48% stockout rate during promotions and seasonal demand swings",
-        "Excessive capital tied up in slow-moving safety stock",
+        "Point forecasting models (ARIMA / standard regression) ignore tail risk uncertainty",
+        "48% baseline stockout rate during peak promotional volatility",
+        "Over-compensation with arbitrary safety stocks inflated warehouse holding costs by 45%",
       ],
       constraints: [
-        "Statistically guaranteed prediction intervals (90% coverage)",
-        "Must map uncertainty into financial order quantities in real time",
-        "Containerized for seamless deployment into supply chain ERPs",
+        "Strict 90% finite-sample marginal coverage guarantee on prediction intervals",
+        "Real-time API inference latency under 20ms for continuous replenishment systems",
+        "Model calibration must remain valid under non-Gaussian, intermittent retail demand",
       ],
     },
     solution: {
       overview:
-        "Built a multi-stage probabilistic forecasting pipeline: 1) LightGBM models non-linear demand trends, 2) Split Conformal Prediction calibrates distribution-free prediction intervals, and 3) Newsvendor critical fractile math determines profit-maximizing order quantities.",
+        "Trained LightGBM quantile regression models calibrated with split inductive conformal prediction (MAPIE) to generate mathematically guaranteed prediction intervals, mapped directly to optimal stock levels via classic Newsvendor fractile optimization.",
       architectureHighlights: [
-        "LightGBM Quantile Regressors predicting 10th, 50th, and 90th percentiles",
-        "Split Conformal Calibration ensuring finite-sample coverage validity",
-        "Newsvendor Optimization mapping critical ratio (underage vs overage cost) to inventory stock",
-        "Dockerized FastAPI endpoint returning predictions and recommended order quantities",
+        "Feature Store: Lag features, rolling statistics, calendar indicators, and promotional flags",
+        "LightGBM Gradient Boosting: Fast gradient-based tree boosting with Optuna hyperparameter tuning",
+        "Inductive Conformal Prediction: Produces distribution-free prediction intervals with 90% coverage",
+        "Newsvendor Profit Maximization: Translates conformal intervals into profit-optimal reorder points",
       ],
       tradeOffs: [
         {
-          choice: "Conformalized Quantile Regression",
-          alternative: "Gaussian Parametric Assumptions",
-          reason: "Real retail demand is skewed and non-Gaussian; conformal prediction guarantees valid intervals regardless of distribution.",
+          choice: "Split conformal prediction over parametric Gaussian confidence intervals",
+          alternative: "Assuming Gaussian error residuals and taking mean ± 1.96 * sigma",
+          reason:
+            "Retail sales distributions are heavily skewed and zero-inflated. Conformal prediction provides mathematically proven coverage guarantees without requiring unrealistic normality assumptions.",
         },
         {
-          choice: "LightGBM Gradient Boosting",
-          alternative: "LSTM / DeepAR",
-          reason: "LightGBM trained in 1/10th the time on tabular sales data with superior tabular feature interpretability and lower inference latency.",
+          choice: "LightGBM with feature engineering over DeepAR / Temporal Fusion Transformers",
+          alternative: "Deep neural sequence models (TFT / LSTM)",
+          reason:
+            "LightGBM achieved 3.4x faster training cycles and sub-12ms API latency with competitive RMSE, making continuous retraining operationally viable.",
         },
       ],
     },
     architecture: {
-      diagramDescription: "Pipeline: Feature Store -> LightGBM Regressor -> Conformal Interval Calibration -> Newsvendor Solver",
+      diagramDescription:
+        "Probabilistic pipeline: Historical Orders -> Feature Engineering -> LightGBM Regressor -> Conformal Calibration (MAPIE) -> Newsvendor Fractile -> Optimal Reorder Point",
       nodes: [
         {
-          id: "sales-history",
-          title: "Historical Sales & Promos",
+          id: "features",
+          title: "Feature Pipeline",
           type: "input",
-          description: "SKU sales history, calendar features, promotions, store geography",
-          tech: "Pandas / Feature Store",
+          description: "7d/14d/30d rolling averages, lag features, and holiday flags",
+          tech: "Pandas / Polars",
         },
         {
-          id: "lgbm-model",
-          title: "LightGBM Engine",
+          id: "lightgbm",
+          title: "LightGBM Model",
           type: "process",
-          description: "Gradient boosted decision trees forecasting demand percentiles",
-          tech: "LightGBM / Python",
+          description: "Fast gradient boosted tree regression with Optuna tuning",
+          tech: "LightGBM",
         },
         {
-          id: "conformal-calibrator",
+          id: "conformal",
           title: "Conformal Calibrator",
           type: "process",
-          description: "Computes non-conformity residuals over validation set to guarantee 90% coverage",
-          tech: "Non-Parametric Math",
+          description: "Computes non-conformity scores on holdout set to ensure 90% coverage",
+          tech: "MAPIE / Python",
         },
         {
-          id: "newsvendor-solver",
+          id: "newsvendor",
           title: "Newsvendor Optimizer",
           type: "output",
-          description: "Balances underage cost vs overage cost to compute optimal stock order",
+          description: "Applies critical fractile (Underage vs Overage cost) to pick stock point",
           tech: "FastAPI / Docker",
         },
       ],
       dataFlowSteps: [
-        "ERP system sends product SKU, lead time, and margin data via REST API",
-        "LightGBM generates multi-quantile demand distribution in 12ms",
-        "Conformal calibrator adjusts interval bounds for statistical coverage guarantee",
-        "Newsvendor module calculates exact units to reorder, cutting stockouts to 11%",
+        "Raw transactional order data ingested from data lake",
+        "Automated feature pipeline generates rolling aggregations and lag features",
+        "LightGBM generates point prediction for SKU demand over target lead time",
+        "Conformal calibrator inflates prediction by empirical quantile non-conformity threshold",
+        "Newsvendor module evaluates unit margin vs holding cost to recommend exact reorder quantity",
+        "FastAPI container serves prediction intervals to ERP replenishment systems",
       ],
     },
     codeHighlights: [
       {
-        title: "Newsvendor Critical Fractile Calculation (Python)",
+        title: "Conformal Inductive Calibration & Newsvendor Order Point",
         language: "python",
-        code: `def calculate_optimal_order_quantity(underage_cost: float, overage_cost: float, conformal_intervals: tuple[float, float]) -> int:
-    critical_ratio = underage_cost / (underage_cost + overage_cost)
-    lower_bound, upper_bound = conformal_intervals
-    optimal_stock = lower_bound + critical_ratio * (upper_bound - lower_bound)
-    return max(0, int(round(optimal_stock)))`,
+        code: `def compute_optimal_order_quantity(
+    y_pred_point: float, 
+    residuals_calibration: np.ndarray, 
+    alpha: float = 0.10, 
+    cost_underage: float = 25.0, 
+    cost_overage: float = 5.0
+) -> dict:
+    # 1. Compute empirical non-conformity score quantile
+    q_hat = np.quantile(np.abs(residuals_calibration), 1.0 - alpha)
+    lower_bound = max(0.0, y_pred_point - q_hat)
+    upper_bound = y_pred_point + q_hat
+    
+    # 2. Critical Fractile for Newsvendor Profit Maximization
+    critical_fractile = cost_underage / (cost_underage + cost_overage) # e.g. 25 / 30 = 0.833
+    optimal_stock = lower_bound + critical_fractile * (upper_bound - lower_bound)
+    
+    return {
+        "prediction_interval": (lower_bound, upper_bound),
+        "coverage_guarantee": f"{int((1 - alpha) * 100)}%",
+        "recommended_reorder_units": int(np.ceil(optimal_stock))
+    }`,
         explanation:
-          "Translates machine learning uncertainty directly into bottom-line financial savings by accounting for asymmetrical margin risk.",
+          "Combines statistical conformal bounds with economic utility theory to maximize expected retail profit.",
       },
     ],
     interactiveDemoType: "conformal",
   },
-  {
-    id: "two-tower-recommender",
-    slug: "two-tower-recommender",
-    title: "Multimodal Two-Tower Recommender",
-    tagline: "Deep learning dual-encoder retrieval model with InfoNCE contrastive training",
-    category: "Machine Learning",
-    status: "PRODUCTION",
-    year: "2024",
-    githubUrl: "https://github.com/Slash-495/Two-Tower-Recommender",
-    liveUrl: "https://github.com/Slash-495/Two-Tower-Recommender",
-    summary:
-      "Trained a high-throughput deep learning dual-encoder candidate generation model in PyTorch using InfoNCE contrastive loss and in-batch negative sampling. Sub-millisecond vector indexing with FAISS yielded a +4.2% gain in Recall@10 and a +3.6% gain in Recall@50 over baseline matrix factorization.",
-    primaryMetric: {
-      label: "Recall@10 Gain",
-      value: "+4.2% lift",
-    },
-    metrics: [
-      {
-        label: "Recall@10 Lift",
-        value: "+4.2%",
-        change: "Significant",
-        description: "Compared to matrix factorization baseline",
-      },
-      {
-        label: "Recall@50 Lift",
-        value: "+3.6%",
-        change: "Better discovery",
-        description: "Captures long-tail item affinity across user segments",
-      },
-      {
-        label: "Embedding Dimension",
-        value: "128-dim",
-        change: "Compact",
-        description: "High-density normalized latent representation",
-      },
-      {
-        label: "Retrieval Latency",
-        value: "<2.4ms",
-        change: "Real-time",
-        description: "FAISS IVF-PQ vector index on 1M+ catalog items",
-      },
-    ],
-    techStack: ["PyTorch", "FAISS", "Python", "NumPy", "Scikit-Learn", "CUDA"],
-    problem: {
-      context:
-        "Large-scale recommendation systems with millions of catalog items cannot score every user-item pair with heavy deep networks in real-time. Candidate retrieval must narrow down millions of candidates to the top-100 within a few milliseconds while preserving cross-modal semantic relevance.",
-      painPoints: [
-        "Matrix factorization failing to capture complex non-linear user preferences",
-        "High inference latency making deep cross-attention networks unusable for candidate generation",
-        "Cold-start item retrieval failing without content and metadata feature integration",
-      ],
-      constraints: [
-        "Sub-5ms candidate retrieval for 1M+ candidate items",
-        "Decoupled user and item towers allowing asynchronous offline item embedding indexing",
-        "Loss function robust to positive interaction sparsity",
-      ],
-    },
-    solution: {
-      overview:
-        "Architected a symmetric two-tower neural network: Query Tower encodes user history; Item Tower encodes item metadata. The towers project into a shared 128-dimensional metric space optimized via InfoNCE contrastive loss, enabling FAISS to retrieve top candidates with simple dot-product similarity.",
-      architectureHighlights: [
-        "User Tower: Deep MLP with residual connections encoding user engagement history",
-        "Item Tower: Entity embedding network projecting catalog features into shared latent space",
-        "InfoNCE Contrastive Loss: In-batch negatives for efficient representation learning",
-        "FAISS IVF-PQ Index: Sub-2.4ms approximate nearest neighbor (ANN) retrieval",
-      ],
-      tradeOffs: [
-        {
-          choice: "Two-Tower Dual Encoder with FAISS",
-          alternative: "Heavy Cross-Attention Network",
-          reason: "Decoupled item embeddings can be precomputed and indexed in FAISS, enabling 2.4ms candidate generation vs 150ms for cross-attention.",
-        },
-        {
-          choice: "InfoNCE Loss with In-Batch Negatives",
-          alternative: "Binary Cross-Entropy (BCE)",
-          reason: "InfoNCE prevents gradient saturation and learns more discriminative embeddings across large catalogs without sampling overhead.",
-        },
-      ],
-    },
-    architecture: {
-      diagramDescription: "Two-Tower Architecture: User Features -> User Tower | Item Features -> Item Tower -> Dot Product & InfoNCE Loss",
-      nodes: [
-        {
-          id: "user-features",
-          title: "User Context & History",
-          type: "input",
-          description: "User engagement history, demographic features, session context",
-          tech: "PyTorch Tensors",
-        },
-        {
-          id: "user-tower",
-          title: "User Encoder Tower",
-          type: "process",
-          description: "Multi-layer perceptron mapping user context into 128-dim normalized embedding",
-          tech: "PyTorch / ReLU / Dropout",
-        },
-        {
-          id: "item-tower",
-          title: "Item Encoder Tower",
-          type: "process",
-          description: "Projects catalog metadata into identical 128-dim metric space",
-          tech: "PyTorch / EmbeddingBag",
-        },
-        {
-          id: "faiss-index",
-          title: "FAISS Vector Retrieval",
-          type: "output",
-          description: "Sub-2.4ms inner product maximum search returning Top-100 candidates",
-          tech: "FAISS IVF-PQ Index",
-        },
-      ],
-      dataFlowSteps: [
-        "User opens feed; user context vector is fed into User Tower to generate 128-dim vector",
-        "Precomputed 128-dim item embeddings reside inside memory-mapped FAISS index",
-        "FAISS executes GPU-accelerated maximum inner product search across 1M items in <2.4ms",
-        "Top-100 candidates dispatched to downstream ranking stage with +4.2% Recall@10 gain",
-      ],
-    },
-    codeHighlights: [
-      {
-        title: "InfoNCE Contrastive Loss Implementation (PyTorch)",
-        language: "python",
-        code: `class InfoNCELoss(nn.Module):
-    def __init__(self, temperature: float = 0.07):
-        super().__init__()
-        self.temperature = temperature
-        
-    def forward(self, user_embeddings: torch.Tensor, item_embeddings: torch.Tensor) -> torch.Tensor:
-        u_norm = F.normalize(user_embeddings, p=2, dim=1)
-        i_norm = F.normalize(item_embeddings, p=2, dim=1)
-        logits = torch.matmul(u_norm, i_norm.T) / self.temperature
-        labels = torch.arange(user_embeddings.size(0), device=user_embeddings.device)
-        return (F.cross_entropy(logits, labels) + F.cross_entropy(logits.T, labels)) / 2.0`,
-        explanation:
-          "Leverages in-batch negatives to train discriminative representations without generating expensive negative sample pairs.",
-      },
-    ],
-    interactiveDemoType: "two-tower",
-  },
 ];
-
-
 
 export const PROFILE_DATA = {
   name: "Arush Jain",
-  title: "AI Systems & Full-Stack Engineer",
-  status: "Scalable AI Systems • Multi-Agent Workflows • Full-Stack Engineering",
+  title: "AI Systems, Full-Stack & Analytics Engineer",
+  status: "Scalable AI Systems • Data Analytics Warehouses • Full-Stack Engineering",
   location: "IIITDM Jabalpur / Remote",
   education: "B.Tech in Smart Manufacturing, IIITDM Jabalpur (2023 - Present)",
   contact: {
     email: "jainarush423@gmail.com",
-    phone: "+91 91713 56822",
   },
   coreFocus: [
-    "Full-Stack Applications",
     "Scalable AI Systems",
+    "Data & Analytics Warehouses",
     "Multi-Agent Workflows",
-    "Data Structures & Algorithms",
+    "Full-Stack Applications",
   ],
-  bio: "Engineering scalable AI systems, multi-agent workflows, and robust full-stack applications with deep algorithmic foundations in data structures and systems design.",
+  bio: "Engineering scalable AI systems, data analytics pipelines, and robust full-stack applications with deep algorithmic foundations in data structures and systems design.",
   heroHeadline: "Building scalable AI systems, multi-agent workflows, and robust full-stack applications.",
   heroPunchline: "Building scalable AI systems, multi-agent workflows, and robust full-stack applications.",
   stats: [
-    { label: "RailRoute Latency", value: "1.45s (-55%)" },
+    { label: "RailRoute Pass Rate", value: "100% Verified" },
     { label: "Legal RAG Precision", value: "94.2% P@4" },
-    { label: "Stockout Reduction", value: "11% (from 48%)" },
-    { label: "Recommender Lift", value: "+4.2% R@10" },
+    { label: "Logistics Churn Impact", value: "R$ 1.73M Quantified" },
+    { label: "A/B Loss Prevented", value: "$96,300 Saved" },
   ],
   systemSpecs: {
     education: "IIITDM Jabalpur (2023 - Present)",
     degree: "B.Tech in Smart Manufacturing",
-    honors: "Amazon ML Summer School 2026 • Patent Holder",
+    honors: "Amazon ML Summer School 2026 • Patent Application Published",
     runtime: "Next.js 14 App Router + FastAPI & Python",
-    architecture: "Multi-Agent DAGs & Full-Stack Ecosystems",
+    architecture: "Multi-Agent DAGs & Analytics Warehouses",
     styling: "Tailwind CSS + Class-Based Dark Mode",
-    motion: "Framer Motion Interactive Bento Grid",
-    copilot: "In-Memory Semantic Vector Retrieval & Grounded RAG",
+    motion: "Framer Motion Micro-Interactions",
+    copilot: "In-Memory Lexical & BM25 Knowledge Retrieval",
   },
   socialLinks: [
     { label: "GitHub", url: "https://github.com/Slash-495", icon: "Github" },
-    { label: "LinkedIn", url: "https://linkedin.com/in/#", icon: "Linkedin", isPlaceholder: true },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/arush-jain", icon: "Linkedin", isPlaceholder: false },
     { label: "LeetCode", url: "https://leetcode.com/u/Slash495/", icon: "Code2", isPlaceholder: false },
     { label: "Email", url: "mailto:jainarush423@gmail.com", icon: "Mail" },
-    { label: "Phone", url: "tel:+919171356822", icon: "Phone" },
   ],
 };
 
@@ -1119,43 +1319,46 @@ export interface AchievementItem {
   organization: string;
   description: string;
   highlights: string[];
-  metrics?: { label: string; value: string }[];
-  verificationLink?: { label: string; url: string };
+  metrics: { label: string; value: string }[];
   patentNumber?: string;
-  iconName?: "Award" | "FileCheck2" | "GraduationCap" | "Code2" | "Terminal";
+  verificationLink?: {
+    label: string;
+    url: string;
+  };
+  iconName: string;
 }
 
 export const ACHIEVEMENTS: AchievementItem[] = [
   {
-    id: "amazon-ml-summer-school",
+    id: "amazon-ml-summer-school-2026",
     title: "Amazon ML Summer School 2026",
-    badge: "SELECTIVE // TOP TIER",
+    badge: "SELECTIVE ADMISSION",
     category: "Elite Selection",
     year: "2026",
-    organization: "Amazon India",
+    organization: "Amazon Science & Machine Learning Division",
     description:
       "Selected among thousands of applicants across premier Indian engineering institutions for intensive training and direct mentorship by Amazon Machine Learning Scientists. Immersed in foundational ML theory, large-scale deep learning, and frontier generative AI architectures.",
     highlights: [
-      "Rigorous technical selection covering algorithms, probability, linear algebra, and machine learning fundamentals",
-      "Mentorship curriculum: Deep Learning, Sequence Models, Generative AI & Large Language Models (LLMs)",
-      "Industry-scale architectural patterns for distributed training, low-latency model inference, and AI safety",
+      "Rigorous competitive selection process evaluating applied mathematics, statistics, and machine learning fundamentals",
+      "Direct technical modules covering Supervised Learning, Deep Neural Networks, Dimensionality Reduction, and LLM Alignment",
+      "Interactive technical masterclasses analyzing production-grade generative models and real-world deployment challenges at Amazon scale",
     ],
     metrics: [
-      { label: "Acceptance", value: "Top Tier Nationwide" },
-      { label: "Curriculum", value: "GenAI & Scalable ML" },
+      { label: "Selection Rate", value: "Highly Competitive" },
+      { label: "Curriculum", value: "Amazon ML Scientists" },
     ],
     iconName: "Award",
   },
   {
     id: "two-wheeler-footrest-patent",
     title: "Centrifugal Speed Interlock Footrest Mechanism for Two-Wheelers",
-    badge: "PATENT APPLICATION NO. 202421034177",
+    badge: "PATENT APPLICATION PUBLISHED • APP. NO. 202421034177",
     category: "Intellectual Property",
     year: "2024",
     organization: "Indian Patent Office",
     patentNumber: "202421034177",
     description:
-      "Invented and patented a novel safety footrest mechanism for two-wheelers. Employs a mechanical centrifugal flyweight interlock system that restricts footrest deployment when vehicle velocity exceeds 5 km/h, preventing severe pillion foot entrapment and road contact injuries.",
+      "Invented a novel mechanical safety footrest mechanism for two-wheelers with a patent application published (App. No. 202421034177, Indian Patent Office). Employs a passive centrifugal flyweight governor that locks footrest actuation when velocity exceeds 5 km/h, preventing pillion foot entrapment and road contact accidents.",
     highlights: [
       "Passive centrifugal governor: Locks footrest actuation above 5 km/h with 100% mechanical fail-safety",
       "Zero parasitic battery draw: Eliminates complex electrical actuators and vulnerability to electrical failure",
@@ -1163,7 +1366,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     ],
     metrics: [
       { label: "Interlock Speed", value: "≤ 5 km/h" },
-      { label: "Safety Rating", value: "100% Fail-Safe" },
+      { label: "Status", value: "Application Published" },
     ],
     iconName: "FileCheck2",
   },
@@ -1213,21 +1416,21 @@ export const ACHIEVEMENTS: AchievementItem[] = [
   },
   {
     id: "open-source-production-shipments",
-    title: "Shipped Real-World Multi-Agent & Full-Stack Systems",
-    badge: "4+ PRODUCTION DEPLOYMENTS",
+    title: "Shipped Real-World Multi-Agent, Full-Stack & Analytics Systems",
+    badge: "6+ PUBLIC REPOSITORIES & DEPLOYMENTS",
     category: "Open Source",
     year: "2024 - 2025",
     organization: "Global Open Source & Live Users",
     description:
-      "Built and deployed end-to-end production applications with live user-facing deployments: Duffy voice-native language ecosystem, Chambers GST-RAG legal intelligence, RailRoute Finder multi-agent triaging, and Velora cloud platform.",
+      "Built and deployed end-to-end applications across multi-agent systems, data warehouses, and web products: Roznamcha CRM, Olist Analytics Engine, OptiMetrics A/B engine, Chambers GST-RAG legal intelligence, RailRoute Finder, and Duffy voice AI.",
     highlights: [
-      "Duffy (Live): Real-time Web Speech API voice AI with SuperMemo-2 spaced repetition (duffy.onrender.com)",
-      "Chambers GST-RAG (Live): Dual-stream FAISS + BM25 hybrid retrieval cutting hallucinations to 2.1%",
-      "RailRoute Finder (Live): 3-agent orchestration discovering split-journey train routes with 1.45s response",
-      "Velora (Live): High-concurrency full-stack Next.js cloud app with sub-45ms APIs and optimistic UI",
+      "Roznamcha (Live CRM): PostgreSQL NTILE(5) RFM customer analytics & monthly cohort retention",
+      "Olist Analytics: Containerized 100k+ order data warehouse with Metabase BI & R$ 1.73M delay quantification",
+      "OptiMetrics: Statistical A/B experimentation engine in Python & Power BI saving $96.3k+",
+      "Chambers GST-RAG: Dual-stream FAISS + BM25 hybrid legal retrieval cutting hallucinations to 2.1%",
     ],
     metrics: [
-      { label: "Deployed Systems", value: "4 Live Web Apps" },
+      { label: "Public Systems", value: "6 Repositories" },
       { label: "Source Code", value: "100% Publicly Available" },
     ],
     verificationLink: {
