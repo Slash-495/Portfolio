@@ -1,25 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Bot,
-  Send,
-  Sparkles,
-  RotateCcw,
-  Check,
-  Copy,
-  ArrowUpRight,
-  ExternalLink,
-  ChevronDown,
-  Terminal,
-  Search,
-} from "lucide-react";
+import { ArrowUpRight, RotateCcw, ArrowRight } from "lucide-react";
 import { queryRagCopilot, Citation, RagResponse } from "@/lib/rag-engine";
 import { SUGGESTED_PROMPTS } from "@/lib/knowledge-base";
 import { PROJECTS, ProjectCaseStudy } from "@/lib/projects-data";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
 
 interface Message {
   id: string;
@@ -44,11 +29,10 @@ export function RagCopilotWidget({
     {
       id: "initial-1",
       sender: "copilot",
-      text: "Greetings! I am Arush Jain's portfolio RAG Copilot. I am grounded in his background at IIITDM Jabalpur (B.Tech in Smart Manufacturing), his core focus across scalable AI systems, multi-agent workflows, full-stack applications, and data structures, as well as his engineering projects. Ask me anything about Arush's experience, architecture designs, or code decisions.",
+      text: "Hi, I am Arush's portfolio AI assistant. I can answer questions regarding his full-stack systems, multi-agent pipelines, probabilistic demand models, and background. What would you like to explore?",
       timestamp: "Just now",
     },
   ]);
-  const [copiedId, setCopiedId] = React.useState<string | null>(null);
   const chatBottomRef = React.useRef<HTMLDivElement | null>(null);
 
   // Auto-scroll chat to bottom
@@ -71,7 +55,6 @@ export function RagCopilotWidget({
     setQuery("");
     setIsTyping(true);
 
-    // Simulate realistic RAG retrieval & typewriter stream delay
     setTimeout(() => {
       const result: RagResponse = queryRagCopilot(q);
 
@@ -85,13 +68,7 @@ export function RagCopilotWidget({
 
       setMessages((prev) => [...prev, copilotMsg]);
       setIsTyping(false);
-    }, 450);
-  };
-
-  const handleCopy = (id: string, text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+    }, 380);
   };
 
   const handleCitationClick = (citation: Citation) => {
@@ -107,54 +84,49 @@ export function RagCopilotWidget({
       {
         id: "initial-reset",
         sender: "copilot",
-        text: "Conversation reset. Context window cleared. What engineering topic would you like to explore next?",
+        text: "Conversation cleared. What would you like to look into next?",
         timestamp: "Just now",
       },
     ]);
   };
 
   return (
-    <div className="flex flex-col h-full rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white/90 dark:bg-[#0c0c0e]/90 backdrop-blur-md shadow-xl overflow-hidden font-mono text-xs">
-      {/* Copilot Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60">
-        <div className="flex items-center gap-2.5">
-          <div className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-            <Bot className="w-4 h-4" />
+    <div
+      className={`flex flex-col h-full bg-[#F9F9F6] ${
+        isFloating ? "" : "border border-[#E5E5DF] rounded-2xl p-6 sm:p-8"
+      }`}
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-[#E5E5DF] pb-4 mb-4">
+        <div className="flex flex-col gap-0.5">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#7A8B6B]" />
+            <h3 className="text-base sm:text-lg font-normal tracking-tight text-[#1A1A1A]">
+              Ask AI
+            </h3>
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider">
-                PORTFOLIO RAG COPILOT
-              </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            </div>
-            <span className="text-[10px] text-zinc-500">
-              GROUNDED IN ARCHITECTURE & BENCHMARK SPECS
-            </span>
-          </div>
+          <span className="text-xs text-[#8C8C85] font-light">
+            Grounded answers across Arush's code, systems, and journey.
+          </span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={resetChat}
-            title="Reset Context"
-            className="p-1.5 rounded-md text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-          </button>
-        </div>
+        <button
+          onClick={resetChat}
+          title="Reset conversation"
+          className="text-xs text-[#8C8C85] hover:text-[#1A1A1A] transition-colors flex items-center gap-1"
+        >
+          <RotateCcw className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Reset</span>
+        </button>
       </div>
 
-      {/* Suggested Prompts Pill Bar */}
-      <div className="px-4 py-2 border-b border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/60 dark:bg-zinc-900/30 overflow-x-auto scrollbar-none flex items-center gap-2">
-        <span className="text-[10px] text-zinc-400 uppercase tracking-widest shrink-0 flex items-center gap-1">
-          <Sparkles className="w-3 h-3 text-emerald-500" /> Prompts:
-        </span>
-        {SUGGESTED_PROMPTS.slice(0, 4).map((prompt, idx) => (
+      {/* Suggested Prompts */}
+      <div className="flex flex-wrap items-center gap-2 mb-4 pb-2">
+        {SUGGESTED_PROMPTS.slice(0, 3).map((prompt, idx) => (
           <button
             key={idx}
             onClick={() => handleSend(prompt)}
-            className="px-2.5 py-1 rounded-full bg-zinc-200/60 dark:bg-zinc-800/70 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-[10px] whitespace-nowrap transition-colors border border-zinc-300/40 dark:border-zinc-700/60"
+            className="text-xs text-[#666662] hover:text-[#1A1A1A] border border-[#E5E5DF] hover:border-[#7A8B6B] rounded-full px-3 py-1 bg-white/60 transition-colors"
           >
             {prompt}
           </button>
@@ -162,7 +134,7 @@ export function RagCopilotWidget({
       </div>
 
       {/* Messages Scroll Area */}
-      <div className="flex-1 p-4 overflow-y-auto space-y-4 max-h-[380px] min-h-[260px]">
+      <div className="flex-1 overflow-y-auto space-y-4 max-h-[380px] min-h-[240px] pr-2">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -170,101 +142,66 @@ export function RagCopilotWidget({
               msg.sender === "user" ? "items-end" : "items-start"
             }`}
           >
-            <div className="flex items-center gap-2 mb-1 px-1 text-[10px] text-zinc-400">
-              <span>{msg.sender === "user" ? "YOU" : "COPILOT"}</span>
-              <span>•</span>
-              <span>{msg.timestamp}</span>
-            </div>
-
+            {/* Minimal chat bubble */}
             <div
-              className={`relative max-w-[88%] p-3.5 rounded-xl border leading-relaxed font-sans text-xs ${
+              className={`max-w-[85%] text-sm sm:text-base font-light leading-relaxed ${
                 msg.sender === "user"
-                  ? "bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-950 border-zinc-900 dark:border-zinc-200 font-medium"
-                  : "bg-zinc-100/90 dark:bg-zinc-900/80 text-zinc-800 dark:text-zinc-200 border-zinc-200 dark:border-zinc-800"
+                  ? "bg-[#EFEFEA] text-[#1A1A1A] rounded-2xl px-4 py-3"
+                  : "bg-transparent text-[#1A1A1A] py-1"
               }`}
             >
               <div className="whitespace-pre-wrap">{msg.text}</div>
 
-              {/* Citations / Grounded Sources */}
+              {/* Citations as quiet olive links */}
               {msg.citations && msg.citations.length > 0 && (
-                <div className="mt-3 pt-2.5 border-t border-zinc-200 dark:border-zinc-800 flex flex-col gap-1.5 font-mono text-[10px]">
-                  <span className="text-zinc-400 uppercase tracking-widest">
-                    Grounded Case Citations:
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {msg.citations.map((cite) => (
-                      <button
-                        key={cite.id}
-                        onClick={() => handleCitationClick(cite)}
-                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 transition-colors"
-                      >
-                        <span>[{cite.projectTitle || cite.title}]</span>
-                        <ArrowUpRight className="w-2.5 h-2.5" />
-                      </button>
-                    ))}
-                  </div>
+                <div className="mt-3 pt-2 border-t border-[#E5E5DF] flex flex-wrap items-center gap-2 text-xs">
+                  <span className="text-[#8C8C85]">Sources:</span>
+                  {msg.citations.map((cite) => (
+                    <button
+                      key={cite.id}
+                      onClick={() => handleCitationClick(cite)}
+                      className="text-[#7A8B6B] hover:text-[#1A1A1A] underline underline-offset-2 decoration-[#7A8B6B]/40 hover:decoration-[#1A1A1A] transition-colors inline-flex items-center gap-1"
+                    >
+                      <span>{cite.projectTitle || cite.title}</span>
+                      <ArrowUpRight className="w-3 h-3" />
+                    </button>
+                  ))}
                 </div>
-              )}
-
-              {/* Copy answer button */}
-              {msg.sender === "copilot" && (
-                <button
-                  onClick={() => handleCopy(msg.id, msg.text)}
-                  className="absolute top-2 right-2 p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
-                  title="Copy response"
-                >
-                  {copiedId === msg.id ? (
-                    <Check className="w-3 h-3 text-emerald-500" />
-                  ) : (
-                    <Copy className="w-3 h-3" />
-                  )}
-                </button>
               )}
             </div>
           </div>
         ))}
 
-        {/* Typing indicator */}
         {isTyping && (
-          <div className="flex items-center gap-2 p-3 rounded-lg bg-zinc-100 dark:bg-zinc-900/80 text-zinc-500 w-fit">
-            <span className="text-[10px] font-mono">Synthesizing vector context</span>
-            <div className="flex gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-bounce [animation-delay:-0.3s]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-bounce [animation-delay:-0.15s]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-bounce" />
-            </div>
+          <div className="text-xs text-[#8C8C85] italic py-1">
+            Retrieving grounded response...
           </div>
         )}
-
         <div ref={chatBottomRef} />
       </div>
 
-      {/* Query Input Box */}
+      {/* Input Field */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
           handleSend();
         }}
-        className="p-3 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 flex items-center gap-2"
+        className="mt-4 pt-3 border-t border-[#E5E5DF] flex items-center gap-3"
       >
-        <div className="relative flex-1">
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Ask about 1.2M/s throughput, 68% token reduction, 120 FPS physics..."
-            className="w-full bg-white dark:bg-zinc-950 border border-zinc-300 dark:border-zinc-800 rounded-lg px-3.5 py-2 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-sans"
-          />
-        </div>
-
-        <Button
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Ask a question about systems, latency, or background..."
+          className="flex-1 bg-white border border-[#E5E5DF] focus:border-[#7A8B6B] rounded-full px-4 py-2.5 text-sm text-[#1A1A1A] placeholder:text-[#8C8C85] outline-none transition-colors"
+        />
+        <button
           type="submit"
-          size="sm"
           disabled={!query.trim() || isTyping}
-          className="bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200"
+          className="w-10 h-10 rounded-full bg-[#1A1A1A] text-white hover:bg-[#7A8B6B] disabled:opacity-30 disabled:hover:bg-[#1A1A1A] transition-colors flex items-center justify-center shrink-0"
         >
-          <Send className="w-3.5 h-3.5" />
-        </Button>
+          <ArrowRight className="w-4 h-4" />
+        </button>
       </form>
     </div>
   );

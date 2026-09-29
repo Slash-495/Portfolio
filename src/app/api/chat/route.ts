@@ -4,16 +4,16 @@ import { queryRagCopilot } from "@/lib/rag-engine";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { query } = body;
+    const queryText = body.query || body.message;
 
-    if (!query || typeof query !== "string") {
+    if (!queryText || typeof queryText !== "string") {
       return NextResponse.json(
-        { error: "Query parameter is required" },
+        { error: "Query or message parameter is required" },
         { status: 400 }
       );
     }
 
-    const result = queryRagCopilot(query);
+    const result = queryRagCopilot(queryText);
 
     return NextResponse.json(result);
   } catch (error) {

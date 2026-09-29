@@ -15,25 +15,25 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "inline-flex items-center justify-center font-mono text-xs uppercase tracking-wider transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 disabled:pointer-events-none disabled:opacity-50 select-none",
+          "inline-flex items-center justify-center text-xs tracking-wide transition-all duration-150 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-40 select-none",
           {
             // Variants
-            "bg-zinc-900 text-zinc-50 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 border border-transparent shadow-sm active:scale-[0.98]":
+            "bg-[#1A1A1A] text-[#F9F9F6] hover:bg-[#7A8B6B] border border-transparent rounded-full shadow-xs":
               variant === "default",
-            "border border-zinc-300 dark:border-zinc-800 bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-900/60 text-zinc-900 dark:text-zinc-200 hover:border-zinc-400 dark:hover:border-zinc-700 active:scale-[0.98]":
+            "border border-[#E5E5DF] bg-transparent text-[#1A1A1A] hover:border-[#7A8B6B] hover:text-[#7A8B6B] rounded-full":
               variant === "outline",
-            "hover:bg-zinc-100 dark:hover:bg-zinc-800/60 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100":
+            "text-[#666662] hover:text-[#1A1A1A] bg-transparent":
               variant === "ghost",
-            "bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-900 dark:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-700 active:scale-[0.98]":
+            "bg-[#F0F0EB] text-[#1A1A1A] hover:bg-[#E5E5DF] rounded-full":
               variant === "secondary",
-            "bg-zinc-900 text-zinc-100 border border-zinc-700 shadow-[0_0_15px_rgba(255,255,255,0.08)] dark:shadow-[0_0_20px_rgba(255,255,255,0.12)] hover:border-zinc-500 active:scale-[0.98]":
+            "bg-[#1A1A1A] text-white hover:bg-[#7A8B6B] rounded-full":
               variant === "glow",
 
             // Sizes
-            "h-8 px-3 text-[11px] rounded-md gap-1.5": size === "sm",
-            "h-10 px-4 text-xs rounded-md gap-2": size === "md",
-            "h-12 px-6 text-sm rounded-lg gap-2.5": size === "lg",
-            "h-9 w-9 rounded-md": size === "icon",
+            "h-8 px-3 text-xs gap-1.5": size === "sm",
+            "h-10 px-4 text-xs gap-2": size === "md",
+            "h-12 px-6 text-sm gap-2.5": size === "lg",
+            "h-9 w-9 rounded-full": size === "icon",
           },
           className
         )}

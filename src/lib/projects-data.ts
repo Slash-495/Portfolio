@@ -1104,7 +1104,7 @@ export const PROFILE_DATA = {
   socialLinks: [
     { label: "GitHub", url: "https://github.com/Slash-495", icon: "Github" },
     { label: "LinkedIn", url: "https://linkedin.com/in/#", icon: "Linkedin", isPlaceholder: true },
-    { label: "LeetCode", url: "https://leetcode.com/#", icon: "Code2", isPlaceholder: true },
+    { label: "LeetCode", url: "https://leetcode.com/u/Slash495/", icon: "Code2", isPlaceholder: false },
     { label: "Email", url: "mailto:jainarush423@gmail.com", icon: "Mail" },
     { label: "Phone", url: "tel:+919171356822", icon: "Phone" },
   ],
@@ -1206,8 +1206,8 @@ export const ACHIEVEMENTS: AchievementItem[] = [
       { label: "Created Tool", value: "LeetLens (Open Source)" },
     ],
     verificationLink: {
-      label: "View LeetLens Repository",
-      url: "https://github.com/Slash-495/LeetLens",
+      label: "View LeetCode Profile",
+      url: "https://leetcode.com/u/Slash495/",
     },
     iconName: "Code2",
   },

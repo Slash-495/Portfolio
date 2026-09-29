@@ -12,8 +12,6 @@ import { Footer } from "@/components/layout/Footer";
 import { CaseStudyModal } from "@/components/portfolio/CaseStudyModal";
 import { Modal } from "@/components/ui/Modal";
 import { PROJECTS, ProjectCaseStudy } from "@/lib/projects-data";
-import { Bot, Sparkles, Terminal } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 
 export default function Home() {
   const [isCopilotModalOpen, setIsCopilotModalOpen] = React.useState(false);
@@ -36,49 +34,43 @@ export default function Home() {
   const handleOpenProjectFromCopilot = (project: ProjectCaseStudy) => {
     setActiveProject(project);
     setIsCaseStudyOpen(true);
-    // Keep or minimize copilot modal
     setIsCopilotModalOpen(false);
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
-      {/* Top Header with Dark/Light Toggle */}
+    <div className="min-h-screen flex flex-col justify-between bg-[#F9F9F6] text-[#1A1A1A]">
+      {/* Top Header */}
       <Header onOpenCopilot={() => setIsCopilotModalOpen(true)} />
 
-      {/* Main Content Area */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 w-full flex flex-col gap-20 py-6 sm:py-10">
-        {/* Hero Manifesto & Telemetry */}
+      {/* Main Content Area with generous whitespace */}
+      <main className="max-w-6xl mx-auto px-6 sm:px-10 w-full flex flex-col gap-24 sm:gap-36 py-12 sm:py-20">
+        {/* Massive Typographic Hero */}
         <Hero onOpenCopilot={() => setIsCopilotModalOpen(true)} />
 
-        {/* High-Impact Project Case Studies */}
+        {/* Selected Work (Anti-Bento Typographic List) */}
         <ProjectGrid />
 
-        {/* Distinctions, Honors & Intellectual Property */}
+        {/* Milestones & Honors */}
         <AchievementsSection />
 
-        {/* Personal Narrative, Side Quests & Philosophy */}
+        {/* Narrative & Side Quests */}
         <AboutSection />
 
-        {/* System Specs & Engineering Matrix */}
+        {/* Architectural Tenets */}
         <SystemSpecs />
 
-        {/* Embedded Interactive RAG Copilot Section */}
-        <section id="ai-chat" className="scroll-mt-24 flex flex-col gap-6">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-            <div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <Bot className="w-4 h-4 text-emerald-500" />
-                <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">
-                  05 // CONVERSATIONAL INTELLIGENCE
-                </span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-mono font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-                Embedded Portfolio RAG Copilot
-              </h2>
-              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-                Query system architecture specs, throughput bottlenecks, and code decisions with verified source citations.
-              </p>
-            </div>
+        {/* Ask AI Section */}
+        <section id="ai-chat" className="scroll-mt-24 flex flex-col gap-8">
+          <div className="flex flex-col gap-2 border-b border-[#E5E5DF] pb-6">
+            <span className="text-xs uppercase tracking-widest text-[#8C8C85]">
+              Intelligence // 05
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-normal tracking-tight text-[#1A1A1A]">
+              Ask the Copilot
+            </h2>
+            <p className="text-sm text-[#8C8C85] max-w-xl">
+              An interactive grounded semantic engine trained on technical constraints, architecture diagrams, and system trade-offs.
+            </p>
           </div>
 
           <div className="w-full">
@@ -92,16 +84,15 @@ export default function Home() {
       {/* Footer */}
       <Footer />
 
-      {/* Floating Action Button for RAG Copilot */}
+      {/* Minimal Floating Action Button for Ask AI */}
       <div className="fixed bottom-6 right-6 z-40">
         <button
           onClick={() => setIsCopilotModalOpen(true)}
-          className="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-zinc-900 text-zinc-100 dark:bg-zinc-100 dark:text-zinc-900 border border-zinc-700/60 shadow-2xl hover:scale-105 active:scale-95 transition-all font-mono text-xs font-semibold"
+          className="group flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A1A1A] text-[#F9F9F6] hover:bg-[#7A8B6B] transition-colors shadow-lg text-xs font-normal"
         >
-          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
-          <span>RAG Copilot</span>
-          <kbd className="px-1.5 py-0.5 rounded bg-zinc-800 dark:bg-zinc-200 text-zinc-300 dark:text-zinc-700 text-[10px] hidden sm:inline-block">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#7A8B6B]" />
+          <span>Ask AI</span>
+          <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-[10px] text-white/70 hidden sm:inline-block font-mono">
             ⌘K
           </kbd>
         </button>
@@ -111,7 +102,7 @@ export default function Home() {
       <Modal
         isOpen={isCopilotModalOpen}
         onClose={() => setIsCopilotModalOpen(false)}
-        title="PORTFOLIO RAG COPILOT"
+        title="Ask AI Copilot"
         subtitle="Grounded semantic search across architecture specs and case studies"
         maxWidth="2xl"
       >
@@ -123,7 +114,7 @@ export default function Home() {
         </div>
       </Modal>
 
-      {/* Case Study Modal triggered from Copilot Citations */}
+      {/* Case Study Modal triggered from Project Rows or Copilot Citations */}
       <CaseStudyModal
         project={activeProject}
         isOpen={isCaseStudyOpen}

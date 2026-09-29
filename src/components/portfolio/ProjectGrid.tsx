@@ -4,7 +4,6 @@ import * as React from "react";
 import { ProjectCaseStudy, PROJECTS } from "@/lib/projects-data";
 import { ProjectCard } from "./ProjectCard";
 import { CaseStudyModal } from "./CaseStudyModal";
-import { Terminal, Filter } from "lucide-react";
 
 interface ProjectGridProps {
   onOpenCopilotWithProject?: (projectName: string) => void;
@@ -17,11 +16,11 @@ export function ProjectGrid({ onOpenCopilotWithProject }: ProjectGridProps) {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const categories = [
-    "ALL",
-    "Full Stack Project",
-    "AI & Multi-Agent",
-    "RAG & Search",
-    "Machine Learning",
+    { label: "All", value: "ALL" },
+    { label: "Full Stack", value: "Full Stack Project" },
+    { label: "Multi-Agent", value: "AI & Multi-Agent" },
+    { label: "RAG & Search", value: "RAG & Search" },
+    { label: "Machine Learning", value: "Machine Learning" },
   ];
 
   const filteredProjects = React.useMemo(() => {
@@ -36,44 +35,38 @@ export function ProjectGrid({ onOpenCopilotWithProject }: ProjectGridProps) {
   };
 
   return (
-    <section id="projects" className="scroll-mt-24 flex flex-col gap-6">
+    <section id="work" className="scroll-mt-24 flex flex-col gap-10">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-        <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <Terminal className="w-4 h-4 text-emerald-500" />
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">
-              01 // HIGH-IMPACT DELIVERABLES
-            </span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-mono font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-            Selected Engineering Case Studies
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-[#E5E5DF] pb-6">
+        <div className="flex flex-col gap-2">
+          <span className="text-xs uppercase tracking-widest text-[#8C8C85]">
+            Index // 01
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-normal tracking-tight text-[#1A1A1A]">
+            Selected Work
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-            Production systems, sub-millisecond pipelines, and verified performance benchmarks.
-          </p>
         </div>
 
-        {/* Filter categories */}
-        <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+        {/* Flat Minimal Category Filter */}
+        <div className="flex flex-wrap items-center gap-5 sm:gap-7 text-xs font-normal">
           {categories.map((cat) => (
             <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider rounded-md transition-all ${
-                selectedCategory === cat
-                  ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs font-semibold"
-                  : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300"
+              key={cat.value}
+              onClick={() => setSelectedCategory(cat.value)}
+              className={`transition-colors py-1 ${
+                selectedCategory === cat.value
+                  ? "text-[#1A1A1A] font-medium border-b border-[#1A1A1A]"
+                  : "text-[#8C8C85] hover:text-[#1A1A1A]"
               }`}
             >
-              {cat}
+              {cat.label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Grid of Projects */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* Clean Typographic Borderless List */}
+      <div className="flex flex-col">
         {filteredProjects.map((project) => (
           <ProjectCard
             key={project.id}
@@ -83,7 +76,7 @@ export function ProjectGrid({ onOpenCopilotWithProject }: ProjectGridProps) {
         ))}
       </div>
 
-      {/* Deep Dive Case Study Modal */}
+      {/* Case Study Modal (Editorial Reader Mode) */}
       <CaseStudyModal
         project={activeProject}
         isOpen={isModalOpen}

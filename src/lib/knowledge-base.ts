@@ -170,7 +170,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "Contact Information & Developer Profiles",
     keywords: ["contact", "email", "phone", "github", "linkedin", "leetcode", "hire", "arush"],
     content:
-      "Arush Jain can be reached via email at jainarush423@gmail.com or phone at +91 91713 56822. Check out his code repositories on GitHub at https://github.com/Slash-495, along with his LinkedIn and LeetCode profiles.",
+      "Arush Jain can be reached via email at jainarush423@gmail.com or phone at +91 91713 56822. Check out his code repositories on GitHub at https://github.com/Slash-495, his LeetCode profile at https://leetcode.com/u/Slash495/, and his LinkedIn.",
   },
 ];
 
