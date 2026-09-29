@@ -60,14 +60,14 @@ export function SystemSpecs() {
   ];
 
   return (
-    <section id="about" className="scroll-mt-24 flex flex-col gap-6">
+    <section id="specs" className="scroll-mt-24 flex flex-col gap-6">
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-4">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
             <Cpu className="w-4 h-4 text-emerald-500" />
             <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">
-              02 // SYSTEM SPECS & ARCHITECTURAL MATRIX
+              04 // SYSTEM SPECS & ARCHITECTURAL MATRIX
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-mono font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
@@ -139,13 +139,13 @@ export function SystemSpecs() {
           </div>
         </div>
 
-        {/* Academic Profile & Active Runtime */}
+        {/* Academic & Fellowship Profile */}
         <div className="p-5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-950 text-zinc-100 flex flex-col justify-between font-mono text-xs">
           <div>
             <div className="flex items-center gap-2 mb-3 pb-2 border-b border-zinc-800">
               <GraduationCap className="w-4 h-4 text-emerald-400" />
               <span className="font-bold uppercase tracking-wider text-zinc-300">
-                ACADEMIC PROFILE
+                EDUCATION & FELLOWSHIP
               </span>
             </div>
 
@@ -157,15 +157,20 @@ export function SystemSpecs() {
               <div>
                 <div className="text-zinc-400 text-[10px]">DEGREE & PROGRAM:</div>
                 <div className="text-emerald-400 font-bold">B.Tech in Smart Manufacturing</div>
+                <div className="text-zinc-400 text-[10px] mt-0.5">2023 - Present</div>
               </div>
-              <div>
-                <div className="text-zinc-400 text-[10px]">TENURE:</div>
-                <div className="text-zinc-300">2023 - Present</div>
+              <div className="pt-2 border-t border-zinc-800/80">
+                <div className="text-zinc-400 text-[10px]">PRESTIGIOUS SELECTION:</div>
+                <div className="text-amber-400 font-bold">Amazon ML Summer School 2026</div>
+                <div className="text-zinc-400 text-[10px] mt-0.5">
+                  Mentored by Amazon ML Scientists on LLMs & Frontier AI
+                </div>
               </div>
-              <div>
-                <div className="text-zinc-400 text-[10px]">SPECIALIZATION:</div>
-                <div className="text-zinc-300 text-[10px]">
-                  AI Automation, Systems Design, Graph Algorithms
+              <div className="pt-2 border-t border-zinc-800/80">
+                <div className="text-zinc-400 text-[10px]">INTELLECTUAL PROPERTY:</div>
+                <div className="text-indigo-400 font-bold">Patent App: 202421034177</div>
+                <div className="text-zinc-400 text-[10px] mt-0.5">
+                  Centrifugal Speed Interlock Footrest Mechanism
                 </div>
               </div>
             </div>

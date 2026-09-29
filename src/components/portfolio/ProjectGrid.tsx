@@ -22,7 +22,6 @@ export function ProjectGrid({ onOpenCopilotWithProject }: ProjectGridProps) {
     "AI & Multi-Agent",
     "RAG & Search",
     "Machine Learning",
-    "Systems & Hardware",
   ];
 
   const filteredProjects = React.useMemo(() => {

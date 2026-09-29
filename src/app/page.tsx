@@ -4,6 +4,8 @@ import * as React from "react";
 import { Header } from "@/components/layout/Header";
 import { Hero } from "@/components/portfolio/Hero";
 import { ProjectGrid } from "@/components/portfolio/ProjectGrid";
+import { AchievementsSection } from "@/components/portfolio/AchievementsSection";
+import { AboutSection } from "@/components/portfolio/AboutSection";
 import { SystemSpecs } from "@/components/portfolio/SystemSpecs";
 import { RagCopilotWidget } from "@/components/copilot/RagCopilotWidget";
 import { Footer } from "@/components/layout/Footer";
@@ -51,6 +53,12 @@ export default function Home() {
         {/* High-Impact Project Case Studies */}
         <ProjectGrid />
 
+        {/* Distinctions, Honors & Intellectual Property */}
+        <AchievementsSection />
+
+        {/* Personal Narrative, Side Quests & Philosophy */}
+        <AboutSection />
+
         {/* System Specs & Engineering Matrix */}
         <SystemSpecs />
 
@@ -61,7 +69,7 @@ export default function Home() {
               <div className="flex items-center gap-2 mb-1.5">
                 <Bot className="w-4 h-4 text-emerald-500" />
                 <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">
-                  03 // CONVERSATIONAL INTELLIGENCE
+                  05 // CONVERSATIONAL INTELLIGENCE
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-mono font-bold tracking-tight text-zinc-900 dark:text-zinc-50">

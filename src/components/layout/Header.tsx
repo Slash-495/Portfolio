@@ -36,8 +36,8 @@ export function Header({ onOpenCopilot }: HeaderProps) {
           </a>
         </div>
 
-        {/* Center: Navigation Links (Projects, AI Chat, About) */}
-        <nav className="hidden md:flex items-center gap-8 text-slate-600 dark:text-slate-400 font-medium">
+        {/* Center: Navigation Links (Projects, Achievements, AI Chat, About) */}
+        <nav className="hidden md:flex items-center gap-7 text-slate-600 dark:text-slate-400 font-medium">
           <a
             href="#projects"
             className="hover:text-[#0F172A] dark:hover:text-[#F1F5F9] transition-colors uppercase tracking-wider text-xs"
@@ -45,17 +45,23 @@ export function Header({ onOpenCopilot }: HeaderProps) {
             Projects
           </a>
           <a
-            href="#ai-chat"
-            className="hover:text-emerald-600 dark:hover:text-emerald-400 text-emerald-600 dark:text-emerald-400 font-semibold transition-colors uppercase tracking-wider text-xs flex items-center gap-1.5"
+            href="#achievements"
+            className="hover:text-[#0F172A] dark:hover:text-[#F1F5F9] transition-colors uppercase tracking-wider text-xs"
           >
-            <Bot className="w-3.5 h-3.5" />
-            AI Chat
+            Achievements
           </a>
           <a
             href="#about"
             className="hover:text-[#0F172A] dark:hover:text-[#F1F5F9] transition-colors uppercase tracking-wider text-xs"
           >
             About
+          </a>
+          <a
+            href="#ai-chat"
+            className="hover:text-emerald-600 dark:hover:text-emerald-400 text-emerald-600 dark:text-emerald-400 font-semibold transition-colors uppercase tracking-wider text-xs flex items-center gap-1.5"
+          >
+            <Bot className="w-3.5 h-3.5" />
+            AI Chat
           </a>
         </nav>
 

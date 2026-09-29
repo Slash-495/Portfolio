@@ -26,7 +26,7 @@ export function Hero({ onOpenCopilot }: HeroProps) {
       {/* Background radial glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[320px] bg-emerald-500/5 dark:bg-emerald-500/10 blur-[130px] rounded-full pointer-events-none -z-10" />
 
-      {/* Prominent Status Tag: Final Year @ IIITDM Jabalpur • Amazon ML Summer School 2026 */}
+      {/* Engineering Focus Pill: Focused strictly on capability */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -35,7 +35,7 @@ export function Hero({ onOpenCopilot }: HeroProps) {
       >
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25 font-medium shadow-xs">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
-          <span>Final Year @ IIITDM Jabalpur • Amazon ML Summer School 2026</span>
+          <span>Scalable AI Systems • Multi-Agent Workflows • Full-Stack Engineering</span>
         </div>
       </motion.div>
 

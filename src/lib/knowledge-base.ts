@@ -17,7 +17,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "RailRoute Agent: 3-Agent Split-Journey Train Routing",
     keywords: ["railroute", "train", "agent", "multi-agent", "planner", "verifier", "ranker", "gemini", "streamlit", "python", "latency", "pass rate"],
     content:
-      "RailRoute Agent is a specialized 3-agent autonomous routing system built by Arush Jain using Python, Gemini, and Streamlit. It discovers operationally safe split-journey train routes when direct tickets are waitlisted or unavailable. By executing a triad DAG (Route Planner -> Schedule Verifier -> Journey Ranker) with parallel verification, it cut latency from 3.2s to 1.45s and raised the operational pass rate to 100%.",
+      "RailRoute Agent is a specialized 3-agent autonomous routing system built by Arush Jain using Python, Gemini, and Streamlit (live at https://rail-route-finder.streamlit.app/, GitHub: https://github.com/Slash-495/Rail-Route-Finder). It discovers operationally safe split-journey train routes when direct tickets are waitlisted or unavailable. By executing a triad DAG (Route Planner -> Schedule Verifier -> Journey Ranker) with parallel verification, it cut latency from 3.2s to 1.45s and raised the operational pass rate to 100%.",
   },
   {
     id: "kb-railroute-2",
@@ -37,7 +37,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "Chambers & Infrastructure: Hybrid Legal RAG for Indian GST Act",
     keywords: ["chambers", "legal", "rag", "gst", "faiss", "bm25", "cohere", "rerank", "fastapi", "aws", "precision", "hallucination"],
     content:
-      "Chambers & Infrastructure is an enterprise legal RAG pipeline developed by Arush Jain over the Indian Goods & Services Tax (GST) Act. It uses a dual-stream hybrid retrieval pipeline combining dense semantic search (FAISS) with sparse statutory keyword search (BM25) fused via Reciprocal Rank Fusion (RRF) and scored with Cohere Cross-Encoder Rerank. It reduced legal hallucinations from 36.8% to 2.1% and achieved 94.2% Precision@4.",
+      "Chambers & Infrastructure (GST-RAG) is an enterprise legal RAG pipeline developed by Arush Jain over the Indian Goods & Services Tax (GST) Act (live at https://chambersandinfastructures.streamlit.app/, GitHub: https://github.com/Slash-495/GST-RAG). It uses a dual-stream hybrid retrieval pipeline combining dense semantic search (FAISS) with sparse statutory keyword search (BM25) fused via Reciprocal Rank Fusion (RRF) and scored with Cohere Cross-Encoder Rerank. It reduced legal hallucinations from 36.8% to 2.1% and achieved 94.2% Precision@4.",
   },
   {
     id: "kb-chambers-2",
@@ -107,17 +107,23 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     title: "Velora: Modern Full-Stack Cloud Application & Low-Latency APIs",
     keywords: ["velora", "full-stack", "nextjs", "typescript", "postgres", "prisma", "zod", "server actions", "reactive", "latency"],
     content:
-      "Velora is a high-concurrency full-stack cloud web application engineered by Arush Jain using Next.js App Router, TypeScript, and PostgreSQL with Prisma. It delivers sub-45ms API response latencies, 100% end-to-end type safety via shared Zod schemas and Server Actions, and instant 0ms optimistic UI rendering with zero layout shift.",
+      "Velora is a high-concurrency full-stack cloud web application engineered by Arush Jain using Next.js App Router, TypeScript, and PostgreSQL with Prisma (live at https://velora-3jpcjj3y1-slashs-projects-1d391125.vercel.app/, GitHub: https://github.com/Slash-495/Velora). It delivers sub-45ms API response latencies, 100% end-to-end type safety via shared Zod schemas and Server Actions, and instant 0ms optimistic UI rendering with zero layout shift.",
   },
   {
     id: "kb-patent-1",
-    projectId: "embedded-footrest-patent",
-    projectTitle: "Patent & Notable Achievements",
     category: "Patent",
-    title: "Patented Automatic Footrest Assembly & Amazon ML Summer School 2026",
-    keywords: ["patent", "footrest", "two-wheeler", "embedded", "interlock", "amazon ml", "amazon", "achievement", "honors"],
+    title: "Patented Centrifugal Speed Interlock Footrest & Amazon ML Summer School 2026",
+    keywords: ["patent", "footrest", "two-wheeler", "embedded", "interlock", "amazon ml", "amazon", "achievement", "honors", "202421034177"],
     content:
-      "Arush Jain holds a patent for an automatic footrest assembly for two-wheelers using embedded microcontroller feedback, seat pressure sensors, and vehicle velocity safety interlocks (locking actuation above 5 km/h to prevent roadside hazards). Furthermore, Arush was selected for the prestigious Amazon ML Summer School 2026, receiving specialized mentorship from Amazon scientists in deep learning and LLM architectures.",
+      "Arush Jain holds a patent application (Application No. 202421034177) for a novel Centrifugal Speed Interlock Footrest Mechanism for Two-Wheelers that locks footrest actuation when speed exceeds 5 km/h, preventing pillion foot entrapment and road contact injuries. Furthermore, Arush was selected for the prestigious Amazon ML Summer School 2026, receiving specialized mentorship from Amazon scientists in deep learning, LLMs, and large-scale AI architectures.",
+  },
+  {
+    id: "kb-achievements-1",
+    category: "Philosophy",
+    title: "Major Achievements, Honors & Distinctions",
+    keywords: ["achievements", "honors", "distinctions", "awards", "amazon ml", "patent", "iiitdm", "leetcode", "open source"],
+    content:
+      "Arush Jain's major achievements and honors include: 1) Amazon ML Summer School 2026 selection (mentored by Amazon ML Scientists on LLMs and scalable systems), 2) Indian Patent Application No. 202421034177 for a novel Centrifugal Speed Interlock Footrest Mechanism, 3) 400+ problems solved across LeetCode & Codeforces, 4) Author of LeetLens open-source Chrome extension with AST recursion visualizers, and 5) 4 shipped production web deployments (Duffy, GST-RAG, RailRoute Finder, Velora).",
   },
   {
     id: "kb-education-1",
@@ -136,6 +142,29 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "Arush Jain's primary engineering focus is: 1) Scalable AI Systems (fine-tuning, hybrid retrieval, dual-stream architectures), 2) Multi-Agent Workflows (triad DAGs, deterministic verification, Pareto ranking), 3) Full-Stack Applications (Next.js App Router, FastAPI, WebRTC, Docker), and 4) Algorithmic Data Structures (FAISS vector indices, lock-free buffers, complexity optimization).",
   },
   {
+    id: "kb-about-personal-1",
+    category: "Philosophy",
+    title: "About Arush Jain: Engineering Journey, Side Quests & Interests",
+    keywords: [
+      "about",
+      "bio",
+      "who is arush",
+      "journey",
+      "f1",
+      "mclaren",
+      "liverpool",
+      "strava",
+      "running",
+      "rock music",
+      "ac/dc",
+      "japanese",
+      "philosophy",
+      "side quests"
+    ],
+    content:
+      "Arush Jain is a final-year engineering student at IIITDM Jabalpur majoring in Smart Manufacturing, spending all his time architecting scalable AI systems and full-stack applications. His path spans designing a patented automated footrest for two-wheelers, engineering multi-agent LLM pipelines, probabilistic demand forecasting, and attending the Amazon ML Summer School. Offline, he stresses over McLaren's tire strategy in Formula 1, aggressively supports Liverpool FC, logs miles on Strava, geeks out over classic rock (AC/DC), and is learning Japanese (Rōmaji). His core belief: 'The best software comes from genuine curiosity and good taste, not just typing fast.'",
+  },
+  {
     id: "kb-contact-1",
     category: "Contact",
     title: "Contact Information & Developer Profiles",
@@ -150,6 +179,7 @@ export const SUGGESTED_PROMPTS = [
   "Tell me about Duffy's in-browser voice recognition and SRS ecosystem.",
   "What is Velora's full-stack architecture and sub-45ms latency?",
   "How does RailRoute Agent achieve a 100% operational pass rate?",
-  "Explain the dual-stream retrieval in Chambers & Infrastructure (Legal RAG).",
-  "Tell me about Arush's patent in embedded footrests and Amazon ML Summer School 2026.",
+  "Explain the dual-stream retrieval in Chambers & Infrastructure (GST-RAG).",
+  "What are Arush's major achievements, patent, and Amazon ML Summer School selection?",
+  "Who is Arush Jain and what are his interests outside of coding?",
 ];

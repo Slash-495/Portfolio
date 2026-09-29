@@ -18,7 +18,7 @@ export interface ProjectCaseStudy {
   slug: string;
   title: string;
   tagline: string;
-  category: "Full Stack Project" | "AI & Multi-Agent" | "RAG & Search" | "Machine Learning" | "Systems & Hardware";
+  category: "Full Stack Project" | "AI & Multi-Agent" | "RAG & Search" | "Machine Learning";
   status: "PRODUCTION" | "DEPLOYED" | "PATENT GRANTED" | "SELECTED";
   year: string;
   githubUrl: string;
@@ -372,7 +372,7 @@ export const PROJECTS: ProjectCaseStudy[] = [
     status: "PRODUCTION",
     year: "2025",
     githubUrl: "https://github.com/Slash-495/Velora",
-    liveUrl: "https://github.com/Slash-495/Velora",
+    liveUrl: "https://velora-3jpcjj3y1-slashs-projects-1d391125.vercel.app/",
     summary:
       "Constructed a high-concurrency full-stack cloud application architected with Next.js App Router, TypeScript, and high-performance serverless endpoints. Designed with modular UI patterns, instant optimistic UI updates, resilient database indexing, and strict end-to-end type safety across the entire client-server boundary.",
     primaryMetric: {
@@ -517,8 +517,8 @@ export const PROJECTS: ProjectCaseStudy[] = [
     category: "AI & Multi-Agent",
     status: "DEPLOYED",
     year: "2025",
-    githubUrl: "https://github.com/Slash-495/RailRoute-Agent",
-    liveUrl: "https://github.com/Slash-495/RailRoute-Agent",
+    githubUrl: "https://github.com/Slash-495/Rail-Route-Finder",
+    liveUrl: "https://rail-route-finder.streamlit.app/",
     summary:
       "Architected a specialized 3-agent autonomous routing system using Python, Gemini LLM, and Streamlit to discover safe, multi-leg split train journeys when direct tickets are waitlisted or unavailable. Reduced latency from 3.2s to 1.45s and raised the operational pass rate to 100%.",
     primaryMetric: {
@@ -663,8 +663,8 @@ export const PROJECTS: ProjectCaseStudy[] = [
     category: "RAG & Search",
     status: "PRODUCTION",
     year: "2025",
-    githubUrl: "https://github.com/Slash-495/Chambers-Infrastructure",
-    liveUrl: "https://github.com/Slash-495/Chambers-Infrastructure",
+    githubUrl: "https://github.com/Slash-495/GST-RAG",
+    liveUrl: "https://chambersandinfastructures.streamlit.app/",
     summary:
       "Engineered an enterprise-grade legal RAG system over the Indian Goods & Services Tax (GST) Act using a dual-stream hybrid retrieval architecture (FAISS dense vectors + BM25 sparse lexical search) fused via Reciprocal Rank Fusion and re-ranked with Cohere Rerank. Slashed legal hallucination rates from 36.8% to 2.1% and achieved 94.2% Precision@4.",
     primaryMetric: {
@@ -1062,151 +1062,14 @@ export const PROJECTS: ProjectCaseStudy[] = [
     ],
     interactiveDemoType: "two-tower",
   },
-  {
-    id: "embedded-footrest-patent",
-    slug: "embedded-footrest-patent",
-    title: "Patent & Notable Achievements",
-    tagline: "Patented automatic footrest assembly for two-wheelers & Amazon ML Summer School 2026",
-    category: "Systems & Hardware",
-    status: "PATENT GRANTED",
-    year: "2024",
-    githubUrl: "https://github.com/Slash-495",
-    liveUrl: "https://github.com/Slash-495",
-    summary:
-      "Patented an innovative automatic footrest assembly for two-wheelers using embedded controllers, proximity sensor feedback, and electromechanical safety interlocks. Selected for the prestigious Amazon ML Summer School 2026, gaining deep industry mentorship in large-scale machine learning and generative AI architectures.",
-    primaryMetric: {
-      label: "Intellectual Property & Honors",
-      value: "Patent Granted • Amazon ML",
-    },
-    metrics: [
-      {
-        label: "Intellectual Property",
-        value: "Patent Granted",
-        change: "Published",
-        description: "Automatic footrest actuation with safety interlocking",
-      },
-      {
-        label: "Honor",
-        value: "Amazon ML 2026",
-        change: "Selected",
-        description: "Selected among thousands of applicants across Indian institutions",
-      },
-      {
-        label: "Safety Response",
-        value: "<120ms",
-        change: "Real-time",
-        description: "Embedded microcontroller sensor interrupt handling",
-      },
-      {
-        label: "Academic Standing",
-        value: "IIITDM Jabalpur",
-        change: "Smart Mfg.",
-        description: "B.Tech in Smart Manufacturing (2023 - Present)",
-      },
-    ],
-    techStack: ["Embedded C++", "Microcontrollers", "Sensors & Actuators", "Machine Learning", "Python", "CAD / FEA"],
-    problem: {
-      context:
-        "Two-wheeler pillion riders frequently struggle with manual footrests that stick or are hard to deploy while balancing, leading to passenger slips and roadside accidents. Manual footrests left deployed when riding solo pose severe collision hazards with curbs.",
-      painPoints: [
-        "Pillion rider balance loss when fumbling to kick out a stiff manual footrest",
-        "Solo riders leaving footrests deployed, leading to curb clipping and crashes",
-        "Lack of intelligent safety interlocks to prevent footrest deployment at high vehicle speeds",
-      ],
-      constraints: [
-        "Must operate reliably under extreme dust, vibration, and monsoon moisture",
-        "Fail-safe mechanical override if electrical power is disconnected",
-        "Sub-150ms actuation response triggered by pillion presence detection",
-      ],
-    },
-    solution: {
-      overview:
-        "Invented an intelligent embedded footrest system that uses dual-sensor feedback combined with speed-governed microcontroller interlocks. The footrest automatically deploys safely when a passenger mounts and retracts flush with the vehicle frame when riding solo.",
-      architectureHighlights: [
-        "Embedded Controller: High-reliability microcontroller with watchdog timer and hardware interrupts",
-        "Safety Interlock: Disables deployment when speedometer signal indicates vehicle velocity > 5 km/h",
-        "Electromechanical Actuator: High-torque brushless gear motor with spring-return fail-safe",
-        "Patent Protection: Novel mechanical linkage and dual-condition sensor gating architecture",
-      ],
-      tradeOffs: [
-        {
-          choice: "Dual-Condition Sensor Interlock (Weight + Speed)",
-          alternative: "Simple Manual Toggle Switch",
-          reason: "Eliminates driver distraction and guarantees footrest never extends accidentally at highway speeds.",
-        },
-        {
-          choice: "Spring-Loaded Mechanical Fail-Safe",
-          alternative: "Rigid Bi-Directional Worm Drive",
-          reason: "Allows immediate manual retraction even if battery power is completely severed during an emergency.",
-        },
-      ],
-    },
-    architecture: {
-      diagramDescription: "Hardware Architecture: Sensor Suite -> Embedded Microcontroller -> Safety Gate -> High-Torque Actuator",
-      nodes: [
-        {
-          id: "sensor-inputs",
-          title: "Sensor Feedback Suite",
-          type: "input",
-          description: "Seat force sensor + optical proximity sensor + vehicle speedometer pulse",
-          tech: "Hardware Sensors",
-        },
-        {
-          id: "mcu-controller",
-          title: "Embedded Controller",
-          type: "process",
-          description: "Microcontroller executing state machine with 20ms interrupt loop",
-          tech: "Embedded C++ / FreeRTOS",
-        },
-        {
-          id: "safety-gate",
-          title: "Speed Interlock Gate",
-          type: "process",
-          description: "Prevents actuation if vehicle speed > 5 km/h; protects against accidental deployment",
-          tech: "Firmware Safety Logic",
-        },
-        {
-          id: "actuator-assembly",
-          title: "Footrest Actuator",
-          type: "output",
-          description: "Deploys footrest into ergonomic locked position in 120ms; retracts flush on dismount",
-          tech: "DC Gearmotor / Spring Link",
-        },
-      ],
-      dataFlowSteps: [
-        "Pillion passenger sits; force sensor triggers microcontroller hardware interrupt",
-        "Firmware validates that vehicle speed is under 5 km/h and engine is in stable state",
-        "Actuator drives footrest smoothly to extended passenger position in 120ms",
-        "When passenger dismounts, footrest auto-retracts flush with chassis, eliminating collision hazards",
-      ],
-    },
-    codeHighlights: [
-      {
-        title: "Embedded State Machine & Safety Interlock (Embedded C++)",
-        language: "cpp",
-        code: `enum class FootrestState { RETRACTED, EXTENDING, EXTENDED, RETRACTING, FAULT };
-
-void updateFootrestStateMachine() {
-    float currentSpeedKmh = readVehicleSpeed();
-    bool pillionDetected = readSeatPressureSensor() && readProximitySensor();
-    if (currentSpeedKmh > 5.0f) {
-        if (currentState == FootrestState::EXTENDING) abortActuationImmediate();
-        return;
-    }
-    // State machine transitions...
-}`,
-        explanation:
-          "Guarantees that mechanical movement is locked if vehicle speed exceeds 5 km/h, preventing accidental high-speed extension.",
-      },
-    ],
-    interactiveDemoType: "patent-footrest",
-  },
 ];
+
+
 
 export const PROFILE_DATA = {
   name: "Arush Jain",
   title: "AI Systems & Full-Stack Engineer",
-  status: "Final Year @ IIITDM Jabalpur • Amazon ML Summer School 2026",
+  status: "Scalable AI Systems • Multi-Agent Workflows • Full-Stack Engineering",
   location: "IIITDM Jabalpur / Remote",
   education: "B.Tech in Smart Manufacturing, IIITDM Jabalpur (2023 - Present)",
   contact: {
@@ -1219,7 +1082,7 @@ export const PROFILE_DATA = {
     "Multi-Agent Workflows",
     "Data Structures & Algorithms",
   ],
-  bio: "Engineering scalable AI systems, multi-agent workflows, and robust full-stack applications with deep algorithmic foundations in data structures and systems design. Selected for Amazon ML Summer School 2026 and patent holder in embedded systems.",
+  bio: "Engineering scalable AI systems, multi-agent workflows, and robust full-stack applications with deep algorithmic foundations in data structures and systems design.",
   heroHeadline: "Building scalable AI systems, multi-agent workflows, and robust full-stack applications.",
   heroPunchline: "Building scalable AI systems, multi-agent workflows, and robust full-stack applications.",
   stats: [
@@ -1246,3 +1109,131 @@ export const PROFILE_DATA = {
     { label: "Phone", url: "tel:+919171356822", icon: "Phone" },
   ],
 };
+
+export interface AchievementItem {
+  id: string;
+  title: string;
+  badge: string;
+  category: "Intellectual Property" | "Elite Selection" | "Education" | "Algorithms" | "Open Source";
+  year: string;
+  organization: string;
+  description: string;
+  highlights: string[];
+  metrics?: { label: string; value: string }[];
+  verificationLink?: { label: string; url: string };
+  patentNumber?: string;
+  iconName?: "Award" | "FileCheck2" | "GraduationCap" | "Code2" | "Terminal";
+}
+
+export const ACHIEVEMENTS: AchievementItem[] = [
+  {
+    id: "amazon-ml-summer-school",
+    title: "Amazon ML Summer School 2026",
+    badge: "SELECTIVE // TOP TIER",
+    category: "Elite Selection",
+    year: "2026",
+    organization: "Amazon India",
+    description:
+      "Selected among thousands of applicants across premier Indian engineering institutions for intensive training and direct mentorship by Amazon Machine Learning Scientists. Immersed in foundational ML theory, large-scale deep learning, and frontier generative AI architectures.",
+    highlights: [
+      "Rigorous technical selection covering algorithms, probability, linear algebra, and machine learning fundamentals",
+      "Mentorship curriculum: Deep Learning, Sequence Models, Generative AI & Large Language Models (LLMs)",
+      "Industry-scale architectural patterns for distributed training, low-latency model inference, and AI safety",
+    ],
+    metrics: [
+      { label: "Acceptance", value: "Top Tier Nationwide" },
+      { label: "Curriculum", value: "GenAI & Scalable ML" },
+    ],
+    iconName: "Award",
+  },
+  {
+    id: "two-wheeler-footrest-patent",
+    title: "Centrifugal Speed Interlock Footrest Mechanism for Two-Wheelers",
+    badge: "PATENT APPLICATION NO. 202421034177",
+    category: "Intellectual Property",
+    year: "2024",
+    organization: "Indian Patent Office",
+    patentNumber: "202421034177",
+    description:
+      "Invented and patented a novel safety footrest mechanism for two-wheelers. Employs a mechanical centrifugal flyweight interlock system that restricts footrest deployment when vehicle velocity exceeds 5 km/h, preventing severe pillion foot entrapment and road contact injuries.",
+    highlights: [
+      "Passive centrifugal governor: Locks footrest actuation above 5 km/h with 100% mechanical fail-safety",
+      "Zero parasitic battery draw: Eliminates complex electrical actuators and vulnerability to electrical failure",
+      "Complete CAD modeling, dynamic kinematic simulation, and physical prototype fabrication at IIITDMJ",
+    ],
+    metrics: [
+      { label: "Interlock Speed", value: "≤ 5 km/h" },
+      { label: "Safety Rating", value: "100% Fail-Safe" },
+    ],
+    iconName: "FileCheck2",
+  },
+  {
+    id: "iiitdm-jabalpur-education",
+    title: "B.Tech in Smart Manufacturing @ IIITDM Jabalpur",
+    badge: "ACADEMIC STANDING",
+    category: "Education",
+    year: "2023 - Present",
+    organization: "Indian Institute of Information Technology, Design & Manufacturing, Jabalpur",
+    description:
+      "Pursuing Bachelor of Technology with an interdisciplinary curriculum merging computational intelligence, autonomous robotic manufacturing, discrete optimization, and modern systems architecture.",
+    highlights: [
+      "Core Coursework: Data Structures & Algorithms, Systems Design, Robotics & Automation, Probability & Statistics",
+      "Research & innovation focus on autonomous decision agents and mechanical-computational safety systems",
+      "Active contributor in institute technical fests, hackathons, and software engineering initiatives",
+    ],
+    metrics: [
+      { label: "Institute", value: "IIITDM Jabalpur" },
+      { label: "Discipline", value: "Smart Manufacturing" },
+    ],
+    iconName: "GraduationCap",
+  },
+  {
+    id: "algorithmic-problem-solving",
+    title: "Competitive Programming & Problem Solving Mastery",
+    badge: "400+ PROBLEMS SOLVED",
+    category: "Algorithms",
+    year: "2024 - Present",
+    organization: "LeetCode & Codeforces",
+    description:
+      "Demonstrated strong mathematical and algorithmic intuition by solving 400+ problems spanning graph algorithms, topological sorts, dynamic programming, and systems design. Built and open-sourced LeetLens to empower other developers with runtime AST execution trace visualizers.",
+    highlights: [
+      "Extensive problem solving across advanced dynamic programming, Dijkstra/A* graphs, and binary search",
+      "Creator of LeetLens: AI-powered LeetCode Chrome extension featuring automated Solution Review & recursion trees",
+      "Strict zero-leakage BYOK architecture prioritizing user privacy and local-first execution",
+    ],
+    metrics: [
+      { label: "Solved Count", value: "400+ Problems" },
+      { label: "Created Tool", value: "LeetLens (Open Source)" },
+    ],
+    verificationLink: {
+      label: "View LeetLens Repository",
+      url: "https://github.com/Slash-495/LeetLens",
+    },
+    iconName: "Code2",
+  },
+  {
+    id: "open-source-production-shipments",
+    title: "Shipped Real-World Multi-Agent & Full-Stack Systems",
+    badge: "4+ PRODUCTION DEPLOYMENTS",
+    category: "Open Source",
+    year: "2024 - 2025",
+    organization: "Global Open Source & Live Users",
+    description:
+      "Built and deployed end-to-end production applications with live user-facing deployments: Duffy voice-native language ecosystem, Chambers GST-RAG legal intelligence, RailRoute Finder multi-agent triaging, and Velora cloud platform.",
+    highlights: [
+      "Duffy (Live): Real-time Web Speech API voice AI with SuperMemo-2 spaced repetition (duffy.onrender.com)",
+      "Chambers GST-RAG (Live): Dual-stream FAISS + BM25 hybrid retrieval cutting hallucinations to 2.1%",
+      "RailRoute Finder (Live): 3-agent orchestration discovering split-journey train routes with 1.45s response",
+      "Velora (Live): High-concurrency full-stack Next.js cloud app with sub-45ms APIs and optimistic UI",
+    ],
+    metrics: [
+      { label: "Deployed Systems", value: "4 Live Web Apps" },
+      { label: "Source Code", value: "100% Publicly Available" },
+    ],
+    verificationLink: {
+      label: "Explore GitHub Profile",
+      url: "https://github.com/Slash-495",
+    },
+    iconName: "Terminal",
+  },
+];

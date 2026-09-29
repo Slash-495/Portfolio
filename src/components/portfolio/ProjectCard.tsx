@@ -89,7 +89,7 @@ export function ProjectCard({ project, onOpenCaseStudy }: ProjectCardProps) {
 
       {/* Action Buttons: GitHub Link + Live Demo + Deep Dive */}
       <div className="flex flex-wrap items-center justify-between pt-3 border-t border-[#E2E8F0] dark:border-[#1E293B] gap-2 font-mono text-xs">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
@@ -102,6 +102,18 @@ export function ProjectCard({ project, onOpenCaseStudy }: ProjectCardProps) {
             </a>
           )}
 
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 transition-colors text-[11px] font-medium"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Live App</span>
+            </a>
+          )}
+
           <Button
             size="sm"
             variant="outline"
@@ -109,7 +121,7 @@ export function ProjectCard({ project, onOpenCaseStudy }: ProjectCardProps) {
             className="text-[11px] gap-1.5 hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 border-[#E2E8F0] dark:border-[#1E293B]"
           >
             <Activity className="w-3.5 h-3.5 text-emerald-500" />
-            <span>Live Demo</span>
+            <span>Simulate</span>
           </Button>
         </div>
 
