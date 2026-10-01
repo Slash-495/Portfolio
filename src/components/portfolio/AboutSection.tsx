@@ -43,7 +43,7 @@ export function AboutSection() {
         {/* Main Prose (7 cols) */}
         <div className="lg:col-span-7 flex flex-col gap-8 text-base sm:text-lg text-[#2D2D2D] font-light leading-relaxed">
           <p>
-            Hi, I'm Arush. I'm a final-year engineering student at IIITDM Jabalpur, officially majoring in Smart Manufacturing but unofficially spending all my time architecting scalable AI systems and full-stack applications.
+            Hi, I'm Arush. I'm an engineering student at IIITDM Jabalpur (2027 Grad), officially majoring in Smart Manufacturing but unofficially spending all my time architecting scalable AI systems and full-stack applications.
           </p>
 
           <p>

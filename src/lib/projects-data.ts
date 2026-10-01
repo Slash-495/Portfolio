@@ -1445,7 +1445,7 @@ export const PROFILE_DATA = {
   title: "AI Systems, Full-Stack & Analytics Engineer",
   status: "Scalable AI Systems • Data Analytics Warehouses • Full-Stack Engineering",
   location: "IIITDM Jabalpur / Remote",
-  education: "B.Tech in Smart Manufacturing, IIITDM Jabalpur (2023 - Present)",
+  education: "B.Tech in Smart Manufacturing, IIITDM Jabalpur (2023 - 2027)",
   contact: {
     email: "jainarush423@gmail.com",
   },
@@ -1465,7 +1465,7 @@ export const PROFILE_DATA = {
     { label: "Projected Loss Avoided", value: "$96,300 (per 50K)" },
   ],
   systemSpecs: {
-    education: "IIITDM Jabalpur (2023 - Present)",
+    education: "IIITDM Jabalpur (2023 - 2027)",
     degree: "B.Tech in Smart Manufacturing",
     honors: "Amazon ML Summer School 2026 • Patent Application Published",
     runtime: "Next.js 14 App Router + FastAPI & Python",
@@ -1547,7 +1547,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     title: "B.Tech in Smart Manufacturing @ IIITDM Jabalpur",
     badge: "ACADEMIC STANDING",
     category: "Education",
-    year: "2023 - Present",
+    year: "2023 - 2027",
     organization: "Indian Institute of Information Technology, Design & Manufacturing, Jabalpur",
     description:
       "Pursuing Bachelor of Technology with an interdisciplinary curriculum merging computational intelligence, autonomous robotic manufacturing, discrete optimization, and modern systems architecture.",

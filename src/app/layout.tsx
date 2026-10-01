@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 export const metadata: Metadata = {
   title: "Arush Jain — AI Systems, Analytics & Full-Stack Engineer",
   description:
-    "Portfolio of Arush Jain. Engineering scalable multi-agent systems, data analytics warehouses, and full-stack cloud applications. B.Tech Smart Manufacturing at IIITDM Jabalpur • Amazon ML Summer School 2026.",
+    "Portfolio of Arush Jain. Engineering scalable multi-agent systems, data analytics warehouses, and full-stack cloud applications. B.Tech Smart Manufacturing at IIITDM Jabalpur (2027 Grad) • Amazon ML Summer School 2026.",
   keywords: [
     "Arush Jain",
     "IIITDM Jabalpur",

@@ -33,9 +33,9 @@ export function Hero({ onOpenCopilot }: HeroProps) {
         <div className="max-w-xl flex flex-col gap-3">
           <div className="flex flex-wrap items-center gap-2 text-xs text-[#666662] tracking-wide">
             <span className="w-2 h-2 rounded-full bg-[#455A30] shrink-0" />
-            <span>Final Year @ IIITDM Jabalpur (Graduating 2026)</span>
+            <span>IIITDM Jabalpur (2027 Grad)</span>
             <span>•</span>
-            <span className="text-[#455A30] font-medium">Open to Full-Time Roles</span>
+            <span className="text-[#455A30] font-medium">Open to Opportunities</span>
           </div>
           <p className="text-base sm:text-lg text-[#666662] font-light leading-relaxed">
             Building reliable AI systems, full-stack web applications, and data analytics pipelines that solve real problems without unnecessary jargon.

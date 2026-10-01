@@ -149,9 +149,9 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
     id: "kb-education-1",
     category: "Education",
     title: "Education & Academic Standing at IIITDM Jabalpur",
-    keywords: ["education", "college", "iiitdm", "jabalpur", "btech", "smart manufacturing", "university", "arush jain", "final year", "2023"],
+    keywords: ["education", "college", "iiitdm", "jabalpur", "btech", "smart manufacturing", "university", "arush jain", "2027 grad", "2023", "2027"],
     content:
-      "Arush Jain is a Final Year B.Tech student in Smart Manufacturing at IIITDM Jabalpur (2023 - Present). His academic specialization spans AI systems, data analytics warehouses, multi-agent workflows, and advanced algorithmic data structures.",
+      "Arush Jain is a B.Tech student in Smart Manufacturing at IIITDM Jabalpur (2023 - 2027, 2027 Grad). His academic specialization spans AI systems, data analytics warehouses, multi-agent workflows, and advanced algorithmic data structures.",
   },
   {
     id: "kb-focus-1",
@@ -182,7 +182,7 @@ export const KNOWLEDGE_BASE: KnowledgeChunk[] = [
       "side quests"
     ],
     content:
-      "Arush Jain is a final-year engineering student at IIITDM Jabalpur majoring in Smart Manufacturing, spending all his time architecting scalable AI systems, analytics warehouses, and full-stack applications. His path spans filing a patent application for a sensor-based safety footrest, engineering multi-agent LLM pipelines, probabilistic demand forecasting, and attending the Amazon ML Summer School. Offline, he stresses over McLaren's tire strategy in Formula 1, aggressively supports Liverpool FC, logs miles on Strava, geeks out over classic rock (AC/DC), and is learning Japanese (Rōmaji). His core belief: 'The best software comes from genuine curiosity and good taste, not just typing fast.'",
+      "Arush Jain is an engineering student at IIITDM Jabalpur (2027 Grad) majoring in Smart Manufacturing, spending all his time architecting scalable AI systems, analytics warehouses, and full-stack applications. His path spans filing a patent application for a sensor-based safety footrest, engineering multi-agent LLM pipelines, probabilistic demand forecasting, and attending the Amazon ML Summer School. Offline, he stresses over McLaren's tire strategy in Formula 1, aggressively supports Liverpool FC, logs miles on Strava, geeks out over classic rock (AC/DC), and is learning Japanese (Rōmaji). His core belief: 'The best software comes from genuine curiosity and good taste, not just typing fast.'",
   },
   {
     id: "kb-resume-fullstack",

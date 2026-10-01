@@ -3,7 +3,7 @@
 A personal developer portfolio and case-study showcase built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**. Features technical deep-dives into multi-agent systems, data analytics pipelines, and full-stack applications, alongside an embedded local-first retrieval copilot.
 
 **Live Application**: [portfolio-slash.vercel.app](https://github.com/Slash-495/Portfolio)  
-**Author**: Arush Jain (B.Tech Smart Manufacturing @ IIITDM Jabalpur • Amazon ML Summer School 2026)
+**Author**: Arush Jain (B.Tech Smart Manufacturing @ IIITDM Jabalpur, 2027 Grad • Amazon ML Summer School 2026)
 
 ---
 
